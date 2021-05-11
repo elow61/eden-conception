@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="351" viewBox="0 0 1081 351">
+  <defs>
+    <style>
+      .cls-1 {
+        font-size: 226px;
+        font-family: AcuminConcept_180.000wght, "Acumin Variable Concept";
+      }
+
+      .cls-1, .cls-2, .cls-3 {
+        fill: #fff;
+        text-anchor: middle;
+      }
+
+      .cls-2 {
+        font-size: 58px;
+        font-family: AcuminConcept_700.000wght_72.000wdth, "Acumin Variable Concept";
+        font-weight: 700;
+      }
+
+      .cls-3 {
+        font-size: 76px;
+        font-family: "The Rickon";
+      }
+    </style>
+  </defs>
+  <text id="EDEN" class="cls-1" x="538.754" y="178.3"><tspan x="538.754">EDEN</tspan></text>
+  <text id="CONCEPTION" class="cls-2" x="539.432" y="250.803"><tspan x="539.432">CONCEPTION</tspan></text>
+  <text id="Edition" class="cls-3" transform="matrix(0.984, -0.176, 0.176, 0.984, 613.977, 317.311)"><tspan x="0">Edition</tspan></text>
+</svg>

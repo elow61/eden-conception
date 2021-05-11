@@ -1,8 +1,39 @@
-h1 {
-  color: blue;
-  text-align: center; }
+* {
+  box-sizing: border-box;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-kerning: auto; }
 
-h2 {
-  color: red; }
+html {
+  font-family: sans-serif;
+  -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0; }
+
+header {
+  height: 100vh;
+  background: linear-gradient(217deg, #3c3d54, #2f2f3c); }
+  header canvas {
+    position: absolute; }
+  header .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: inherit; }
+    header .container img {
+      max-width: 100%;
+      height: auto;
+      vertical-align: middle;
+      border-style: none;
+      border: 1px solid white;
+      padding: 40px; }
+  header i {
+    color: white;
+    font-size: 25px;
+    margin-top: 20px;
+    position: absolute;
+    right: 20px; }
 
 /*# sourceMappingURL=style.css.map */

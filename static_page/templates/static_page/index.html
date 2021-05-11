@@ -1,10 +1,20 @@
 {% extends 'static_page/base.html' %}
 {% load i18n %}
 {% load sass_tags %}
+{% load static %}
 {% block title %}Homepage{% endblock %}
 
 {% block content %}
     <header>
-        <h2>Index</h2>
+        <div>
+            
+        </div>
+        <i class="far fa-caret-square-right"></i>
+        <div class="container">
+            <img src="{% static 'img/logo_white.png' %}" alt="Logo Eden Conception"/>
+        </div>
     </header>
+{% endblock %}
+{% block js %}
+    <script type="module" src="{% static 'js/three.js' %}"></script>
 {% endblock %}

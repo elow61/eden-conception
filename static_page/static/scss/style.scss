@@ -1,8 +1,58 @@
-h1 {
-    color: blue;
-    text-align: center;
+// Preset CSS ----------------------
+* {
+    box-sizing: border-box;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-kerning: auto;
 }
 
-h2 {
-    color: red;
+html {
+    font-family: sans-serif;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    margin: 0;
+}
+// End preset css ----------------------
+
+// Variables
+$light_blue: #8ec5fc;
+$light_pink: #e0c3fc;
+
+$dark_blue: #3c3d54;
+$dark_blue_2: #2f2f3c;
+
+
+header {
+    height: 100vh;
+    background: linear-gradient(217deg, $dark_blue, $dark_blue_2);
+
+    canvas {
+        position: absolute;
+    }
+
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: inherit;
+
+        img {
+            max-width: 100%;
+            height: auto;
+            vertical-align: middle;
+            border-style: none;
+            border: 1px solid white;
+            padding: 40px;
+        }
+    }
+    i {
+        color: white;
+        font-size: 25px;
+        margin-top: 20px;
+        position: absolute;
+        right: 20px;
+    }
 }
