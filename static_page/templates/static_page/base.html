@@ -9,10 +9,12 @@
     <title>{% block title %}{% endblock %}</title>
     {% block scss %}{% endblock %}
     <link href="{% static 'fontawesome_free/css/all.min.css' %}" rel="stylesheet" type="text/css">
-    <link href="{% sass_src 'scss/style.scss' %}" rel="stylesheet" type="text/css" />
+    <link href="{% sass_src 'scss/_variables.scss' %}" rel="stylesheet" type="text/css" />
 </head>
 <body>
-    {% block content %}{% endblock %}
+    <header>
+        {% block content %}{% endblock %}
+    </header>
     {% block js %}{% endblock %}
 </body>
 </html>

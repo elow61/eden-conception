@@ -2,19 +2,25 @@
 {% load i18n %}
 {% load sass_tags %}
 {% load static %}
-{% block title %}Homepage{% endblock %}
+{% block title %}Eden Conception{% endblock %}
+{% block scss %}<link href="{% sass_src 'scss/index.scss' %}" rel="stylesheet" type="text/css" />{% endblock %}
 
 {% block content %}
-    <header>
-        <div>
-            
-        </div>
-        <i class="far fa-caret-square-right"></i>
-        <div class="container">
-            <img src="{% static 'img/logo_white.png' %}" alt="Logo Eden Conception"/>
-        </div>
-    </header>
+
+    <div class="container">
+        <img src="{% static 'img/logo_white.png' %}" alt="Logo Eden Conception"/>
+    </div>
+    <nav>
+        <ul>
+            <li>
+                <a href="/login">Connection</a>
+            </li>
+            <li>
+                <a href="/legal-mentions">Legals mentions</a>
+            </li>
+        </ul>
+    </nav>
 {% endblock %}
 {% block js %}
-    <script type="module" src="{% static 'js/three.js' %}"></script>
+<script type="module" src="{% static 'js/three.js' %}"></script>
 {% endblock %}

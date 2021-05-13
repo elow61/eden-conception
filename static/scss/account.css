@@ -1,0 +1,96 @@
+* {
+  box-sizing: border-box;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-kerning: auto; }
+
+html {
+  font-family: sans-serif;
+  -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  color: #fff; }
+
+header {
+  height: 100vh;
+  background: linear-gradient(217deg, #3c3d54, #2f2f3c); }
+  header canvas {
+    position: absolute; }
+
+.m-auto {
+  margin: auto; }
+
+.col-6 {
+  -ms-flex: 0 0 50%;
+  flex: 0 0 50%;
+  max-width: 50%; }
+
+.return-home {
+  position: absolute;
+  padding: 10px;
+  text-decoration: none;
+  color: inherit; }
+
+section.main-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: inherit; }
+  section.main-form .container-form {
+    border: 1px solid #fff;
+    padding: 40px 40px 0 40px; }
+    section.main-form .container-form h1 {
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 1rem; }
+    section.main-form .container-form form {
+      display: flex;
+      flex-direction: column;
+      justify-content: center; }
+      section.main-form .container-form form .form-group {
+        display: flex;
+        align-items: center; }
+        section.main-form .container-form form .form-group input {
+          width: 300px;
+          margin-bottom: 10px;
+          float: right;
+          background: transparent;
+          border: none;
+          border-bottom: 1px solid #fff;
+          -ms-flex: 0 0 50%;
+          flex: 0 0 50%;
+          max-width: 50%;
+          color: #fff; }
+          section.main-form .container-form form .form-group input:focus {
+            outline: none; }
+          section.main-form .container-form form .form-group input:focus-visible {
+            outline: none; }
+      section.main-form .container-form form button {
+        padding: 10px 40px;
+        background: transparent;
+        color: #fff;
+        border: 1px solid #fff;
+        margin-top: 40px;
+        margin-bottom: 10px;
+        cursor: pointer;
+        text-transform: uppercase; }
+    section.main-form .container-form p {
+      text-align: center;
+      font-size: .8em;
+      font-style: italic; }
+      section.main-form .container-form p a {
+        color: inherit;
+        text-decoration: none; }
+
+@media only screen and (max-width: 480px) {
+  .container-form {
+    padding: 0 !important; }
+    .container-form .form-group {
+      flex-direction: column;
+      margin-bottom: 10px; }
+      .container-form .form-group input {
+        margin-top: 10px; } }
+
+/*# sourceMappingURL=account.css.map */

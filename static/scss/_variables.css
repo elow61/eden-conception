@@ -1,0 +1,30 @@
+* {
+  box-sizing: border-box;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-kerning: auto; }
+
+html {
+  font-family: sans-serif;
+  -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  color: #fff; }
+
+header {
+  height: 100vh;
+  background: linear-gradient(217deg, #3c3d54, #2f2f3c); }
+  header canvas {
+    position: absolute; }
+
+.m-auto {
+  margin: auto; }
+
+.col-6 {
+  -ms-flex: 0 0 50%;
+  flex: 0 0 50%;
+  max-width: 50%; }
+
+/*# sourceMappingURL=_variables.css.map */

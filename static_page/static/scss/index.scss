@@ -1,0 +1,59 @@
+@import '_variables.scss';
+
+header {
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: inherit;
+    
+        img {
+            max-width: 100%;
+            height: auto;
+            vertical-align: middle;
+            border-style: none;
+            border: 1px solid $white;
+            padding: 40px;
+        }
+    }
+    
+    nav {
+        position: absolute;
+        bottom: 0;
+    
+        ul {
+            display: flex;
+            list-style: none;
+    
+            li {
+                margin-right: 10px;
+                color: $white;
+    
+                a {
+                    text-decoration: none;
+                    color: inherit;
+                    position: relative;
+                    display: inline-block;
+    
+                    &::after {
+                        background: $white;
+                        bottom: 0;
+                        content: "";
+                        height: 1px;
+                        left: 0;
+                        opacity: 0.8;
+                        position: absolute;
+                        right: 0;
+                        transform: scaleX(0);
+                        transform-origin: 0 0;
+                        transition: transform .3s;
+                    }
+    
+                    &:hover::after {
+                        transform: scaleX(1);
+                    }
+                }
+            }
+        }
+    }    
+}
