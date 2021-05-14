@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
+    'project.apps.ProjectConfig',
     'user.apps.UserConfig',
     'static_page.apps.StaticPageConfig',
     'django.contrib.admin',
@@ -147,4 +148,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Config auth model
 AUTH_USER_MODEL = "user.User"
-LOGIN_REDIRECT_URL = 'dashboard:dashboard'
+LOGIN_REDIRECT_URL = 'project:dashboard'

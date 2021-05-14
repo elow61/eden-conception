@@ -3,7 +3,7 @@ from django.contrib.auth import views as v
 from . import views
 
 
-app_name = 'dashboard'
+app_name = 'project'
 urlpatterns = [
-    path('dashboard/', views.DashboardView.as_view(), name="dashboard"),
+    path('dashboard/', views.DashboardView.as_view(), name='dashboard'),
 ]

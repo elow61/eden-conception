@@ -6,7 +6,7 @@
 <section class="main-form">
     <div class="container-form">
         <h1>Register</h1>
-        <form method="post" action="{% url 'user:login' %}">
+        <form method="post" action="{% url 'user:register' %}">
             {% csrf_token %}
             {% for field in form %}
                 <div class="form-group">
@@ -24,9 +24,8 @@
                 </div>
             {% endif %}
             <div class="m-auto">
-                <button class="" id="id_login" type="submit">Register</button>
+                <button class="" id="id_register" type="submit">Register</button>
             </div>
-            <input type="hidden" name="next" value="{{ redirect_field_name }}" />
         </form>
     </div>
 </section>
