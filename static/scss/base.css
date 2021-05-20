@@ -21,4 +21,18 @@ body {
   flex: 0 0 50%;
   max-width: 50%; }
 
-/*# sourceMappingURL=_variables.css.map */
+body {
+  height: 100vh;
+  display: flex; }
+
+header {
+  background-color: #2f2f3c;
+  height: 100vh;
+  width: 300px; }
+
+main {
+  height: 100vh;
+  width: 100%;
+  background-color: #3c3d54; }
+
+/*# sourceMappingURL=base.css.map */

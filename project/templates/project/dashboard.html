@@ -1,1 +1,50 @@
-<div>coucou</div>
+{% extends 'project/base.html' %}
+{% load i18n %}
+{% load sass_tags %}
+{% load static %}
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+    <header>
+        <div class="logout">
+            <i class="fas fa-sign-out-alt"></i>
+        </div>
+        <nav>
+            <h2>
+                <i class="fas fa-folder"></i>
+                Projects
+                <i id="btn-create-project" class="fas fa-plus"></i>
+            </h2>
+            <ul class="project-list">
+                {% if projects %}
+                    {% for project in projects %}
+                        <li><h4 project-id="{{project.id}}">{{ project.name }}</h4></li>
+                    {% endfor %}
+                {% endif %}
+            </ul>
+            <h2>
+                <i class="fas fa-users"></i>
+                Collaborator
+            </h2>
+        </nav>
+    </header>
+    <main>
+        <section>
+            {% if projects %}
+                {% include 'project/project_detail.html' %}
+            {% else %}
+                {% include 'project/create_project.html' %}
+            {% endif %}
+
+            <div class="container-create-project">
+                {% include 'project/create_project.html' %}
+            </div>
+        </section>
+    </main>
+
+{% endblock %}
+{% block js %}
+    <script src="{% static 'js/submit_form_ajax.js' %}"></script>
+    <script src="{% static 'js/project_detail.js' %}"></script>
+    <script src="{% static 'js/create_project.js' %}"></script>
+{% endblock %}

@@ -9,10 +9,21 @@
     <title>{% block title %}{% endblock %}</title>
     {% block scss %}{% endblock %}
     <link href="{% static 'fontawesome_free/css/all.min.css' %}" rel="stylesheet" type="text/css">
-    <link href="{% sass_src 'scss/_variables.scss' %}" rel="stylesheet" type="text/css" />
+    <link href="{% sass_src 'scss/base_front.scss' %}" rel="stylesheet" type="text/css" />
 </head>
 <body>
     <header>
+        <div class="door">
+            {% if user.is_authenticated %}
+                <a href="{% url 'project:dashboard' %}">
+                    <i class="fas fa-door-open"></i>
+                </a>
+            {% else %}
+                <a href="{% url 'user:login' %}">
+                    <i class="fas fa-door-closed"></i>
+                </a>
+            {% endif %}
+        </div>
         {% block content %}{% endblock %}
     </header>
     {% block js %}{% endblock %}

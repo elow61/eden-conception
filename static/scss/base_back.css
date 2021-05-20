@@ -1,0 +1,109 @@
+* {
+  box-sizing: border-box;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-kerning: auto; }
+
+html {
+  font-family: sans-serif;
+  -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  color: #dbdada; }
+
+a {
+  text-decoration: none;
+  color: inherit; }
+
+ul {
+  list-style: none; }
+
+.m-auto {
+  margin: auto; }
+
+.col-6 {
+  -ms-flex: 0 0 50%;
+  flex: 0 0 50%;
+  max-width: 50%; }
+
+.d-none {
+  display: none; }
+
+body {
+  height: 100vh;
+  display: flex; }
+
+header {
+  background-color: #2f2f3c;
+  height: 100vh;
+  width: 400px;
+  overflow-y: scroll; }
+  header .logout {
+    position: absolute;
+    right: 0;
+    padding: 10px;
+    color: #70e5cd; }
+  header nav {
+    margin-top: 120px;
+    margin-left: 20px; }
+    header nav h2 {
+      color: #ee6f4f;
+      text-transform: uppercase; }
+      header nav h2 #btn-create-project {
+        color: #70e5cd;
+        cursor: pointer; }
+    header nav ul li h4 {
+      cursor: pointer;
+      letter-spacing: .2em; }
+
+main {
+  height: 100vh;
+  width: 100%;
+  background-color: #3c3d54; }
+  main section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: inherit; }
+    main section .container-create-project.closed {
+      display: none; }
+    main section .container-create-project {
+      display: block; }
+    main section .create-project {
+      border: 1px solid #dbdada;
+      padding: 40px; }
+      main section .create-project form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center; }
+        main section .create-project form .form-group {
+          display: flex;
+          align-items: center; }
+          main section .create-project form .form-group input {
+            width: 300px;
+            margin-bottom: 10px;
+            float: right;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid #dbdada;
+            -ms-flex: 0 0 50%;
+            flex: 0 0 50%;
+            max-width: 50%;
+            color: #dbdada; }
+            main section .create-project form .form-group input:focus {
+              outline: none; }
+            main section .create-project form .form-group input:focus-visible {
+              outline: none; }
+        main section .create-project form button {
+          padding: 10px 40px;
+          background: transparent;
+          color: #dbdada;
+          border: 1px solid #dbdada;
+          margin-top: 40px;
+          margin-bottom: 10px;
+          cursor: pointer;
+          text-transform: uppercase; }
+
+/*# sourceMappingURL=base_back.css.map */

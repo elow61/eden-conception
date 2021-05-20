@@ -1,0 +1,65 @@
+@import '_variables.scss';
+
+main .container-projects-details {
+    background-color: $dark_blue_2;
+    position: absolute;
+    top: 120px;
+    right: 30px;
+    left: 400px;
+
+    .project-detail {
+        padding: 10px;
+
+        .header-project-detail { 
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+    
+            h2 {
+                margin: 0 !important;
+                color: $orange;
+                font-size: 1.6em !important;
+            }
+    
+            .icons-p {
+                display: flex;
+                font-size: 1.6em;
+                cursor: pointer;
+    
+                .view-project{color: $cyan_green;}
+                .delete-project {
+                    margin-left: 20px;
+                    color: $orange;
+                }
+            }
+        }
+        .main-project-detail {
+            display: flex;
+            justify-content: space-between;
+
+            .info {
+                display: flex;
+                flex-direction: column;
+
+                div {
+                    padding: 25px 0;
+                }
+            }
+            .display {
+                .contain-display {
+                    width: 500px;
+                    height: 250px;
+                    border: 1px solid $white;
+                }
+            }
+        }
+    
+        hr {
+            width: 400px;
+            margin: 0;
+            background-color: $white;
+            border:none;
+            height: 1px;
+        }
+    }
+}

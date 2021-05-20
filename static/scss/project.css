@@ -11,7 +11,14 @@ html {
 
 body {
   margin: 0;
-  color: #fff; }
+  color: #dbdada; }
+
+a {
+  text-decoration: none;
+  color: inherit; }
+
+ul {
+  list-style: none; }
 
 .m-auto {
   margin: auto; }
@@ -21,4 +28,11 @@ body {
   flex: 0 0 50%;
   max-width: 50%; }
 
-/*# sourceMappingURL=_variables.css.map */
+.d-none {
+  display: none; }
+
+body {
+  background-color: #3c3d54;
+  height: 100vh; }
+
+/*# sourceMappingURL=project.css.map */

@@ -1,0 +1,17 @@
+{% extends 'project/base.html' %}
+{% load i18n %}
+{% load sass_tags %}
+{% load static %}
+{% block title %}Project {{project.name}}{% endblock %}
+{% block scss %}
+    <link href="{% sass_src 'scss/project.scss' %}" rel="stylesheet" type="text/css" />
+{% endblock %}
+{% block content %}
+    <header>
+        <nav>
+            <div class="return">
+                
+            </div>
+        </nav>
+    </header>
+{% endblock %}

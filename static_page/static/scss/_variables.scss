@@ -6,7 +6,10 @@ $light_pink: #e0c3fc;
 $dark_blue: #3c3d54;
 $dark_blue_2: #2f2f3c;
 
-$white: #fff;
+$white: #dbdada;
+
+$cyan_green: #70e5cd;
+$orange: #ee6f4f;
 
 // Device size
 $mobile_size: 480px;
@@ -58,17 +61,16 @@ body {
     margin: 0;
     color: $white;
 }
-// End preset css ----------------------
 
-// Base
-header {
-    height: 100vh;
-    background: linear-gradient(217deg, $dark_blue, $dark_blue_2);
-
-    canvas {
-        position: absolute;
-    }
+a {
+    text-decoration: none;
+    color: inherit;
 }
+
+ul {
+    list-style: none;
+}
+// End preset css ----------------------
 
 // Generics classes
 .m-auto {
@@ -79,4 +81,8 @@ header {
     -ms-flex: 0 0 50%;
     flex: 0 0 50%;
     max-width: 50%;
+}
+
+.d-none {
+    display: none;
 }
