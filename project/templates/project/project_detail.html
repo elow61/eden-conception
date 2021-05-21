@@ -8,7 +8,13 @@
                         <i class="far fa-eye"></i>
                     </a>
                 </div>
-                <div class="delete-project"><i class="far fa-trash-alt"></i></div>
+                <div class="delete-project">
+                    <form method="post" class="form-delete-project">
+                        {% csrf_token %}
+                        <input type="hidden" name="project_id" value="{{ project.id }}">
+                        <button type="submit"><i class="far fa-trash-alt"></i></button>
+                    </form>
+                </div>
             </div>
         </div>
         <hr/>

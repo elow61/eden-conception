@@ -49,6 +49,10 @@ class DashboardView(View):
 
         return JsonResponse(res)
 
+    @staticmethod
+    def delete_project(requeset):
+        pass
+
 
 class ProjectView(View):
 
@@ -98,6 +102,7 @@ class ProjectView(View):
                 list_to_delete = ProjectList.objects.get(id=list_id)
                 list_to_delete.delete()
 
+                res['list_id'] = list_id
                 res['success'] = _('The list has deleted')
             else:
                 res['error'] = _('The list doesn\'t have deleted')

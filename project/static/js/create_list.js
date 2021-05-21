@@ -13,7 +13,7 @@
     formCreate.submit((e) => {
         e.preventDefault();
         
-        submitForm(url, form).then(response => {
+        submitForm(url, formCreate).then(response => {
             if (response.list_name) {
                 const containerLists = $('.container-project-list');
                 containerLists.append(response.template);
@@ -21,15 +21,18 @@
         })
     })
 
+
     let urlDelete = '/delete_list/'
-    let formDelete = $('.form-delete-list')
-    formDelete.submit((e) => {
+    let formDelete = $('.form-delete-list');
+
+    formDelete.submit(function (e) {
         e.preventDefault();
 
-        submitForm(urlDelete, formDelete).then(response => {
-            
+        submitForm(urlDelete, $(this)).then(response => {
+            if (response.list_id) {
+                $('#project-list-' + response.list_id).remove();
+            }
         })
     })
-
 
 })(jQuery);

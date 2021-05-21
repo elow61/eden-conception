@@ -3,8 +3,8 @@
     'use strict';
 
     let form = $('.form-create-project');
-
     let url = '/create_project/';
+
     form.submit((e) =>  {
         e.preventDefault();
         submitForm(url, form).then(response => {
@@ -44,4 +44,18 @@
         })
         $('.container-create-project').toggleClass('closed');
     });
+
+    // Delete project
+    let urlDelete = '/delete_project/'
+    let formDelete = $('.form-delete-project');
+
+    formDelete.submit(function (e) {
+        e.preventDefault();
+
+        submitForm(urlDelete, $(this)).then(response => {
+            if (response.list_id) {
+                $('#project-list-' + response.list_id).remove();
+            }
+        })
+    })
 })(jQuery);

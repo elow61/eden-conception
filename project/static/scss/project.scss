@@ -29,6 +29,7 @@ body {
             flex-wrap: nowrap;
             overflow-x: scroll;
             margin-top: 20px;
+            position: relative;
             
             .project-list {
                 margin-right: 50px;
@@ -38,6 +39,7 @@ body {
                 min-width: 290px;
                 max-height: 100%;
 
+                // Header list
                 .header-list {
                     display: flex;
                     align-items: center;
@@ -54,6 +56,19 @@ body {
                             color: $orange !important;
                             cursor: pointer;
                         }
+                    }
+                }
+                
+                // Main list
+                .main-list {
+                    button.create-task {
+                        position: absolute;
+                        bottom: 0;
+                        margin: 10px;
+                        background: transparent;
+                        border: none;
+                        color: $cyan_green;
+                        cursor: pointer;
                     }
                 }
             }

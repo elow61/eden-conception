@@ -48,7 +48,8 @@ body {
     display: flex;
     flex-wrap: nowrap;
     overflow-x: scroll;
-    margin-top: 20px; }
+    margin-top: 20px;
+    position: relative; }
     body main .container-project-list .project-list {
       margin-right: 50px;
       background-color: #2f2f3c;
@@ -69,5 +70,13 @@ body {
             background: transparent !important;
             color: #ee6f4f !important;
             cursor: pointer; }
+      body main .container-project-list .project-list .main-list button.create-task {
+        position: absolute;
+        bottom: 0;
+        margin: 10px;
+        background: transparent;
+        border: none;
+        color: #70e5cd;
+        cursor: pointer; }
 
 /*# sourceMappingURL=project.css.map */

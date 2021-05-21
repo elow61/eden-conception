@@ -1,12 +1,15 @@
-<div id="project-list-{{list.id}}" class="project-list">
+<div id="project-list-{{new_list.id}}" class="project-list">
     <div class="header-list">
-        <h4>{{list.name}}</h4>
+        <h4>{{new_list.name}}</h4>
         <div class="delete-list">
             <form method="post" class="form-delete-list">
                 {% csrf_token %}
-                <input type="hidden" name="list_id" value="{{ list.id }}">
+                <input type="hidden" name="list_id" value="{{ new_list.id }}">
                 <button type="submit"><i class="far fa-trash-alt"></i></button>
             </form>
         </div>
+    </div>
+    <div class="main-list">
+        <button class="create-task"><i class="fas fa-plus"></i> Create a task</button>
     </div>
 </div>
