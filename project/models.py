@@ -10,3 +10,23 @@ class Project(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class ProjectList(models.Model):
+
+    name = models.CharField(max_length=100, unique=True)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+
+
+class ProjectTask(models.Model):
+
+    name = models.CharField(max_length=120)
+    description = models.TextField()
+    # project_list_id = ManyToOne
+    # Assign
+    # Deadline : format date
+    # Estimated time : format hour
+    # Timesheet : OneToMany

@@ -1,6 +1,62 @@
 @import '_variables.scss';
 
 body {
-    background-color: $dark_blue;
+    background-color: $dark_blue_light;
     height: 100vh;
+    padding: 10px;
+
+    header {
+
+        .return-dashboard {
+            display: flex;
+            align-items: center;
+
+            h1 {
+                margin-left: 20px;
+                color: $orange;
+            }
+        }
+    }
+
+    main {
+        #btn-create-list {
+            color: $cyan_green;
+            cursor: pointer;
+        }
+
+        .container-project-list {
+            display: flex;
+            flex-wrap: nowrap;
+            overflow-x: scroll;
+            margin-top: 20px;
+            
+            .project-list {
+                margin-right: 50px;
+                background-color: $dark_blue;
+                border-radius: 10px;
+                min-height: 115px;
+                min-width: 290px;
+                max-height: 100%;
+
+                .header-list {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    position: relative;
+
+                    .delete-list {
+                        position: absolute;
+                        right: 10px;
+
+                        button {
+                            border: none !important;
+                            background: transparent !important;
+                            color: $orange !important;
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

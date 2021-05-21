@@ -3,7 +3,10 @@
 {% load sass_tags %}
 {% load static %}
 {% block title %}Dashboard{% endblock %}
-
+{% block scss %}
+    <link href="{% sass_src 'scss/base_back.scss' %}" rel="stylesheet" type="text/css" />
+    <link href="{% sass_src 'scss/project_detail.scss' %}" rel="stylesheet" type="text/css" />
+{% endblock %}
 {% block content %}
     <header>
         <div class="logout">
@@ -31,9 +34,9 @@
     <main>
         <section>
             {% if projects %}
-                {% include 'project/project_detail.html' %}
-            {% else %}
-                {% include 'project/create_project.html' %}
+                <div class="container-projects-details">
+                    {% include 'project/project_detail.html' %}
+                </div>
             {% endif %}
 
             <div class="container-create-project">

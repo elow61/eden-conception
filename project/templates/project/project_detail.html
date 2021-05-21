@@ -1,47 +1,45 @@
-<div class="container-projects-details">
-    {% for project in projects %}
-        <div id="project-detail-{{project.id}}" class="d-none project-detail">
-            <div class="header-project-detail">
-                <h2>{{project.name}}</h2>
-                <div class="icons-p">
-                    <div class="view-project">
-                        <a href="/project-{{project.id}}">
-                            <i class="far fa-eye"></i>
-                        </a>
-                    </div>
-                    <div class="delete-project"><i class="far fa-trash-alt"></i></div>
+{% for project in projects %}
+    <div id="project-detail-{{project.id}}" class="d-none project-detail">
+        <div class="header-project-detail">
+            <h2>{{project.name}}</h2>
+            <div class="icons-p">
+                <div class="view-project">
+                    <a href="/project-{{project.id}}">
+                        <i class="far fa-eye"></i>
+                    </a>
                 </div>
+                <div class="delete-project"><i class="far fa-trash-alt"></i></div>
             </div>
-            <hr/>
-            <div class="main-project-detail">
-                <div class="info">
-                    <div class="last-modification">
-                        <span>Last modification : </span>
-                        <span>date et / ou heure ?</span>
-                    </div>
-                    <hr/>
-                    <div class="task-count">
-                        <span>Task number : </span>
-                        <span>nombre de tâches</span>
-                    </div>
-                    <hr/>
-                    <div class="creator">
-                        <span>Creator : </span>
-                        <span>{{project.user.first_name}}</span>
-                    </div>
-                    <hr/>
-                    <div class="member">
-                        <span>Member : </span>
-                        <span>{{project.user_ids.first_name}}</span>
-                    </div>
-                    <hr/>
+        </div>
+        <hr/>
+        <div class="main-project-detail">
+            <div class="info">
+                <div class="last-modification">
+                    <span>Last modification : </span>
+                    <span>date et / ou heure ?</span>
                 </div>
-                <div class="display">
-                    <div class="contain-display">
+                <hr/>
+                <div class="task-count">
+                    <span>Task number : </span>
+                    <span>nombre de tâches</span>
+                </div>
+                <hr/>
+                <div class="creator">
+                    <span>Creator : </span>
+                    <span>{{project.user.first_name}}</span>
+                </div>
+                <hr/>
+                <div class="member">
+                    <span>Member : </span>
+                    <span>{{project.user_ids.first_name}}</span>
+                </div>
+                <hr/>
+            </div>
+            <div class="display">
+                <div class="contain-display">
 
-                    </div>
                 </div>
             </div>
         </div>
-    {% endfor %}
-</div>
+    </div>
+{% endfor %}
