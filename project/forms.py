@@ -9,3 +9,7 @@ class CreateProjectForm(forms.Form):
 
 class CreateListForm(forms.Form):
     list_name = forms.CharField(label='_(List name)', max_length=100)
+
+
+class CreateTaskForm(forms.Form):
+    task_name = forms.CharField(label='_(Task name)', max_length=100)

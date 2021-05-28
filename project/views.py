@@ -5,8 +5,8 @@ from django.http import JsonResponse
 from django.template.loader import render_to_string
 from django.utils.translation import gettext_lazy as _
 
-from .forms import CreateProjectForm, CreateListForm
-from .models import Project, ProjectList
+from .forms import CreateProjectForm, CreateListForm, CreateTaskForm
+from .models import Project, ProjectList, ProjectTask
 from user.models import User
 
 
@@ -77,7 +77,13 @@ class ProjectView(View):
     def get(self, request, project_id):
         project = get_object_or_404(Project, pk=project_id)
         lists = project.projectlist_set.all()
-        context = {'project': project, 'lists': lists, 'form': self.form}
+
+        context = {
+            'project': project,
+            'lists': lists,
+            'create_list_form': self.form,
+            'create_task_form': CreateTaskForm
+        }
         return render(request, self.template_name, context)
 
     @staticmethod
@@ -123,5 +129,27 @@ class ProjectView(View):
                 res['error'] = _('The list doesn\'t have deleted')
         else:
             res['error'] = _('Please, connect you.')
+
+        return JsonResponse(res)
+
+    @staticmethod
+    def create_task(request):
+        res = {}
+        if request.user.is_authenticated:
+            if request.method == 'POST':
+                name = request.POST.get('task_name')
+                list_id = request.POST.get('list_id')
+                current_list = ProjectList.objects.get(id=list_id)
+                ProjectTask.objects.create(
+                    name=name,
+                    project_list=current_list,
+                )
+                task = ProjectTask.objects.get(name=name)
+                context = {'task': task}
+
+                res['task_name'] = name
+                res['task_id'] = task.id
+                res['list_id'] = list_id
+                res['template'] = render_to_string('project/project_task.html', context)
 
         return JsonResponse(res)

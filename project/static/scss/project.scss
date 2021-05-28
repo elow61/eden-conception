@@ -4,9 +4,13 @@ body {
     background-color: $dark_blue_light;
     height: 100vh;
     padding: 10px;
+    // overflow: hidden;
+    display: flex;
+    flex-direction: column;
 
     header {
-
+        width: 100%;
+        height: 70px;
         .return-dashboard {
             display: flex;
             align-items: center;
@@ -17,61 +21,80 @@ body {
             }
         }
     }
-
+    
+    // Management lists
     main {
-        #btn-create-list {
-            color: $cyan_green;
-            cursor: pointer;
-        }
+        display:flex;
+        flex-direction: column;
+        height: 100%;
+        position: relative;
+    }
+    main #board {
+        overflow-y: hidden;
+    }
+    main #btn-create-list {
+        color: $cyan_green;
+        cursor: pointer;
+    }
+    main .container-project-list {
+        display:flex;
+        align-items: flex-start;
+        margin-top: 20px;
+        
 
-        .container-project-list {
-            display: flex;
-            flex-wrap: nowrap;
-            overflow-x: scroll;
-            margin-top: 20px;
+        .project-list {
             position: relative;
-            
-            .project-list {
-                margin-right: 50px;
-                background-color: $dark_blue;
-                border-radius: 10px;
-                min-height: 115px;
-                min-width: 290px;
-                max-height: 100%;
+            margin-right: 50px;
+            background-color: $dark_blue;
+            border-radius: 10px;
+            min-height: 0;
+            width: 290px;
+            min-width: 290px;
+            max-height: 100%;
+            padding-bottom: 10px;
+            vertical-align: top;
 
-                // Header list
-                .header-list {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    position: relative;
+            // Header list
+            .header-list {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: relative;
 
-                    .delete-list {
-                        position: absolute;
-                        right: 10px;
+                .delete-list {
+                    position: absolute;
+                    right: 10px;
 
-                        button {
-                            border: none !important;
-                            background: transparent !important;
-                            color: $orange !important;
-                            cursor: pointer;
-                        }
-                    }
-                }
-                
-                // Main list
-                .main-list {
-                    button.create-task {
-                        position: absolute;
-                        bottom: 0;
-                        margin: 10px;
-                        background: transparent;
-                        border: none;
-                        color: $cyan_green;
+                    button {
+                        border: none !important;
+                        background: transparent !important;
+                        color: $orange !important;
                         cursor: pointer;
                     }
                 }
             }
+            
+            // Footer list
+            .footer-list {
+                background-color: $dark_blue;
+                
+                a.create-task {
+                    margin: 10px;
+                    background: transparent;
+                    border: none;
+                    color: $cyan_green;
+                    cursor: pointer;
+                }
+            }
         }
+    }
+
+    // Management tasks
+    main .main-list .container-project-task {
+        background-color: $dark_blue_light;
+        margin: 10px;
+        padding: 10px;
+        min-height: 0;
+        position: relative;
     }
 }

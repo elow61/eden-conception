@@ -23,9 +23,10 @@ class ProjectList(models.Model):
 
 class ProjectTask(models.Model):
 
-    name = models.CharField(max_length=120)
+    name = models.CharField(max_length=120, unique=True)
     description = models.TextField()
-    # project_list_id = ManyToOne
+    project_list = models.ForeignKey(ProjectList, on_delete=models.CASCADE)
+
     # Assign
     # Deadline : format date
     # Estimated time : format hour

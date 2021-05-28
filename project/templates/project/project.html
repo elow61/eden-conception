@@ -16,48 +16,55 @@
         </nav>
     </header>
     <main>
-        <i id="btn-create-list" class="fas fa-plus"></i>
-        <div class="create-list d-none">
-            <form method="post" class="form-create-list">
-                {% csrf_token %}
-                {% for field in form %}
-                    <div class="form-group">
-                        <label class="col-6" for="{{field.id_for_label}}">
-                            {{ field.label }}
-                        </label>
-                        {{ field }}
-                    </div>
-                {% endfor %}
+        <div class="main-create-list">
+            <i id="btn-create-list" class="fas fa-plus"></i>
+            <div class="create-list d-none">
+                <form method="post" class="form-create-list">
+                    {% csrf_token %}
+                    {% for field in create_list_form %}
+                        <div class="form-group">
+                            <label class="col-6" for="{{field.id_for_label}}">
+                                {{ field.label }}
+                            </label>
+                            {{ field }}
+                        </div>
+                    {% endfor %}
                     <input type="hidden" name="project_id" value="{{project.id}}">
-                <button type="submit">Create</button>
-            </form>
+                    <button type="submit">Create</button>
+                </form>
+            </div>
         </div>
-        <div class="container-project-list">
-            {% for list in lists %}
-                <div id="project-list-{{list.id}}" class="project-list">
-                    <div class="header-list">
-                        <h4>{{list.name}}</h4>
-                        <div class="delete-list">
-                            <form method="post" class="form-delete-list">
-                                {% csrf_token %}
-                                <input type="hidden" name="list_id" value="{{ list.id }}">
-                                <button type="submit"><i class="far fa-trash-alt"></i></button>
-                            </form>
+        <div id="board">
+            <div class="container-project-list">
+                {% for list in lists %}
+                    <div id="project-list-{{list.id}}" class="project-list">
+                        <div class="header-list">
+                            <h4>{{list.name}}</h4>
+                            <div class="delete-list">
+                                <form method="post" class="form-delete-list">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="list_id" value="{{ list.id }}">
+                                    <button type="submit"><i class="far fa-trash-alt"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="main-list">
+                            {% for task in list.projecttask_set.all %}
+                                <div class="container-project-task" id="project-task-{{task.id}}">
+                                    <a href="#">{{task.name}}</a>
+                                </div>
+                            {% endfor %}
+                            {% include 'project/project_task.html' %}
+                        </div>
+                        <div class="footer-list">
+                            <a href="#create-task-in-{{list.id}}" class="btn create-task"><i class="fas fa-plus"></i> Create a task</a>
+                            <div id="create-task-in-{{list.id}}" class="modal">
+                                {% include 'project/create_task.html' %}
+                            </div>
                         </div>
                     </div>
-                    <div class="main-list">
-                        <a href="#create-task-in-{{list.id}}" class="btn create-task"><i class="fas fa-plus"></i> Create a task</a>
-                    </div>
-                    <div id="create-task-in-{{list.id}}" class="modal">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    </div>
-                </div>
-            {% endfor %}
+                {% endfor %}
+            </div>
         </div>
     </main>
 {% endblock %}
@@ -65,4 +72,5 @@
     <script src="{% static 'js/submit_form_ajax.js' %}"></script>
     <script src="{% static 'js/lists/create_list.js' %}"></script>
     <script src="{% static 'js/lists/delete_list.js' %}"></script>
+    <script src="{% static 'js/tasks/create_task.js' %}"></script>
 {% endblock %}

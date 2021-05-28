@@ -1,0 +1,16 @@
+{% load i18n %}
+<div class="create-task-container">
+    <form method="post" class="form-create-task">
+        {% csrf_token %}
+        {% for field in create_task_form %}
+            <div class="form-group">
+                <label class="col-6" for="{{field.id_for_label}}">
+                    {{ field.label }}
+                </label>
+                {{ field }}
+            </div>
+        {% endfor %}
+        <input type="hidden" name="list_id" value="{{list.id}}">
+        <button type="submit">Create</button>
+    </form>
+</div>
