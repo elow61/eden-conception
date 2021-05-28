@@ -34,12 +34,12 @@
     <main>
         <section>
             {% if projects %}
-                <div class="container-projects-details">
+                <div class="container-projects-details d-none">
                     {% include 'project/project_detail.html' %}
                 </div>
             {% endif %}
 
-            <div class="container-create-project">
+            <div class="container-create-project" id="container-create-project">
                 {% include 'project/create_project.html' %}
             </div>
         </section>
@@ -48,6 +48,7 @@
 {% endblock %}
 {% block js %}
     <script src="{% static 'js/submit_form_ajax.js' %}"></script>
-    <script src="{% static 'js/project_detail.js' %}"></script>
-    <script src="{% static 'js/create_project.js' %}"></script>
+    <script src="{% static 'js/projects/project_detail.js' %}"></script>
+    <script src="{% static 'js/projects/create_project.js' %}"></script>
+    <script src="{% static 'js/projects/delete_project.js' %}"></script>
 {% endblock %}

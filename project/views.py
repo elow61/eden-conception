@@ -43,15 +43,30 @@ class DashboardView(View):
 
                 res['project_name'] = query
                 res['project_id'] = Project.objects.get(name=query).id
-                res['template'] = render_to_string('project/project_detail.html', context)
+                res['template'] = render_to_string('project/project_detail.html', context, request=request)
             else:
                 res['error'] = _('No project name received.')
 
         return JsonResponse(res)
 
     @staticmethod
-    def delete_project(requeset):
-        pass
+    def delete_project(request):
+        res = {}
+        if request.user.is_authenticated:
+            if request.method == 'POST':
+                project_id = request.POST.get('project_id')
+                print(project_id)
+                project_to_delete = Project.objects.get(id=project_id)
+                project_to_delete.delete()
+
+                res['project_id'] = project_id
+                res['success'] = _('The project has deleted')
+            else:
+                res['error'] = _('The project doesn\'t have deleted')
+        else:
+            res['error'] = _('Please, connect you.')
+
+        return JsonResponse(res)
 
 
 class ProjectView(View):

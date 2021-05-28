@@ -32,7 +32,7 @@ ul {
   display: none; }
 
 body {
-  background-color: #36374b;
+  background-color: #323b4f;
   height: 100vh;
   padding: 10px; }
   body header .return-dashboard {
@@ -52,7 +52,7 @@ body {
     position: relative; }
     body main .container-project-list .project-list {
       margin-right: 50px;
-      background-color: #2f2f3c;
+      background-color: #1F2136;
       border-radius: 10px;
       min-height: 115px;
       min-width: 290px;

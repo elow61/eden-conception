@@ -1,4 +1,3 @@
-
 (function($) {
     'use strict';
 
@@ -25,10 +24,18 @@
                 projectName.on('click', function () {
                     displayProjectDetails(response.project_id);
                 })
+
+                const formDelete = containerProjectDetail.find('#project-detail-'+response.project_id).find('.form-delete-project');
+                formDelete.submit(function (e) {
+                    let url = '/delete_project/';
+                    e.preventDefault();
+                    deleteProject(url, $(this));
+                })
             } else {
                 console.log(response.error);
             }
         });
+        form[0].reset();
     });
 
     // Display the create project form
@@ -38,24 +45,10 @@
 
         $.each(projectDetail, (i) => {
             if (!$(projectDetail[i]).hasClass('d-none')) {
-
                 $(projectDetail[i]).addClass('d-none');
             }
         })
+        $('.container-projects-details').toggleClass('d-none');
         $('.container-create-project').toggleClass('closed');
     });
-
-    // Delete project
-    let urlDelete = '/delete_project/'
-    let formDelete = $('.form-delete-project');
-
-    formDelete.submit(function (e) {
-        e.preventDefault();
-
-        submitForm(urlDelete, $(this)).then(response => {
-            if (response.list_id) {
-                $('#project-list-' + response.list_id).remove();
-            }
-        })
-    })
 })(jQuery);

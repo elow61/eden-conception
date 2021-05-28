@@ -11,18 +11,20 @@
 
     window.displayProjectDetails = function(projectId) {
         const projectDetail = $('.project-detail');
+        const formCreateProject = $('.container-create-project');
+        const containerProjectDetail = $('.container-projects-details');
 
-        if (!$('.container-create-project').hasClass('closed')) {
-            $('.container-create-project').addClass('closed');
+        if (!formCreateProject.hasClass('closed')) {
+            formCreateProject.addClass('closed');
         }
 
         $.each(projectDetail, (i) => {
             if (!$(projectDetail[i]).hasClass('d-none')) {
-
                 $(projectDetail[i]).addClass('d-none');
             }
         })
 
+        containerProjectDetail.removeClass('d-none');
         $('#project-detail-' + projectId).toggleClass('d-none');
     }
     

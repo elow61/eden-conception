@@ -2,10 +2,8 @@
 
 main .container-projects-details {
     background-color: $dark_blue;
-    position: absolute;
-    top: 120px;
-    right: 30px;
-    left: 400px;
+    width: 100%;
+    margin: 30px;
 
     .project-detail {
         padding: 10px;
@@ -23,13 +21,20 @@ main .container-projects-details {
     
             .icons-p {
                 display: flex;
-                font-size: 1.6em;
-                cursor: pointer;
+                i {
+                    cursor: pointer;
+                    font-size: 1.6em;
+                }
     
                 .view-project{color: $cyan_green;}
                 .delete-project {
                     margin-left: 20px;
-                    color: $orange;
+
+                    button {
+                        border: none;
+                        background: transparent !important;
+                        color: $orange;
+                    }
                 }
             }
         }
