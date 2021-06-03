@@ -1,11 +1,12 @@
 {% extends 'static_page/base.html' %}
+{% load i18n %}
 {% load sass_tags %}
 {% block scss %}<link href="{% sass_src 'scss/account.scss' %}" rel="stylesheet" type="text/css"/>{% endblock %}
 {% block content %}
 <a href="/" class="return-home"><i class="fas fa-arrow-left"></i></a>
 <section class="main-form">
     <div class="container-form">
-        <h1>Register</h1>
+        <h1>{% translate 'Register' %}</h1>
         <form method="post" action="{% url 'user:register' %}">
             {% csrf_token %}
             {% for field in form %}
@@ -24,7 +25,7 @@
                 </div>
             {% endif %}
             <div class="m-auto">
-                <button class="" id="id_register" type="submit">Register</button>
+                <button class="" id="id_register" type="submit">{% translate 'Register' %}</button>
             </div>
         </form>
     </div>

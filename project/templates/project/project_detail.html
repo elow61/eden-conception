@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 {% for project in projects %}
     <div id="project-detail-{{project.id}}" class="d-none project-detail">
         <div class="header-project-detail">
@@ -22,26 +23,26 @@
         <div class="main-project-detail">
             <div class="info">
                 <div class="last-modification">
-                    <span>Last modification : </span>
+                    <span>{% translate 'Last modification:' %}</span>
                     <span>{{project.last_modified}}</span>
                 </div>
                 <hr/>
                 <div class="task-count">
-                    <span>Task number : </span>
+                    <span>{% translate 'Task number:' %}</span>
                     <span>{{project.get_number_task}}</span>
                 </div>
                 <hr/>
                 <div class="creator">
-                    <span>Creator : </span>
+                    <span>{% translate 'Creator:' %}</span>
                     <span>{{project.user.first_name}}</span>
                 </div>
                 <hr/>
                 <div class="member">
-                    <span>Member : </span>
+                    <span>{% translate 'Member:' %}</span>
                     {% if project.member %}
                         <span>{{project.user_ids.first_name}}</span>
                     {% else %}
-                        <span>Nobody except you :)</span>
+                        <span>{% translate 'Nobody except you :)' %}</span>
                     {% endif %}
                 </div>
                 <hr/>

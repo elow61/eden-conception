@@ -1,11 +1,12 @@
 {% extends 'static_page/base.html' %}
+{% load i18n %}
 {% load sass_tags %}
 {% block scss %}<link href="{% sass_src 'scss/account.scss' %}" rel="stylesheet" type="text/css"/>{% endblock %}
 {% block content %}
 <a href="/" class="return-home"><i class="fas fa-arrow-left"></i></a>
 <section class="main-form">
     <div class="container-form">
-        <h1>Sign in</h1>
+        <h1>{% translate 'Sign in' %}</h1>
         <form method="post" action="{% url 'user:login' %}">
             {% csrf_token %}
             {% for field in form %}
@@ -24,12 +25,12 @@
                 </div>
             {% endif %}
             <div class="m-auto">
-                <button class="" id="id_login" type="submit">Sign in</button>
+                <button class="" id="id_login" type="submit">{% translate 'Sign in' %}</button>
             </div>
             <input type="hidden" name="next" value="{{ redirect_field_name }}" />
         </form>
-        <p><a href="{% url 'user:register' %}">No account ? </a></p>
-        <p><a href="">Forgot your password ?</a></p>
+        <p><a href="{% url 'user:register' %}">{% translate 'No account ?' %}</a></p>
+        <p><a href="">{% translate 'Forgot your password ?' %}</a></p>
     </div>
 </section>
 {% endblock %}

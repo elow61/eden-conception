@@ -1,0 +1,142 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-06-03 12:19+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: eden_conception/settings.py:138
+msgid "French"
+msgstr "Français"
+
+#: eden_conception/settings.py:139
+msgid "English"
+msgstr "Anglais"
+
+#: project/forms.py:7
+msgid "Project name"
+msgstr "Nom du projet"
+
+#: project/forms.py:11
+msgid "List name"
+msgstr "Nom de la liste"
+
+#: project/forms.py:15
+msgid "Task name"
+msgstr "Nom de la tâche"
+
+#: project/templates/project/create_project.html:13
+#: project/templates/project/create_task.html:14
+#: project/templates/project/project.html:33
+msgid "Create"
+msgstr "Créer"
+
+#: project/templates/project/dashboard.html:18
+#, fuzzy
+#| msgid "Project name"
+msgid "Projects"
+msgstr "Nom du projet"
+
+#: project/templates/project/dashboard.html:30
+msgid "Collaborator"
+msgstr "Collaborateur"
+
+#: project/templates/project/project.html:62
+#: project/templates/project/project_list.html:24
+msgid "Create a task"
+msgstr "Créer une tâche"
+
+#: project/templates/project/project_detail.html:26
+msgid "Last modification:"
+msgstr "Dernière modification : "
+
+#: project/templates/project/project_detail.html:31
+#, fuzzy
+#| msgid "Task name"
+msgid "Task number:"
+msgstr "Nombre de tâche"
+
+#: project/templates/project/project_detail.html:36
+msgid "Creator:"
+msgstr "Créateur : "
+
+#: project/templates/project/project_detail.html:41
+msgid "Member:"
+msgstr "Membre : "
+
+#: project/templates/project/project_detail.html:45
+msgid "Nobody except you :)"
+msgstr "Personne à part toi :)"
+
+#: project/views.py:49
+msgid "No project name received."
+msgstr ""
+
+#: project/views.py:64
+msgid "The project has deleted"
+msgstr ""
+
+#: project/views.py:66
+msgid "The project doesn't have deleted"
+msgstr ""
+
+#: project/views.py:68 project/views.py:136
+msgid "Please, connect you."
+msgstr ""
+
+#: project/views.py:113
+msgid "Please, write a list name."
+msgstr ""
+
+#: project/views.py:115
+msgid "Connect before create a list"
+msgstr ""
+
+#: project/views.py:132
+msgid "The list has deleted"
+msgstr ""
+
+#: project/views.py:134
+msgid "The list doesn't have deleted"
+msgstr ""
+
+#: static_page/templates/static_page/index.html:16
+msgid "Connection"
+msgstr "Connexion"
+
+#: static_page/templates/static_page/index.html:19
+msgid "Legals mentions"
+msgstr "Mentions légales"
+
+#: user/models.py:10
+msgid "email address"
+msgstr "Adresse email"
+
+#: user/templates/user/login.html:9 user/templates/user/login.html:28
+msgid "Sign in"
+msgstr "Se connecter"
+
+#: user/templates/user/login.html:32
+msgid "No account ?"
+msgstr "Pas de compte ?"
+
+#: user/templates/user/login.html:33
+msgid "Forgot your password ?"
+msgstr "Mot de passe oublié ?"
+
+#: user/templates/user/register.html:9 user/templates/user/register.html:28
+msgid "Register"
+msgstr "S'enregistrer"
