@@ -10,16 +10,18 @@
         </div>
     </div>
     <div class="main-list">
-        {% for task in list.projecttask_set.all %}
-            <div class="container-project-task" id="project-task-{{task.id}}">
-                <a href="#">{{task.name}}</a>
-            </div>
+        {% for task in new_list.projecttask_set.all %}
+            {% if task %}
+                <div class="container-project-task" id="project-task-{{task.id}}">
+                    <a href="#">{{task.name}}</a>
+                </div>
+            {% endif %}
         {% endfor %}
         {% include 'project/project_task.html' %}
     </div>
     <div class="footer-list">
-        <a href="#create-task-in-{{list.id}}" class="btn create-task"><i class="fas fa-plus"></i> Create a task</a>
-        <div id="create-task-in-{{list.id}}" class="modal">
+        <a href="#create-task-in-{{new_list.id}}" class="btn create-task"><i class="fas fa-plus"></i> Create a task</a>
+        <div id="create-task-in-{{new_list.id}}" class="modal">
             {% include 'project/create_task.html' %}
         </div>
     </div>

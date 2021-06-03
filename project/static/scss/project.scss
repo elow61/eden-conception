@@ -32,6 +32,36 @@ body {
     main #board {
         overflow-y: hidden;
     }
+    main .form-create-list {
+        display: flex;
+        align-items: flex-end;
+
+        input {
+            width: 300px;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid $white;
+            max-width: 75%;
+            color: $white;
+
+            &:focus {
+                outline: none;
+            }
+
+            &:focus-visible {
+                outline: none;
+            }
+        }
+
+        button {
+            padding: 10px 40px;
+            background: transparent;
+            color: $white;
+            border: 1px solid $white;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+    }
     main #btn-create-list {
         color: $cyan_green;
         cursor: pointer;

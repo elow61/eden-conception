@@ -50,9 +50,11 @@
                         </div>
                         <div class="main-list">
                             {% for task in list.projecttask_set.all %}
-                                <div class="container-project-task" id="project-task-{{task.id}}">
-                                    <a href="#">{{task.name}}</a>
-                                </div>
+                                {% if task %}
+                                    <div class="container-project-task" id="project-task-{{task.id}}">
+                                        <a href="#">{{task.name}}</a>
+                                    </div>
+                                {% endif %}
                             {% endfor %}
                             {% include 'project/project_task.html' %}
                         </div>

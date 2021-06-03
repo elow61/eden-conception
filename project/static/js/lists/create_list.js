@@ -25,6 +25,12 @@
                     e.preventDefault();
                     deleteList(url, $(this));
                 })
+
+                const createTasks = containerLists.find('#create-task-in-'+response.list_id);
+                createTasks.on('click', function (e) {
+                    e.preventDefault();
+                    $(this).modal({fadeDuration: 250});
+                })
             }
         })
     })

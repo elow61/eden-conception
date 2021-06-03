@@ -73,11 +73,14 @@ main .container-projects-details {
         display: flex;
         flex-direction: column; }
         main .container-projects-details .project-detail .main-project-detail .info div {
-          padding: 25px 0; }
+          padding: 22px 0; }
       main .container-projects-details .project-detail .main-project-detail .display .contain-display {
         width: 500px;
         height: 250px;
         border: 1px solid #dbdada; }
+        main .container-projects-details .project-detail .main-project-detail .display .contain-display img {
+          width: 500px;
+          height: 250px; }
       main .container-projects-details .project-detail .main-project-detail hr {
         width: 400px;
         margin: 0;

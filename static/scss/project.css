@@ -53,6 +53,27 @@ body {
     position: relative; }
   body main #board {
     overflow-y: hidden; }
+  body main .form-create-list {
+    display: flex;
+    align-items: flex-end; }
+    body main .form-create-list input {
+      width: 300px;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid #dbdada;
+      max-width: 75%;
+      color: #dbdada; }
+      body main .form-create-list input:focus {
+        outline: none; }
+      body main .form-create-list input:focus-visible {
+        outline: none; }
+    body main .form-create-list button {
+      padding: 10px 40px;
+      background: transparent;
+      color: #dbdada;
+      border: 1px solid #dbdada;
+      cursor: pointer;
+      text-transform: uppercase; }
   body main #btn-create-list {
     color: #70e5cd;
     cursor: pointer; }

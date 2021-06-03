@@ -57,7 +57,7 @@ main .container-projects-details {
                 flex-direction: column;
 
                 div {
-                    padding: 25px 0;
+                    padding: 22px 0;
                 }
             }
             .display {
@@ -65,6 +65,11 @@ main .container-projects-details {
                     width: 500px;
                     height: 250px;
                     border: 1px solid $white;
+
+                    img {
+                        width: 500px;
+                        height: 250px;
+                    }
                 }
             }
             hr {

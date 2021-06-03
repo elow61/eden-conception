@@ -2,6 +2,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from django.http import JsonResponse
+from django.template import RequestContext
 from django.template.loader import render_to_string
 from django.utils.translation import gettext_lazy as _
 
@@ -107,7 +108,7 @@ class ProjectView(View):
 
                 res['list_name'] = name
                 res['list_id'] = new_list.id
-                res['template'] = render_to_string('project/project_list.html', context)
+                res['template'] = render_to_string('project/project_list.html', context, request=request)
             else:
                 res['error'] = _('Please, write a list name.')
         else:
@@ -143,8 +144,8 @@ class ProjectView(View):
             if request.method == 'POST':
                 name = request.POST.get('task_name')
                 list_id = request.POST.get('list_id')
-                current_list = ProjectList.objects.get(id=list_id)
-                project = Project.objects.get(current_list.project_id)
+                current_list = ProjectList.objects.get(id=int(list_id))
+                project = Project.objects.get(id=current_list.project_id)
 
                 ProjectTask.objects.create(
                     name=name,

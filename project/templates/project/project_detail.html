@@ -1,3 +1,4 @@
+{% load static %}
 {% for project in projects %}
     <div id="project-detail-{{project.id}}" class="d-none project-detail">
         <div class="header-project-detail">
@@ -47,7 +48,7 @@
             </div>
             <div class="display">
                 <div class="contain-display">
-
+                    <img src="{% static '/img/_.jpeg' %}" alt="">
                 </div>
             </div>
         </div>
