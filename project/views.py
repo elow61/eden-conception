@@ -11,9 +11,9 @@ from .models import Project, ProjectList, ProjectTask
 from user.models import User
 
 
-class DashboardView(View):
+class ProjectView(View):
 
-    template_name = 'project/dashboard.html'
+    template_name = 'project/projects/projects.html'
     form = CreateProjectForm
 
     def get(self, request):
@@ -44,7 +44,7 @@ class DashboardView(View):
 
                 res['project_name'] = query
                 res['project_id'] = Project.objects.get(name=query).id
-                res['template'] = render_to_string('project/project_detail.html', context, request=request)
+                res['template'] = render_to_string('project/projects/project_detail.html', context, request=request)
             else:
                 res['error'] = _('No project name received.')
 
@@ -70,9 +70,9 @@ class DashboardView(View):
         return JsonResponse(res)
 
 
-class ProjectView(View):
+class ListView(View):
 
-    template_name = 'project/project.html'
+    template_name = 'project/lists/lists.html'
     form = CreateListForm
 
     def get(self, request, project_id):
@@ -108,7 +108,7 @@ class ProjectView(View):
 
                 res['list_name'] = name
                 res['list_id'] = new_list.id
-                res['template'] = render_to_string('project/project_list.html', context, request=request)
+                res['template'] = render_to_string('project/lists/new_list.html', context, request=request)
             else:
                 res['error'] = _('Please, write a list name.')
         else:
@@ -159,6 +159,16 @@ class ProjectView(View):
                 res['task_name'] = name
                 res['task_id'] = task.id
                 res['list_id'] = list_id
-                res['template'] = render_to_string('project/project_task.html', context)
+                res['template'] = render_to_string('project/tasks/new_task.html', context)
 
         return JsonResponse(res)
+
+
+class TaskView(View):
+
+    template_name = 'project/tasks/tasks.html'
+
+    def get(self, request, project_id, task_id):
+        project = get_object_or_404(Project, pk=project_id)
+        task = get_object_or_404(ProjectTask, pk=task_id)
+        import pdb; pdb.set_trace();

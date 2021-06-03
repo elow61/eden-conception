@@ -56,12 +56,12 @@
                                     </div>
                                 {% endif %}
                             {% endfor %}
-                            {% include 'project/project_task.html' %}
+                            {% include 'project/tasks/tasks.html' %}
                         </div>
                         <div class="footer-list">
                             <a href="#create-task-in-{{list.id}}" class="btn create-task"><i class="fas fa-plus"></i> {% translate 'Create a task' %}</a>
                             <div id="create-task-in-{{list.id}}" class="modal">
-                                {% include 'project/create_task.html' %}
+                                {% include 'project/tasks/create_task.html' %}
                             </div>
                         </div>
                     </div>
