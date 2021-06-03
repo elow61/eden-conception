@@ -22,12 +22,12 @@
             <div class="info">
                 <div class="last-modification">
                     <span>Last modification : </span>
-                    <span>date et / ou heure ?</span>
+                    <span>{{project.last_modified}}</span>
                 </div>
                 <hr/>
                 <div class="task-count">
                     <span>Task number : </span>
-                    <span>nombre de tâches</span>
+                    <span>{{project.get_number_task}}</span>
                 </div>
                 <hr/>
                 <div class="creator">
@@ -37,7 +37,11 @@
                 <hr/>
                 <div class="member">
                     <span>Member : </span>
-                    <span>{{project.user_ids.first_name}}</span>
+                    {% if project.member %}
+                        <span>{{project.user_ids.first_name}}</span>
+                    {% else %}
+                        <span>Nobody except you :)</span>
+                    {% endif %}
                 </div>
                 <hr/>
             </div>

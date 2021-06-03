@@ -100,6 +100,7 @@ class ProjectView(View):
                     name=name,
                     project=project,
                 )
+                project.save()
 
                 new_list = ProjectList.objects.get(name=name)
                 context['new_list'] = new_list
@@ -121,7 +122,10 @@ class ProjectView(View):
             if request.method == 'POST':
                 list_id = request.POST.get('list_id')
                 list_to_delete = ProjectList.objects.get(id=list_id)
+                project = Project.objects.get(id=list_to_delete.project_id)
+
                 list_to_delete.delete()
+                project.save()
 
                 res['list_id'] = list_id
                 res['success'] = _('The list has deleted')
@@ -140,10 +144,14 @@ class ProjectView(View):
                 name = request.POST.get('task_name')
                 list_id = request.POST.get('list_id')
                 current_list = ProjectList.objects.get(id=list_id)
+                project = Project.objects.get(current_list.project_id)
+
                 ProjectTask.objects.create(
                     name=name,
                     project_list=current_list,
                 )
+                project.save()
+
                 task = ProjectTask.objects.get(name=name)
                 context = {'task': task}
 

@@ -4,14 +4,23 @@ main .container-projects-details {
     background-color: $dark_blue;
     width: 100%;
     margin: 30px;
+    border-radius: 10px;
 
     .project-detail {
         padding: 10px;
+        
+        hr {
+            width: 100%;
+            margin: 0;
+            background-color: $white;
+            border:none;
+            height: 1px;
+        }
 
         .header-project-detail { 
             display: flex;
             justify-content: space-between;
-            margin-bottom: 30px;
+            margin-bottom: 15px;
     
             h2 {
                 margin: 0 !important;
@@ -41,6 +50,7 @@ main .container-projects-details {
         .main-project-detail {
             display: flex;
             justify-content: space-between;
+            margin-top: 15px;
 
             .info {
                 display: flex;
@@ -57,14 +67,13 @@ main .container-projects-details {
                     border: 1px solid $white;
                 }
             }
-        }
-    
-        hr {
-            width: 400px;
-            margin: 0;
-            background-color: $white;
-            border:none;
-            height: 1px;
+            hr {
+                width: 400px;
+                margin: 0;
+                background-color: $white;
+                border:none;
+                height: 1px;
+            }
         }
     }
 }
