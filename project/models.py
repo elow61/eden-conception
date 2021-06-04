@@ -15,9 +15,9 @@ class Project(models.Model):
     @property
     def get_number_task(self):
         self.number_task = 0
-        project_lists = self.projectlist_set.all()
+        project_lists = self.list_set.all()
         for li in project_lists:
-            self.number_task += li.projecttask_set.all().count()
+            self.number_task += li.task_set.all().count()
 
         return self.number_task
 
@@ -32,7 +32,7 @@ class Project(models.Model):
         ordering = ['created_at']
 
 
-class ProjectList(models.Model):
+class List(models.Model):
 
     name = models.CharField(max_length=100, unique=True)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
@@ -41,13 +41,13 @@ class ProjectList(models.Model):
         return self.name
 
 
-class ProjectTask(models.Model):
+class Task(models.Model):
 
     name = models.CharField(max_length=120, unique=True)
     description = models.TextField()
-    project_list = models.ForeignKey(ProjectList, on_delete=models.CASCADE)
-
-    # Assign
-    # Deadline : format date
+    project_list = models.ForeignKey(List, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    assigned_to = models.ForeignKey(User, on_delete=models.CASCADE)
+    deadline = models.DateField(blank=True, default='', null=True)
     # Estimated time : format hour
     # Timesheet : OneToMany

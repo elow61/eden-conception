@@ -1,0 +1,24 @@
+{% load i18n %}
+<form method="post" class="form-update-task" id="form-update-task">
+    {{form.name}}
+    <div class="header-task">
+        <button type="submit" id="save-task" form="form-update-task" task-id="{{task.id}}">{% translate 'Save' %}</button>
+        <button type="button" id="cancel-task">{% translate 'Cancel' %}</button>
+    </div>
+    <div class="container-task">
+        <div class="container-form-update-task">
+            {% csrf_token %}
+            {% for field in form %}
+                {% if not field.id_for_label == 'id_name' %}
+                    <div class="form-group {{field.id_for_label}}">
+                        <label class="" for="{{field.id_for_label}}">
+                            {{ field.label }}
+                        </label>
+                        {{ field }}
+                    </div>
+                {% endif %}
+            {% endfor %}
+            <input type="hidden" name="task_id" value="{{task.id}}">
+        </div>
+    </div>
+</form>

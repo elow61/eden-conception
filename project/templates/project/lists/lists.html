@@ -49,14 +49,14 @@
                             </div>
                         </div>
                         <div class="main-list">
-                            {% for task in list.projecttask_set.all %}
+                            {% for task in list.task_set.all %}
                                 {% if task %}
                                     <div class="container-project-task" id="project-task-{{task.id}}">
-                                        <a href="#">{{task.name}}</a>
+                                        <a href="{% url 'project:task' project_id=project.id task_id=task.id %}">{{task.name}}</a>
                                     </div>
                                 {% endif %}
                             {% endfor %}
-                            {% include 'project/tasks/tasks.html' %}
+                            {% include 'project/tasks/new_task.html' %}
                         </div>
                         <div class="footer-list">
                             <a href="#create-task-in-{{list.id}}" class="btn create-task"><i class="fas fa-plus"></i> {% translate 'Create a task' %}</a>

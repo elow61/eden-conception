@@ -17,4 +17,6 @@ urlpatterns = [
 
     path('create_task/', login_required(views.ListView.create_task), name='create_task'),
     path('project-<int:project_id>/task-<int:task_id>/', login_required(views.TaskView.as_view()), name='task'),
+    path('<task_id>/update/', login_required(views.TaskView.as_view()), name='form_update_task'),
+    path('update_task/', login_required(views.TaskView.update_task), name='update_task'),
 ]

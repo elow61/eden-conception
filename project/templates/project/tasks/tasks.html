@@ -1,0 +1,25 @@
+{% extends 'project/base.html' %}
+{% load i18n %}
+{% load sass_tags %}
+{% load static %}
+{% block title %}{{project.name}}{% endblock %}
+{% block scss %}
+    <link href="{% sass_src 'scss/task.scss' %}" rel="stylesheet" type="text/css" />
+{% endblock %}
+{% block content %}
+    <main>
+        <div id="main-task">
+            <div class="return-dashboard">
+                <a href="{% url 'project:project' project_id=project.id %}" ><i class="fas fa-arrow-left"></i></a>
+                <a href="{% url 'project:dashboard' %}"><i class="fas fa-chart-line"></i></a>
+            </div>
+            {% include 'project/tasks/task_detail.html' %}
+        </div>
+        <div id="main-messages"></div>
+    </main>
+{% endblock %}
+{% block js %}
+    <script src="{% static 'js/tasks/update_task.js' %}"></script>
+    <script src="{% static 'js/submit_form_ajax.js' %}"></script>
+{% endblock %}
+

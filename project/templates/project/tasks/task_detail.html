@@ -1,0 +1,30 @@
+{% load i18n %}
+<div class="contain-header-info">
+    <h1>{{task.name}}</h1>
+    <div class="header-task">
+        <button id="update-task" task-id="{{task.id}}">{% translate 'Update' %}</button>
+    </div>
+    <div class="container-task">
+        <div class="container-info-task">
+    
+            <div class="form-group">
+                <label class="" for="id_assigned_to">
+                    {% translate 'Assigned to ' %} 
+                </label>
+                <span>{{task.assigned_to}}</span>
+            </div>
+            <div class="form-group">
+                <label class="" for="id_deadline">
+                    {% translate 'Deadline ' %} 
+                </label>
+                <span>{{task.deadline}}</span>
+            </div>
+            <div class="form-group">
+                <label class="" for="id_description">
+                    {% translate 'Description ' %}
+                </label>
+                <span>{{task.description}}</span>
+            </div>
+        </div>
+    </div>
+</div>

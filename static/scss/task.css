@@ -1,0 +1,104 @@
+* {
+  box-sizing: border-box;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-kerning: auto; }
+
+html {
+  font-family: sans-serif;
+  -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  color: #dbdada; }
+
+a {
+  text-decoration: none;
+  color: inherit; }
+
+ul {
+  list-style: none; }
+
+.m-auto {
+  margin: auto; }
+
+.col-6 {
+  -ms-flex: 0 0 50%;
+  flex: 0 0 50%;
+  max-width: 50%; }
+
+.d-none {
+  display: none; }
+
+body {
+  background-color: #323b4f;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column; }
+
+main {
+  display: flex; }
+  main #main-task {
+    padding: 10px;
+    height: 100vh;
+    width: 100%;
+    background-color: #323b4f; }
+    main #main-task .return-dashboard {
+      display: flex;
+      align-items: center; }
+    main #main-task .contain-header-info h1 {
+      color: #ee6f4f; }
+    main #main-task .header-task {
+      margin: 20px 0; }
+      main #main-task .header-task button {
+        padding: 10px 40px;
+        background: transparent;
+        color: #dbdada;
+        border: 1px solid #dbdada;
+        cursor: pointer;
+        text-transform: uppercase; }
+    main #main-task #form-update-task input[name="name"] {
+      background: transparent;
+      border: none;
+      color: #ee6f4f;
+      outline: none;
+      width: 100%;
+      font-size: 2em;
+      font-weight: bold;
+      margin-block-start: 0.67em;
+      margin-block-end: 0.67em;
+      margin-inline-start: 0px;
+      margin-inline-end: 0px; }
+    main #main-task .container-task label {
+      display: inline-block;
+      padding: 0 15px 0 0;
+      min-width: 150px; }
+    main #main-task .container-task input, main #main-task .container-task select {
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid white;
+      color: #dbdada; }
+    main #main-task .container-task textarea {
+      background-color: #1F2136;
+      border: none;
+      border-radius: 10px 10px;
+      width: 543px;
+      height: 274px;
+      color: #dbdada;
+      outline: none;
+      padding: 5px; }
+    main #main-task .container-task .form-group {
+      display: flex;
+      margin-bottom: 30px; }
+  main #main-messages {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #1F2136;
+    height: 100vh;
+    width: 400px;
+    overflow-y: scroll; }
+
+/*# sourceMappingURL=task.css.map */

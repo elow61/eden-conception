@@ -1,13 +1,14 @@
 """ All views for the user application """
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
+from django.views.generic.edit import UpdateView
 from django.http import JsonResponse
 from django.template import RequestContext
 from django.template.loader import render_to_string
 from django.utils.translation import gettext_lazy as _
 
-from .forms import CreateProjectForm, CreateListForm, CreateTaskForm
-from .models import Project, ProjectList, ProjectTask
+from .forms import CreateProjectForm, CreateListForm, CreateTaskForm, UpdateTaskForm
+from .models import Project, List, Task
 from user.models import User
 
 
@@ -39,11 +40,14 @@ class ProjectView(View):
                     name=query,
                     user=user,
                 )
+                project = Project.objects.get(name=query)
+                project.user_ids.add(user.id)
                 projects = user.main_user.all()
+
                 context['projects'] = projects
 
                 res['project_name'] = query
-                res['project_id'] = Project.objects.get(name=query).id
+                res['project_id'] = project.id
                 res['template'] = render_to_string('project/projects/project_detail.html', context, request=request)
             else:
                 res['error'] = _('No project name received.')
@@ -77,7 +81,7 @@ class ListView(View):
 
     def get(self, request, project_id):
         project = get_object_or_404(Project, pk=project_id)
-        lists = project.projectlist_set.all()
+        lists = project.list_set.all()
 
         context = {
             'project': project,
@@ -97,13 +101,13 @@ class ListView(View):
                 project_id = request.POST.get('project_id')
                 project = Project.objects.get(id=project_id)
 
-                ProjectList.objects.create(
+                List.objects.create(
                     name=name,
                     project=project,
                 )
                 project.save()
 
-                new_list = ProjectList.objects.get(name=name)
+                new_list = List.objects.get(name=name)
                 context['new_list'] = new_list
 
                 res['list_name'] = name
@@ -122,7 +126,7 @@ class ListView(View):
         if request.user.is_authenticated:
             if request.method == 'POST':
                 list_id = request.POST.get('list_id')
-                list_to_delete = ProjectList.objects.get(id=list_id)
+                list_to_delete = List.objects.get(id=list_id)
                 project = Project.objects.get(id=list_to_delete.project_id)
 
                 list_to_delete.delete()
@@ -142,19 +146,22 @@ class ListView(View):
         res = {}
         if request.user.is_authenticated:
             if request.method == 'POST':
+                user = User.objects.get(id=request.user.id)
                 name = request.POST.get('task_name')
                 list_id = request.POST.get('list_id')
-                current_list = ProjectList.objects.get(id=int(list_id))
+                current_list = List.objects.get(id=int(list_id))
                 project = Project.objects.get(id=current_list.project_id)
 
-                ProjectTask.objects.create(
+                Task.objects.create(
                     name=name,
                     project_list=current_list,
+                    assigned_to=user,
+                    deadline=None,
                 )
                 project.save()
 
-                task = ProjectTask.objects.get(name=name)
-                context = {'task': task}
+                task = Task.objects.get(name=name)
+                context = {'task': task, 'project': project}
 
                 res['task_name'] = name
                 res['task_id'] = task.id
@@ -170,5 +177,48 @@ class TaskView(View):
 
     def get(self, request, project_id, task_id):
         project = get_object_or_404(Project, pk=project_id)
-        task = get_object_or_404(ProjectTask, pk=task_id)
-        import pdb; pdb.set_trace();
+        task = get_object_or_404(Task, pk=task_id)
+
+        context = {'project': project, 'task': task}
+
+        return render(request, self.template_name, context)
+
+    def post(self, request, task_id):
+        res = {}
+        if request.user.is_authenticated:
+            if request.method == 'POST':
+                task_id = request.POST.get('task_id')
+                current_task = Task.objects.get(id=int(task_id))
+                datas = {}
+                datas['assigned_to'] = current_task.assigned_to
+                datas['description'] = current_task.description
+
+                form = UpdateTaskForm(instance=current_task, initial=datas)
+                context = {'form': form, 'task': current_task}
+
+                res['task_id'] = task_id
+                res['template'] = render_to_string('project/tasks/update_task.html', context, request=request)
+
+        return JsonResponse(res)
+
+    @staticmethod
+    def update_task(request):
+        res = {}
+        if request.user.is_authenticated:
+            if request.method == 'POST':
+                task_id = request.POST.get('task_id')
+                user = User.objects.get(id=request.POST.get('assigned_to'))
+
+                current_task = Task.objects.get(id=task_id)
+                current_task.name = request.POST.get('name')
+                current_task.assigned_to = user
+                current_task.deadline = request.POST.get('deadline')
+                current_task.description = request.POST.get('description')
+                current_task.save()
+
+                context = {'task': current_task}
+
+                res['task_id'] = task_id
+                res['template'] = render_to_string('project/tasks/task_detail.html', context)
+
+        return JsonResponse(res)

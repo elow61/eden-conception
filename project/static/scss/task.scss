@@ -1,0 +1,100 @@
+@import '_variables.scss';
+
+body {
+    background-color: $dark_blue_light;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    display: flex;
+
+    #main-task {
+        padding: 10px;
+        height: 100vh;
+        width: 100%;
+        background-color: $dark_blue_light;
+
+        .return-dashboard {
+            display: flex;
+            align-items: center;
+        }
+
+        .contain-header-info {
+            h1 {
+                color: $orange;
+            }
+        }
+
+        .header-task {
+            margin: 20px 0;
+            button {
+                padding: 10px 40px;
+                background: transparent;
+                color: $white;
+                border: 1px solid $white;
+                cursor: pointer;
+                text-transform: uppercase;
+            }
+        }
+
+        #form-update-task {
+            input[name="name"] {
+                background: transparent;
+                border: none;
+                color: $orange;
+                outline: none;
+                width: 100%;
+                font-size: 2em;
+                font-weight: bold;
+                margin-block-start: 0.67em;
+                margin-block-end: 0.67em;
+                margin-inline-start: 0px;
+                margin-inline-end: 0px;
+            }
+        }
+    
+        .container-task {
+            
+            label {
+                display: inline-block;
+                padding: 0 15px 0 0;
+                min-width: 150px;
+            }
+
+            input, select {
+                background: transparent;
+                border: none;
+                border-bottom: 1px solid white;
+                color: $white;
+            }
+    
+            textarea {
+                background-color: $dark_blue;
+                border: none;
+                border-radius: 10px 10px;
+                width: 543px;
+                height: 274px;
+                color: $white;
+                outline: none;
+                padding: 5px;
+            }
+
+            .form-group {
+                display: flex;
+                margin-bottom: 30px;
+            }
+        }
+    }
+
+    #main-messages {
+        position: absolute;
+        top: 0; right: 0;
+        background-color: $dark_blue;
+        height: 100vh;
+        width: 400px;
+        overflow-y: scroll;
+    }
+}

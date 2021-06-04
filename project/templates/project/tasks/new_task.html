@@ -1,5 +1,5 @@
 {% if task %}
 <div class="container-project-task" id="project-task-{{task.id}}">
-    <a href="#">{{task.name}}</a>
+    <a href="{% url 'project:task' project_id=project.id task_id=task.id %}">{{task.name}}</a>
 </div>
 {% endif %}
