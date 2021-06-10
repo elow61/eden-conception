@@ -35,7 +35,7 @@
             </div>
         </div>
         <div id="board">
-            <div class="container-project-list">
+            <div class="container-project-list js-list-sortable">
                 {% for list in lists %}
                     <div id="project-list-{{list.id}}" class="project-list">
                         <div class="header-list">
@@ -48,10 +48,10 @@
                                 </form>
                             </div>
                         </div>
-                        <div class="main-list">
+                        <div class="main-list js-sortable">
                             {% for task in list.task_set.all %}
                                 {% if task %}
-                                    <div class="container-project-task" id="project-task-{{task.id}}">
+                                    <div class="container-project-task js-droppable" id="project-task-{{task.id}}">
                                         <a href="{% url 'project:task' project_id=project.id task_id=task.id %}">{{task.name}}</a>
                                     </div>
                                 {% endif %}

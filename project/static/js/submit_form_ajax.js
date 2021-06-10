@@ -72,4 +72,14 @@
         e.preventDefault();
         $(this).modal({fadeDuration: 250});
     })
+
+    // Manage drag & drop
+    $('.js-list-sortable').sortable({revert: true});
+    $('.js-sortable').sortable({revert: true});
+    
+    // $('.js-droppable').draggable({
+    //     connectToSortable: '.js-sortable',
+    //     cursor: 'pointer',
+    // });
+    $('.js-droppable').droppable();
 })(jQuery);

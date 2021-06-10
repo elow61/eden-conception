@@ -26,11 +26,17 @@
                     deleteList(url, $(this));
                 })
 
-                const createTasks = containerLists.find('#create-task-in-'+response.list_id);
+                const createTasks = containerLists.find('.create-task');
+                const formCreate = containerLists.find('.form-create-task');
                 createTasks.on('click', function (e) {
                     e.preventDefault();
                     $(this).modal({fadeDuration: 250});
                 })
+                formCreate.submit(function (e) {
+                    let url = '/create_task/';
+                    e.preventDefault();
+                    createTask(url, $(this));
+                });
             }
         })
     })

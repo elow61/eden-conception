@@ -111,6 +111,7 @@ class ListView(View):
 
                 new_list = List.objects.get(name=name)
                 context['new_list'] = new_list
+                context['create_task_form'] = CreateTaskForm
 
                 res['list_name'] = name
                 res['list_id'] = new_list.id

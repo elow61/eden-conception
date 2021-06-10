@@ -23,7 +23,21 @@
     <div class="footer-list">
         <a href="#create-task-in-{{new_list.id}}" class="btn create-task"><i class="fas fa-plus"></i> {% translate 'Create a task' %}</a>
         <div id="create-task-in-{{new_list.id}}" class="modal">
-            {% include 'project/tasks/create_task.html' %}
+            <div class="create-task-container">
+                <form method="post" class="form-create-task">
+                    {% csrf_token %}
+                    {% for field in create_task_form %}
+                        <div class="form-group">
+                            <label class="col-6" for="{{field.id_for_label}}">
+                                {{ field.label }}
+                            </label>
+                            {{ field }}
+                        </div>
+                    {% endfor %}
+                    <input type="hidden" name="list_id" value="{{new_list.id}}">
+                    <button type="submit">{% translate 'Create' %}</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>
