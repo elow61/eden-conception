@@ -48,6 +48,6 @@ class Task(models.Model):
     project_list = models.ForeignKey(List, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     assigned_to = models.ForeignKey(User, on_delete=models.CASCADE)
-    deadline = models.DateField(blank=True, default='', null=True)
+    deadline = models.DateField(blank=True, null=True)
     # Estimated time : format hour
     # Timesheet : OneToMany

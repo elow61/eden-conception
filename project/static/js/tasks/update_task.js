@@ -35,7 +35,7 @@
 
             // Management calendar for input date
             $("#id_deadline").datepicker({
-                dateFormat: "dd-mm-yy",
+                dateFormat: "dd/mm/yy",
             });
         })
     }

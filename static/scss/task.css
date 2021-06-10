@@ -48,6 +48,10 @@ main {
     main #main-task .return-dashboard {
       display: flex;
       align-items: center; }
+      main #main-task .return-dashboard a {
+        color: #1F2136; }
+      main #main-task .return-dashboard a:first-child {
+        margin-right: 5px; }
     main #main-task .contain-header-info h1 {
       color: #ee6f4f; }
     main #main-task .header-task {
@@ -100,5 +104,33 @@ main {
     height: 100vh;
     width: 400px;
     overflow-y: scroll; }
+
+.ui-widget-header {
+  background: #1F2136 !important;
+  color: #ee6f4f !important;
+  border: none !important; }
+
+.ui-widget-content {
+  background: #323b4f !important; }
+
+.ui-widget-content {
+  color: #dbdada !important; }
+
+.ui-state-active,
+.ui-widget-content .ui-state-active,
+.ui-widget-header .ui-state-active,
+a.ui-button:active,
+.ui-button:active,
+.ui-button.ui-state-active:hover {
+  border: 1px solid #ee6f4f !important;
+  background: #ee6f4f !important;
+  font-weight: normal; }
+
+.ui-state-highlight,
+.ui-widget-content .ui-state-highlight,
+.ui-widget-header .ui-state-highligh {
+  border: 1px solid #1F2136 !important;
+  background: #1F2136 !important;
+  color: #dbdada !important; }
 
 /*# sourceMappingURL=task.css.map */

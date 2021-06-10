@@ -1,4 +1,6 @@
 """ All views for the user application """
+from datetime import datetime
+
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from django.views.generic.edit import UpdateView
@@ -208,11 +210,12 @@ class TaskView(View):
             if request.method == 'POST':
                 task_id = request.POST.get('task_id')
                 user = User.objects.get(id=request.POST.get('assigned_to'))
+                date_object = datetime.strptime(request.POST.get('deadline'), "%d/%m/%Y")
 
                 current_task = Task.objects.get(id=task_id)
                 current_task.name = request.POST.get('name')
                 current_task.assigned_to = user
-                current_task.deadline = request.POST.get('deadline')
+                current_task.deadline = date_object
                 current_task.description = request.POST.get('description')
                 current_task.save()
 

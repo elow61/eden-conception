@@ -20,6 +20,12 @@ main {
         .return-dashboard {
             display: flex;
             align-items: center;
+
+            a {color: $dark_blue;}
+
+            a:first-child {
+                margin-right: 5px;
+            }
         }
 
         .contain-header-info {
@@ -97,4 +103,36 @@ main {
         width: 400px;
         overflow-y: scroll;
     }
+}
+
+// Design datetime widget
+.ui-widget-header { 
+    background: $dark_blue !important;
+    color: $orange !important;
+    border: none !important;
+}
+.ui-widget-content {
+    background: $dark_blue_light !important;
+}
+.ui-widget-content {
+    color: $white !important;
+}
+.ui-state-active,
+.ui-widget-content .ui-state-active,
+.ui-widget-header .ui-state-active,
+a.ui-button:active,
+.ui-button:active,
+.ui-button.ui-state-active:hover {
+    border: 1px solid $orange !important;
+    background: $orange !important;
+    font-weight: normal;
+}
+
+
+.ui-state-highlight,
+.ui-widget-content .ui-state-highlight,
+.ui-widget-header .ui-state-highligh {
+    border: 1px solid $dark_blue !important;
+    background: $dark_blue !important;
+    color: $white !important;
 }
