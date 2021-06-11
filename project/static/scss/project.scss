@@ -90,6 +90,8 @@ body {
                 align-items: center;
                 justify-content: center;
                 position: relative;
+                border-bottom: 1px solid $dark_blue_light;
+                border-radius: none;;
 
                 .delete-list {
                     position: absolute;
@@ -103,7 +105,20 @@ body {
                     }
                 }
             }
-            
+
+            .main-list {
+                min-height: 10px;
+                padding-top: 9px;
+                .container-project-task {
+                    background-color: $dark_blue_light;
+                    margin: 10px;
+                    padding: 10px;
+                    min-height: 0;
+                    position: relative;
+                    z-index: 10;
+                }
+            }
+
             // Footer list
             .footer-list {
                 background-color: $dark_blue;
@@ -117,15 +132,5 @@ body {
                 }
             }
         }
-    }
-
-    // Management tasks
-    main .main-list .container-project-task {
-        background-color: $dark_blue_light;
-        margin: 10px;
-        padding: 10px;
-        min-height: 0;
-        position: relative;
-        z-index: 10;
     }
 }

@@ -1,7 +1,8 @@
 """ All views for the user application """
 from datetime import datetime
-
+import json
 from django.shortcuts import render, redirect, get_object_or_404
+from django.db.models import F
 from django.views import View
 from django.views.generic.edit import UpdateView
 from django.http import JsonResponse
@@ -103,13 +104,12 @@ class ListView(View):
                 project_id = request.POST.get('project_id')
                 project = Project.objects.get(id=project_id)
 
-                List.objects.create(
+                new_list = List.objects.create(
                     name=name,
                     project=project,
                 )
                 project.save()
 
-                new_list = List.objects.get(name=name)
                 context['new_list'] = new_list
                 context['create_task_form'] = CreateTaskForm
 
@@ -155,21 +155,45 @@ class ListView(View):
                 current_list = List.objects.get(id=int(list_id))
                 project = Project.objects.get(id=current_list.project_id)
 
-                Task.objects.create(
+                # Manage the task's index
+                index = 0
+                if current_list.task_set.all().count() > 0:
+                    index = current_list.task_set.all().reverse()[0].index + 1
+
+                next_tasks = Task.objects.filter(index__gte=index)
+                next_tasks.update(index=F('index') + 1)
+
+
+                new_task = Task.objects.create(
                     name=name,
                     project_list=current_list,
                     assigned_to=user,
                     deadline=None,
+                    index=index,
                 )
                 project.save()
 
-                task = Task.objects.get(name=name)
-                context = {'task': task, 'project': project}
+                context = {'task': new_task, 'project': project}
 
                 res['task_name'] = name
-                res['task_id'] = task.id
+                res['task_id'] = new_task.id
                 res['list_id'] = list_id
                 res['template'] = render_to_string('project/tasks/new_task.html', context)
+
+        return JsonResponse(res)
+
+    @staticmethod
+    def update_order_task(request):
+        res = {}
+        if request.user.is_authenticated:
+            if request.method == 'POST':
+                datas = json.loads(request.POST.get('datas'))
+
+                for data in datas:
+                    current_task = Task.objects.get(id=data['task_id'])
+                    current_task.project_list = List.objects.get(id=data['list_id'])
+                    current_task.index = data['index']
+                    current_task.save()
 
         return JsonResponse(res)
 
@@ -209,11 +233,10 @@ class TaskView(View):
         res = {}
         if request.user.is_authenticated:
             if request.method == 'POST':
-                task_id = request.POST.get('task_id')
                 user = User.objects.get(id=request.POST.get('assigned_to'))
                 date_object = datetime.strptime(request.POST.get('deadline'), "%d/%m/%Y")
+                current_task = Task.objects.get(id=request.POST.get('task_id'))
 
-                current_task = Task.objects.get(id=task_id)
                 current_task.name = request.POST.get('name')
                 current_task.assigned_to = user
                 current_task.deadline = date_object
@@ -222,7 +245,7 @@ class TaskView(View):
 
                 context = {'task': current_task}
 
-                res['task_id'] = task_id
+                res['task_id'] = current_task.id
                 res['template'] = render_to_string('project/tasks/task_detail.html', context)
 
         return JsonResponse(res)

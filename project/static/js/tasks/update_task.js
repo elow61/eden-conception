@@ -62,4 +62,38 @@
         })
     }
 
+    // Manage drag & drop
+    $('.js-list-sortable').sortable({
+        connectWith: '#board',
+    });
+    $('.js-sortable').sortable({
+        connectWith: '.main-list',
+        stop: function (e, ui) {
+            $('.container-project-task').updateOrderTask();
+        }
+    });
+
+    $.fn.updateOrderTask = function () {
+        let datas = {}
+        let $elements = $(this);
+        let csrfToken = getCookie('csrftoken');
+        let infos = []
+        
+        $elements.each(function (e) {
+            let currentTaskId = this.getAttribute('task-id');
+            let listId = this.parentElement.getAttribute('list-id');
+
+            let infoDict = {
+                'task_id': currentTaskId,
+                'list_id': listId,
+                'index': e + 1,
+            };
+            infos.push(infoDict);
+
+        })
+        datas['datas'] = JSON.stringify(infos)
+
+        return ajaxMethod(csrfToken, 'post', '/update_order_task/', datas);
+    }
+
 })(jQuery);

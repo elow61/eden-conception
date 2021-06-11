@@ -37,6 +37,14 @@
                     e.preventDefault();
                     createTask(url, $(this));
                 });
+
+                // Management drag & drop
+                $('.js-sortable').sortable({
+                    connectWith: '.main-list',
+                    stop: function (e, ui) {
+                        $('.container-project-task').updateOrderTask();
+                    }
+                });
             }
         })
     })

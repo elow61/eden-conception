@@ -48,10 +48,10 @@
                                 </form>
                             </div>
                         </div>
-                        <div class="main-list js-sortable">
+                        <div class="main-list js-sortable" list-id="{{list.id}}">
                             {% for task in list.task_set.all %}
                                 {% if task %}
-                                    <div class="container-project-task js-droppable" id="project-task-{{task.id}}">
+                                    <div class="container-project-task js-droppable" id="project-task-{{task.id}}" task-id={{task.id}}>
                                         <a href="{% url 'project:task' project_id=project.id task_id=task.id %}">{{task.name}}</a>
                                     </div>
                                 {% endif %}
@@ -75,4 +75,5 @@
     <script src="{% static 'js/lists/create_list.js' %}"></script>
     <script src="{% static 'js/lists/delete_list.js' %}"></script>
     <script src="{% static 'js/tasks/create_task.js' %}"></script>
+    <script src="{% static 'js/tasks/update_task.js' %}"></script>
 {% endblock %}

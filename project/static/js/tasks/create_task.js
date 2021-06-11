@@ -3,6 +3,12 @@
 
     let formCreate = $('.form-create-task');
 
+    // Open modal to create a task
+    $('.create-task').on('click', function (e) {
+        e.preventDefault();
+        $(this).modal({fadeDuration: 250});
+    })
+
     formCreate.submit(function (e) {
         let url = '/create_task/';
         e.preventDefault();

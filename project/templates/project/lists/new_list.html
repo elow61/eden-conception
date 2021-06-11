@@ -10,10 +10,10 @@
             </form>
         </div>
     </div>
-    <div class="main-list">
+    <div class="main-list js-sortable" list-id="{{list.id}}">
         {% for task in new_list.task_set.all %}
             {% if task %}
-                <div class="container-project-task" id="project-task-{{task.id}}">
+                <div class="container-project-task js-droppable" id="project-task-{{task.id}}" task-id={{task.id}}>
                     <a href="{% url 'project:task' project_id=project.id task_id=task.id %}">{{task.name}}</a>
                 </div>
             {% endif %}

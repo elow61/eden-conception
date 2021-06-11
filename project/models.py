@@ -34,7 +34,7 @@ class Project(models.Model):
 
 class List(models.Model):
 
-    name = models.CharField(max_length=100, unique=True)
+    name = models.CharField(max_length=100)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -43,11 +43,15 @@ class List(models.Model):
 
 class Task(models.Model):
 
-    name = models.CharField(max_length=120, unique=True)
+    name = models.CharField(max_length=120)
     description = models.TextField()
     project_list = models.ForeignKey(List, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     assigned_to = models.ForeignKey(User, on_delete=models.CASCADE)
     deadline = models.DateField(blank=True, null=True)
+    index = models.IntegerField(db_index=True)
     # Estimated time : format hour
     # Timesheet : OneToMany
+
+    class Meta:
+        ordering = ['index']
