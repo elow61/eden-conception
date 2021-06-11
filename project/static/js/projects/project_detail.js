@@ -3,12 +3,19 @@
     
     let projectName = $('.project-list').find('h4');
 
-    // Display project details
+    /**
+     * Event to call the function "displayProjectDetails"
+     * to view the project detail
+     */
     projectName.on('click', function () {
         const projectId = parseInt($(this).attr('project-id'));
         displayProjectDetails(projectId);
     })
 
+    /**
+     * Function to display the project's detail in the dashboard
+     * @param {*} projectId The project id clicked
+     */
     window.displayProjectDetails = function(projectId) {
         const projectDetail = $('.project-detail');
         const formCreateProject = $('.container-create-project');

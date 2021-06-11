@@ -4,6 +4,12 @@
     let form = $('.form-create-project');
     let url = '/create_project/';
 
+    /**
+     * Submit the form to create a new project.
+     * After submit, reload events for the nextelements:
+     * - Event to view a project detail when we click on the project name.
+     * - The submit form to delete a project
+     */
     form.submit((e) =>  {
         e.preventDefault();
         submitForm(url, form).then(response => {
@@ -38,7 +44,9 @@
         form[0].reset();
     });
 
-    // Display the create project form
+    /**
+     * Event to display the form create project
+     */
     const buttonToCreateProject = $('#btn-create-project');
     buttonToCreateProject.on('click', () => {
         const projectDetail = $('.project-detail');

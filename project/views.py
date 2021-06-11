@@ -224,7 +224,7 @@ class TaskView(View):
                 context = {'form': form, 'task': current_task}
 
                 res['task_id'] = task_id
-                res['template'] = render_to_string('project/tasks/update_task.html', context, request=request)
+                res['template'] = render_to_string('project/tasks/forms/update_task.html', context, request=request)
 
         return JsonResponse(res)
 

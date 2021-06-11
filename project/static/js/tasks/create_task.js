@@ -3,18 +3,29 @@
 
     let formCreate = $('.form-create-task');
 
-    // Open modal to create a task
+    /**
+     * Open a modal to view the form create task
+     */
     $('.create-task').on('click', function (e) {
         e.preventDefault();
         $(this).modal({fadeDuration: 250});
     })
 
+    /**
+     * Control the event submit form create task
+     * to call function "createTask"
+     */
     formCreate.submit(function (e) {
         let url = '/create_task/';
         e.preventDefault();
         createTask(url, $(this));
     });
 
+    /**
+     * Function to create a task with the submit form
+     * @param {*} url 
+     * @param {*} form 
+     */
     window.createTask = function (url, form) {
         submitForm(url, form).then(response => {
             if (response.task_id) {

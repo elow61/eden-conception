@@ -1,13 +1,21 @@
 (function($) {
     'use strict';
 
-    // Event to display the form to create a list
+    /**
+     * Event to display the form to create a list
+     */
     const btnAddList = $('#btn-create-list');
     btnAddList.on('click', function () {
         $('.create-list').toggleClass('d-none');
     })
 
-    // Event to create list
+    /**
+     * Control the event submit form create list
+     * After the submit, reload the events for next elements :
+     * - Form to delete a list
+     * - Form to create a task
+     * - Reload the drag & drop for the new list
+     */
     let formCreate = $('.form-create-list');
     let url = '/create_list/'
     formCreate.submit((e) => {
@@ -38,7 +46,7 @@
                     createTask(url, $(this));
                 });
 
-                // Management drag & drop
+                // Management drag & drop with the new list
                 $('.js-sortable').sortable({
                     connectWith: '.main-list',
                     stop: function (e, ui) {
