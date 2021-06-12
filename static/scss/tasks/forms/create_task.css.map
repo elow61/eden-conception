@@ -1,0 +1,9 @@
+{
+	"version": 3,
+	"file": "create_task.css",
+	"sources": [
+		"create_task.scss"
+	],
+	"names": [],
+	"mappings": "AAAA,AAAA,iBAAiB,CAAC;EACd,gBAAgB,EAAE,GAAG,GACxB"
+}
