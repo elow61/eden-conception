@@ -71,7 +71,8 @@ main .container-projects-details {
       margin-top: 15px; }
       main .container-projects-details .project-detail .main-project-detail .info {
         display: flex;
-        flex-direction: column; }
+        flex-direction: column;
+        margin-right: 10px; }
         main .container-projects-details .project-detail .main-project-detail .info div {
           padding: 22px 0; }
       main .container-projects-details .project-detail .main-project-detail .display .contain-display {

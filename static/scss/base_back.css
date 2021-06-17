@@ -106,4 +106,26 @@ main {
           cursor: pointer;
           text-transform: uppercase; }
 
+@media only screen and (max-width: 768px) {
+  body {
+    flex-direction: column; }
+    body header {
+      overflow-y: inherit;
+      width: 100%;
+      height: auto; }
+    body header nav {
+      margin-top: 0; }
+    body main {
+      height: 100%; }
+    body main section .create-project {
+      margin: 20px; }
+    body main section .create-project form .form-group input {
+      width: auto; }
+    body main .container-projects-details .project-detail .main-project-detail .display {
+      display: none; } }
+
+@media only screen and (max-width: 1300px) {
+  body main .container-projects-details .project-detail .main-project-detail hr {
+    width: auto; } }
+
 /*# sourceMappingURL=base_back.css.map */

@@ -107,3 +107,36 @@ main {
         }
     }
 }
+
+// Responsive
+body {
+    @include media-to(768px) {
+        flex-direction: column;
+
+        header {
+            overflow-y: inherit;
+            width: 100%;
+            height: auto;
+        }
+
+        header nav {margin-top: 0}
+
+        main {
+            height: 100%;
+        }
+
+        main section .create-project {
+            margin: 20px
+        }
+
+        main section .create-project form .form-group input {
+            width: auto;
+        }
+
+        main .container-projects-details .project-detail .main-project-detail .display {display: none;}
+    }
+
+    @include media-to(1300px) {
+        main .container-projects-details .project-detail .main-project-detail hr {width: auto;}
+    }
+}
