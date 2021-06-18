@@ -51,7 +51,7 @@ header {
     header nav h2 {
       color: #ee6f4f;
       text-transform: uppercase; }
-      header nav h2 #btn-create-project {
+      header nav h2 #btn-create-project, header nav h2 #btn-add-collaborator {
         color: #70e5cd;
         cursor: pointer; }
     header nav ul li h4 {

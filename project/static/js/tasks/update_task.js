@@ -48,6 +48,10 @@
             $("#id_deadline").datepicker({
                 dateFormat: "dd/mm/yy",
             });
+
+            $('input[id*="created_at"]').datepicker({
+                dateFormat: "dd/mm/yy",
+            })
         })
     }
 
@@ -65,7 +69,7 @@
      * Call in the function "displayFormUpdateTask"
      * when the user has clicked in "Save" button to update the current task
      * @param {String} url to send the information
-     * @param {jQery} form the form update task
+     * @param {jQuery} form the form update task
      * The button update event is reload with the news DOM elements
      */
     window.updateTask = function (url, form) {

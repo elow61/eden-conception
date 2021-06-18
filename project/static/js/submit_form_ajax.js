@@ -24,7 +24,8 @@
         if (csrfToken === undefined) {
             csrfToken = getCookie('csrftoken');
         }
-
+        
+        console.log(data)
         return ajaxMethod(csrfToken, 'post', url, data)
     }
 

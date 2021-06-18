@@ -2,9 +2,9 @@
 from datetime import datetime
 import json
 from django.shortcuts import render, redirect, get_object_or_404
+from django.forms import inlineformset_factory
 from django.db.models import F
 from django.views import View
-from django.views.generic.edit import UpdateView
 from django.http import JsonResponse
 from django.template import RequestContext
 from django.template.loader import render_to_string
@@ -13,6 +13,8 @@ from django.utils.translation import gettext_lazy as _
 from .forms import CreateProjectForm, CreateListForm, CreateTaskForm, UpdateTaskForm
 from .models import Project, List, Task
 from user.models import User
+from timesheet.models import Timesheet
+from timesheet.forms import UpdateTimesheetForm
 
 
 class ProjectView(View):
@@ -163,7 +165,6 @@ class ListView(View):
                 next_tasks = Task.objects.filter(index__gte=index)
                 next_tasks.update(index=F('index') + 1)
 
-
                 new_task = Task.objects.create(
                     name=name,
                     project_list=current_list,
@@ -205,8 +206,9 @@ class TaskView(View):
     def get(self, request, project_id, task_id):
         project = get_object_or_404(Project, pk=project_id)
         task = get_object_or_404(Task, pk=task_id)
+        timesheets = task.timesheet_set.all()
 
-        context = {'project': project, 'task': task}
+        context = {'project': project, 'task': task, 'timesheet': timesheets}
 
         return render(request, self.template_name, context)
 
@@ -220,8 +222,17 @@ class TaskView(View):
                 datas['assigned_to'] = current_task.assigned_to
                 datas['description'] = current_task.description
 
-                form = UpdateTaskForm(instance=current_task, initial=datas)
-                context = {'form': form, 'task': current_task}
+                form_update = UpdateTaskForm(instance=current_task, initial=datas)
+                TimeFormSet = inlineformset_factory(
+                    parent_model=Task,
+                    model=Timesheet,
+                    form=UpdateTimesheetForm,
+                    extra=1,
+                    can_delete=None,
+                    fields=('created_at', 'user', 'description', 'unit_hour')
+                )
+                formset = TimeFormSet(instance=current_task)
+                context = {'form_update': form_update, 'formset': formset, 'task': current_task}
 
                 res['task_id'] = task_id
                 res['template'] = render_to_string('project/tasks/forms/update_task.html', context, request=request)
@@ -231,16 +242,31 @@ class TaskView(View):
     @staticmethod
     def update_task(request):
         res = {}
+        TimeFormSet = inlineformset_factory(
+            parent_model=Task,
+            model=Timesheet,
+            form=UpdateTimesheetForm,
+            can_delete=None,
+        )
         if request.user.is_authenticated:
             if request.method == 'POST':
                 user = User.objects.get(id=request.POST.get('assigned_to'))
                 date_object = datetime.strptime(request.POST.get('deadline'), "%d/%m/%Y")
                 current_task = Task.objects.get(id=request.POST.get('task_id'))
 
+                print(request.POST)
+                formset = TimeFormSet(request.POST, instance=current_task)
+
+                print('Formset :', formset)
+                print('Formset is valid :', formset.is_valid())
+                if formset.is_valid():
+                    formset.save()
+
                 current_task.name = request.POST.get('name')
                 current_task.assigned_to = user
                 current_task.deadline = date_object
                 current_task.description = request.POST.get('description')
+                current_task.planned_hours = request.POST.get('planned_hours')
                 current_task.save()
 
                 context = {'task': current_task}

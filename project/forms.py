@@ -1,5 +1,5 @@
 from django import forms
-from django.forms import ModelForm, DateField
+from django.forms import ModelForm, DateField, TimeInput
 from django.utils.translation import gettext_lazy as _
 from .models import Task
 
@@ -20,5 +20,8 @@ class UpdateTaskForm(ModelForm):
 
     class Meta:
         model = Task
-        fields = ['name', 'assigned_to', 'deadline', 'description']
-        widget = {'deadline': DateField(input_formats=['%d-%m-%Y'])}
+        fields = ['name', 'assigned_to', 'deadline', 'description', 'planned_hours']
+        widget = {
+            'deadline': DateField(input_formats=['%d-%m-%Y']),
+            'planned_hours': TimeInput(format=['%H:%M']),
+        }

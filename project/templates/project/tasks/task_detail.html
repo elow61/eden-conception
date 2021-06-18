@@ -25,6 +25,54 @@
                 </label>
                 <span>{{task.description}}</span>
             </div>
+            <div class="form-group">
+                <label class="" for="id_planned_hours">
+                    {% translate 'Planned hours ' %}
+                </label>
+                <span>{{task.planned_hours}}</span>
+            </div>
+            <div class="form-group">
+                <label class="" for="id_timesheet">
+                    {% translate 'Timesheet ' %}
+                </label>
+                <table>
+                    <thead>
+                        <tr>
+                            {% for timesheet_line in task.timesheet_set.all %}
+                                <th>{{timesheet_line.created_at.verbose_name}}</th>
+                                <th>{{timesheet_line.user.verbose_name}}</th>
+                                <th>{{timesheet_line.description.verbose_name}}</th>
+                                <th>{{timesheet_line.unit_hour.verbose_name}}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for timesheet_line in task.timesheet_set.all %}
+                            {% if timesheet_line %}
+                                <tr>
+                                    <td>{{timesheet_line.created_at}}</td>
+                                    <td>{{timesheet_line.user}}</td>
+                                    <td>{{timesheet_line.description}}</td>
+                                    <td>{{timesheet_line.unit_hour}}</td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td>--</td>
+                                    <td>--</td>
+                                    <td>--</td>
+                                    <td>--</td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                        <tr>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>

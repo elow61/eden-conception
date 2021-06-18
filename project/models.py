@@ -50,8 +50,9 @@ class Task(models.Model):
     assigned_to = models.ForeignKey(User, on_delete=models.CASCADE)
     deadline = models.DateField(blank=True, null=True)
     index = models.IntegerField(db_index=True)
-    # Estimated time : format hour
-    # Timesheet : OneToMany
+    planned_hours = models.TimeField(auto_now=False, auto_now_add=False, blank=True, null=True)
+    effective_hours = models.TimeField(auto_now=False, auto_now_add=False, blank=True, null=True)
+    remaining_hours = models.TimeField(auto_now=False, auto_now_add=False, blank=True, null=True)
 
     class Meta:
         ordering = ['index']

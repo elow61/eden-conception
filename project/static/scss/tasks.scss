@@ -92,6 +92,11 @@ main {
                 display: flex;
                 margin-bottom: 30px;
             }
+
+            table {
+                td input[id*="description"] {width: 500px;}
+                td input[id*="unit_hour"] {width:65px;}
+            }
         }
     }
 

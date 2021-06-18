@@ -96,6 +96,10 @@ main {
     main #main-task .container-task .form-group {
       display: flex;
       margin-bottom: 30px; }
+    main #main-task .container-task table td input[id*="description"] {
+      width: 500px; }
+    main #main-task .container-task table td input[id*="unit_hour"] {
+      width: 65px; }
   main #main-messages {
     position: absolute;
     top: 0;
