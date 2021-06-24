@@ -227,9 +227,7 @@ class TaskView(View):
     def get(self, request, project_id, task_id):
         project = get_object_or_404(Project, pk=project_id)
         task = get_object_or_404(Task, pk=task_id)
-        timesheets = task.timesheet_set.all()
-
-        context = {'project': project, 'task': task, 'timesheet': timesheets}
+        context = {'project': project, 'task': task}
 
         return render(request, self.template_name, context)
 
