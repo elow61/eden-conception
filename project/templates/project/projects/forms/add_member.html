@@ -1,0 +1,15 @@
+{% load i18n %}
+<div class="add-member">
+    <form method="post" class="form-add-member">
+        {% csrf_token %}
+        {% for field in form_add_member %}
+            <div class="form-group">
+                <label class="col-6" for="{{field.id_for_label}}">
+                    {{ field.label }}
+                </label>
+                {{ field }}
+            </div>
+        {% endfor %}
+        <button type="submit">{% translate 'Add a member' %}</button>
+    </form>
+</div>

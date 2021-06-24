@@ -39,7 +39,7 @@
                 <hr/>
                 <div class="member">
                     <span>{% translate 'Member:' %}</span>
-                    {% if project.member %}
+                    {% if project.user_ids.all %}
                         <span>{{project.user_ids.first_name}}</span>
                     {% else %}
                         <span>{% translate 'Nobody except you :)' %}</span>

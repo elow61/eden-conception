@@ -56,7 +56,14 @@
                 $(projectDetail[i]).addClass('d-none');
             }
         })
-        $('.container-projects-details').toggleClass('d-none');
+        if (!$('.container-projects-details').hasClass('d-none')) {
+            $('.container-projects-details').addClass('d-none');
+        }
+
+        if (!$('#container-add-member').hasClass('closed')) {
+            $('#container-add-member').addClass('closed');
+        }
+
         $('.container-create-project').toggleClass('closed');
     });
 })(jQuery);

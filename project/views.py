@@ -6,11 +6,10 @@ from django.forms import inlineformset_factory
 from django.db.models import F
 from django.views import View
 from django.http import JsonResponse
-from django.template import RequestContext
 from django.template.loader import render_to_string
 from django.utils.translation import gettext_lazy as _
 
-from .forms import CreateProjectForm, CreateListForm, CreateTaskForm, UpdateTaskForm
+from .forms import CreateProjectForm, CreateListForm, CreateTaskForm, UpdateTaskForm, AddMember
 from .models import Project, List, Task
 from user.models import User
 from timesheet.models import Timesheet
@@ -25,13 +24,35 @@ class ProjectView(View):
     def get(self, request):
         context = {}
         context['form'] = self.form
+        context['form_add_member'] = AddMember(request)
 
         if request.user.is_authenticated:
             user = User.objects.get(id=request.user.id)
             projects = user.main_user.all()
             context['projects'] = projects
+        else:
+            redirect('user:login')
 
         return render(request, self.template_name, context)
+
+    @staticmethod
+    def add_member(request):
+        res = {}
+        if request.user.is_authenticated:
+            if request.method == 'POST':
+                query = request.POST.get('member_email')
+                project = Project.objects.get(pk=request.POST.get('project_name'))
+                user = User.objects.filter(email__contains=query)
+
+                if not user.exists():
+                    res['error'] = _('No user email saved in database')
+                else:
+                    project.user_ids.add(user.get().id)
+                    res['user_name'] = user.get().first_name
+        else:
+            redirect('user:login')
+
+        return JsonResponse(res)
 
     @staticmethod
     def create_project(request):

@@ -26,7 +26,7 @@ header {
             color: $orange;
             text-transform: uppercase;
 
-            #btn-create-project, #btn-add-collaborator {
+            #btn-create-project, #btn-add-member {
                 color: $cyan_green;
                 cursor: pointer;
             }
@@ -52,12 +52,13 @@ main {
         justify-content: center;
         align-items: center;
         height: inherit;
-        
-        // Create project
-        .container-create-project.closed { display: none}
-        .container-create-project { display: block};
 
-        .create-project {
+        // Create project add member
+        .container-add-member.closed { display: none}
+        .container-create-project.closed { display: none}
+        .container-create-project, .container-add-member { display: block};
+
+        .create-project, .add-member {
             border: 1px solid $white;
             padding: 40px;
 
@@ -90,6 +91,12 @@ main {
                         &:focus-visible {
                             outline: none;
                         }
+                    }
+                    select {
+                        background: transparent;
+                        border: none;
+                        border-bottom: 1px solid white;
+                        color: $white;
                     }
                 }
     

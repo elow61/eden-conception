@@ -10,6 +10,7 @@ urlpatterns = [
     path('dashboard/', login_required(views.ProjectView.as_view()), name='dashboard'),
     path('create_project/', login_required(views.ProjectView.create_project), name='create_project'),
     path('delete_project/', login_required(views.ProjectView.delete_project), name='delete_project'),
+    path('add_member/', login_required(views.ProjectView.add_member), name='add_member'),
 
     path('project-<int:project_id>/', login_required(views.ListView.as_view()), name='project'),
     path('create_list/', login_required(views.ListView.create_list), name='create_list'),

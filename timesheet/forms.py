@@ -2,7 +2,7 @@ from django import forms
 from django.forms import ModelForm, DateField, TimeInput, ModelChoiceField
 from django.utils.translation import gettext_lazy as _
 from .models import Timesheet
-from user.models import User
+from project.models import List
 
 
 class UpdateTimesheetForm(ModelForm):

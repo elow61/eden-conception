@@ -38,12 +38,10 @@
                 <table>
                     <thead>
                         <tr>
-                            {% for timesheet_line in task.timesheet_set.all %}
-                                <th>{{timesheet_line.created_at.verbose_name}}</th>
-                                <th>{{timesheet_line.user.verbose_name}}</th>
-                                <th>{{timesheet_line.description.verbose_name}}</th>
-                                <th>{{timesheet_line.unit_hour.verbose_name}}</th>
-                            {% endfor %}
+                            <th>Created at</th>
+                            <th>User</th>
+                            <th>Description</th>
+                            <th>Unit hour</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -64,12 +62,6 @@
                                 </tr>
                             {% endif %}
                         {% endfor %}
-                        <tr>
-                            <td>--</td>
-                            <td>--</td>
-                            <td>--</td>
-                            <td>--</td>
-                        </tr>
                     </tbody>
                 </table>
             </div>

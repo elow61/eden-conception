@@ -50,7 +50,7 @@ class Task(models.Model):
     assigned_to = models.ForeignKey(User, on_delete=models.CASCADE)
     deadline = models.DateField(blank=True, null=True)
     index = models.IntegerField(db_index=True)
-    planned_hours = models.TimeField(auto_now=False, auto_now_add=False, blank=True, null=True)
+    planned_hours = models.TimeField(auto_now=False, auto_now_add=False, default='00:00')
     effective_hours = models.TimeField(auto_now=False, auto_now_add=False, blank=True, null=True)
     remaining_hours = models.TimeField(auto_now=False, auto_now_add=False, blank=True, null=True)
 
