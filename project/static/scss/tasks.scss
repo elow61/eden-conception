@@ -16,12 +16,13 @@ main {
         height: 100vh;
         width: 100%;
         background-color: $dark_blue_light;
+        overflow-y: scroll;
 
         .return-dashboard {
             display: flex;
             align-items: center;
 
-            a {color: $dark_blue;}
+            a {color: $cyan_green;}
 
             a:first-child {
                 margin-right: 5px;
@@ -91,6 +92,16 @@ main {
             .form-group {
                 display: flex;
                 margin-bottom: 30px;
+
+                .task_description {
+                    width: 543px;
+                    height: 274px;
+                    background: $dark_blue;
+                    border-radius: 10px 10px;
+                    color: #dbdada;
+                    outline: none;
+                    padding: 5px;
+                }
             }
 
             table {

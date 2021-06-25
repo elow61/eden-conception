@@ -45,12 +45,9 @@
     </header>
     <main>
         <section>
-            {% if projects %}
-                <div class="container-projects-details d-none">
-                    {% include 'project/projects/project_detail.html' %}
-                </div>
-            {% endif %}
-
+            <div class="container-projects-details d-none">
+                {% include 'project/projects/project_detail.html' %}
+            </div>
             <div class="container-create-project" id="container-create-project">
                 {% include 'project/projects/forms/create_project.html' %}
             </div>

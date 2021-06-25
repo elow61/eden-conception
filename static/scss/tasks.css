@@ -44,12 +44,13 @@ main {
     padding: 10px;
     height: 100vh;
     width: 100%;
-    background-color: #323b4f; }
+    background-color: #323b4f;
+    overflow-y: scroll; }
     main #main-task .return-dashboard {
       display: flex;
       align-items: center; }
       main #main-task .return-dashboard a {
-        color: #1F2136; }
+        color: #70e5cd; }
       main #main-task .return-dashboard a:first-child {
         margin-right: 5px; }
     main #main-task .contain-header-info h1 {
@@ -96,6 +97,14 @@ main {
     main #main-task .container-task .form-group {
       display: flex;
       margin-bottom: 30px; }
+      main #main-task .container-task .form-group .task_description {
+        width: 543px;
+        height: 274px;
+        background: #1F2136;
+        border-radius: 10px 10px;
+        color: #dbdada;
+        outline: none;
+        padding: 5px; }
     main #main-task .container-task table td input[id*="description"] {
       width: 500px; }
     main #main-task .container-task table td input[id*="unit_hour"] {

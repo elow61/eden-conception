@@ -31,12 +31,6 @@
                     displayProjectDetails(response.project_id);
                 })
 
-                const formDelete = containerProjectDetail.find('#project-detail-'+response.project_id).find('.form-delete-project');
-                formDelete.submit(function (e) {
-                    let url = '/delete_project/';
-                    e.preventDefault();
-                    deleteProject(url, $(this));
-                })
             } else {
                 console.log(response.error);
             }

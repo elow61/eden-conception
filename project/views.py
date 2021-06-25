@@ -1,5 +1,5 @@
 """ All views for the user application """
-from datetime import datetime
+from datetime import datetime, time
 import json
 from django.shortcuts import render, redirect, get_object_or_404
 from django.forms import inlineformset_factory
@@ -83,19 +83,15 @@ class ProjectView(View):
     @staticmethod
     def delete_project(request):
         res = {}
-        if request.user.is_authenticated:
-            if request.method == 'POST':
-                project_id = request.POST.get('project_id')
-                print(project_id)
-                project_to_delete = Project.objects.get(id=project_id)
-                project_to_delete.delete()
+        if request.method == 'POST':
+            project_id = request.POST.get('project_id')
+            project_to_delete = Project.objects.get(id=project_id)
+            project_to_delete.delete()
 
-                res['project_id'] = project_id
-                res['success'] = _('The project has deleted')
-            else:
-                res['error'] = _('The project doesn\'t have deleted')
+            res['project_id'] = project_id
+            res['success'] = _('The project has deleted')
         else:
-            res['error'] = _('Please, connect you.')
+            res['error'] = _('The project doesn\'t have deleted')
 
         return JsonResponse(res)
 
@@ -238,16 +234,19 @@ class TaskView(View):
                 task_id = request.POST.get('task_id')
                 current_task = Task.objects.get(id=int(task_id))
                 datas = {}
+                datas['name'] = current_task.name
                 datas['assigned_to'] = current_task.assigned_to
+                datas['deadline'] = current_task.deadline
                 datas['description'] = current_task.description
+                datas['planned_hours'] = current_task.planned_hours
 
                 form_update = UpdateTaskForm(instance=current_task, initial=datas)
                 TimeFormSet = inlineformset_factory(
                     parent_model=Task,
                     model=Timesheet,
                     form=UpdateTimesheetForm,
+                    can_delete=True,
                     extra=1,
-                    can_delete=None,
                     fields=('created_at', 'user', 'description', 'unit_hour')
                 )
                 formset = TimeFormSet(instance=current_task)
@@ -265,19 +264,16 @@ class TaskView(View):
             parent_model=Task,
             model=Timesheet,
             form=UpdateTimesheetForm,
-            can_delete=None,
+            can_delete=True,
         )
         if request.user.is_authenticated:
             if request.method == 'POST':
                 user = User.objects.get(id=request.POST.get('assigned_to'))
-                date_object = datetime.strptime(request.POST.get('deadline'), "%d/%m/%Y")
+                date_object = datetime.strptime(request.POST.get('deadline'), '%d/%m/%Y')
                 current_task = Task.objects.get(id=request.POST.get('task_id'))
 
-                print(request.POST)
                 formset = TimeFormSet(request.POST, instance=current_task)
 
-                print('Formset :', formset)
-                print('Formset is valid :', formset.is_valid())
                 if formset.is_valid():
                     formset.save()
 
@@ -285,9 +281,10 @@ class TaskView(View):
                 current_task.assigned_to = user
                 current_task.deadline = date_object
                 current_task.description = request.POST.get('description')
-                current_task.planned_hours = request.POST.get('planned_hours')
+                current_task.planned_hours = datetime.strptime(request.POST.get('planned_hours'), '%H:%M').time()
                 current_task.save()
 
+                
                 context = {'task': current_task}
 
                 res['task_id'] = current_task.id
