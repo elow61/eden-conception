@@ -188,6 +188,7 @@ class ListView(View):
                     assigned_to=user,
                     deadline=None,
                     index=index,
+                    planned_hours=0.0,
                 )
                 project.save()
 
@@ -277,11 +278,15 @@ class TaskView(View):
                 if formset.is_valid():
                     formset.save()
 
+                # Convert time to float
+                convert_in_time = datetime.strptime(request.POST.get('planned_hours'), '%H:%M').time()
+                planned_hours_float = convert_in_time.hour + convert_in_time.minute / 60.0
+
                 current_task.name = request.POST.get('name')
                 current_task.assigned_to = user
                 current_task.deadline = date_object
                 current_task.description = request.POST.get('description')
-                current_task.planned_hours = datetime.strptime(request.POST.get('planned_hours'), '%H:%M').time()
+                current_task.planned_hours = planned_hours_float
                 current_task.save()
 
                 

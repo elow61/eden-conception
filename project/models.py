@@ -54,5 +54,37 @@ class Task(models.Model):
     effective_hours = models.FloatField(default=0)
     remaining_hours = models.FloatField(default=0)
 
+    def _format_value(self, value):
+        if isinstance(value, float) or isinstance(value, int):
+            hours, minutes = divmod(abs(value) * 60, 60)
+            minutes = round(minutes)
+            if minutes == 60:
+                minutes = 0
+                hours += 1
+
+            if value < 0:
+                return '-%02d:%02d' % (hours, minutes)
+        return '%02d:%02d' % (hours, minutes)
+
+        return value
+
+    @property
+    def planned_hours_time(self):
+        return self._format_value(self.planned_hours)
+
+    @property
+    def effective_hours_time(self):
+        timesheets = self.timesheet_set.all()
+        total_effective_hours = sum(timesheet.unit_hour for timesheet in timesheets)
+        return self._format_value(total_effective_hours)
+
+    @property
+    def remaining_hours_time(self):
+        timesheets = self.timesheet_set.all()
+        total_effective_hours = sum(timesheet.unit_hour for timesheet in timesheets)
+        remaining_hours = self.planned_hours - total_effective_hours
+
+        return self._format_value(remaining_hours)
+
     class Meta:
         ordering = ['index']
