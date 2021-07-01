@@ -51,7 +51,7 @@ header {
     header nav h2 {
       color: #ee6f4f;
       text-transform: uppercase; }
-      header nav h2 #btn-create-project, header nav h2 #btn-add-collaborator {
+      header nav h2 #btn-create-project, header nav h2 #btn-add-member {
         color: #70e5cd;
         cursor: pointer; }
     header nav ul li h4 {
@@ -67,21 +67,23 @@ main {
     justify-content: center;
     align-items: center;
     height: inherit; }
+    main section .container-add-member.closed {
+      display: none; }
     main section .container-create-project.closed {
       display: none; }
-    main section .container-create-project {
+    main section .container-create-project, main section .container-add-member {
       display: block; }
-    main section .create-project {
+    main section .create-project, main section .add-member {
       border: 1px solid #dbdada;
       padding: 40px; }
-      main section .create-project form {
+      main section .create-project form, main section .add-member form {
         display: flex;
         flex-direction: column;
         justify-content: center; }
-        main section .create-project form .form-group {
+        main section .create-project form .form-group, main section .add-member form .form-group {
           display: flex;
           align-items: center; }
-          main section .create-project form .form-group input {
+          main section .create-project form .form-group input, main section .add-member form .form-group input {
             width: 300px;
             margin-bottom: 10px;
             float: right;
@@ -92,11 +94,16 @@ main {
             flex: 0 0 50%;
             max-width: 50%;
             color: #dbdada; }
-            main section .create-project form .form-group input:focus {
+            main section .create-project form .form-group input:focus, main section .add-member form .form-group input:focus {
               outline: none; }
-            main section .create-project form .form-group input:focus-visible {
+            main section .create-project form .form-group input:focus-visible, main section .add-member form .form-group input:focus-visible {
               outline: none; }
-        main section .create-project form button {
+          main section .create-project form .form-group select, main section .add-member form .form-group select {
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid white;
+            color: #dbdada; }
+        main section .create-project form button, main section .add-member form button {
           padding: 10px 40px;
           background: transparent;
           color: #dbdada;

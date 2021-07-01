@@ -10,7 +10,7 @@
 {% block content %}
     <header>
         <div class="logout">
-            <i class="fas fa-sign-out-alt"></i>
+            <a href="{% url 'user:logout' %}"><i class="fas fa-sign-out-alt"></i></a>
         </div>
         <nav>
             <h2>
@@ -28,20 +28,31 @@
             <h2>
                 <i class="fas fa-users"></i>
                 {% translate 'Collaborator' %}
-                <i id="btn-add-collaborator" class="fas fa-plus"></i>
+                <i id="btn-add-member" class="fas fa-plus"></i>
             </h2>
+            <ul class="member-list">
+                {% if projects %}
+                    {% for project in projects %}
+                        {% for member in project.user_ids.all %}
+                            {% if member.id is not user.id %}
+                                <li><h4 member-id="{{member.id}}">{{ member.first_name }}</h4></li>
+                            {% endif %}
+                            {% endfor %}
+                    {% endfor %}
+                {% endif %}
+            </ul>
         </nav>
     </header>
     <main>
         <section>
-            {% if projects %}
-                <div class="container-projects-details d-none">
-                    {% include 'project/projects/project_detail.html' %}
-                </div>
-            {% endif %}
-
+            <div class="container-projects-details d-none">
+                {% include 'project/projects/project_detail.html' %}
+            </div>
             <div class="container-create-project" id="container-create-project">
                 {% include 'project/projects/forms/create_project.html' %}
+            </div>
+            <div class="container-add-member closed" id="container-add-member">
+                {% include 'project/projects/forms/add_member.html' %}
             </div>
         </section>
     </main>
@@ -52,4 +63,5 @@
     <script src="{% static 'js/projects/project_detail.js' %}"></script>
     <script src="{% static 'js/projects/create_project.js' %}"></script>
     <script src="{% static 'js/projects/delete_project.js' %}"></script>
+    <script src="{% static 'js/projects/add_member.js' %}"></script>
 {% endblock %}

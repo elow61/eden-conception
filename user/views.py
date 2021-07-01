@@ -2,6 +2,7 @@
 from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth import login, logout
+from django.contrib.auth.views import LogoutView
 from .forms import UserCreationFormInherit
 from .models import User
 
@@ -42,3 +43,12 @@ class RegisterView(View):
             return redirect('project:dashboard')
 
         return render(request, self.template_name, {'form': form})
+
+
+class LogoutView(LogoutView):
+    """ Class View to deconnect user """
+
+    def get(self, request):
+        logout(request)
+
+        return redirect('user:login')

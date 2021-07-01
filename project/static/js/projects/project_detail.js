@@ -33,6 +33,13 @@
 
         containerProjectDetail.removeClass('d-none');
         $('#project-detail-' + projectId).toggleClass('d-none');
+
+        const formDelete = containerProjectDetail.find('#project-detail-' + projectId).find('.form-delete-project');
+        formDelete.submit(function (e) {
+            let url = '/delete_project/';
+            e.preventDefault();
+            deleteProject(url, $(this));
+        })
     }
     
 })(jQuery);

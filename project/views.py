@@ -1,16 +1,15 @@
 """ All views for the user application """
-from datetime import datetime
+from datetime import datetime, time
 import json
 from django.shortcuts import render, redirect, get_object_or_404
 from django.forms import inlineformset_factory
 from django.db.models import F
 from django.views import View
 from django.http import JsonResponse
-from django.template import RequestContext
 from django.template.loader import render_to_string
 from django.utils.translation import gettext_lazy as _
 
-from .forms import CreateProjectForm, CreateListForm, CreateTaskForm, UpdateTaskForm
+from .forms import CreateProjectForm, CreateListForm, CreateTaskForm, UpdateTaskForm, AddMember
 from .models import Project, List, Task
 from user.models import User
 from timesheet.models import Timesheet
@@ -25,13 +24,35 @@ class ProjectView(View):
     def get(self, request):
         context = {}
         context['form'] = self.form
+        context['form_add_member'] = AddMember(request)
 
         if request.user.is_authenticated:
             user = User.objects.get(id=request.user.id)
             projects = user.main_user.all()
             context['projects'] = projects
+        else:
+            redirect('user:login')
 
         return render(request, self.template_name, context)
+
+    @staticmethod
+    def add_member(request):
+        res = {}
+        if request.user.is_authenticated:
+            if request.method == 'POST':
+                query = request.POST.get('member_email')
+                project = Project.objects.get(pk=request.POST.get('project_name'))
+                user = User.objects.filter(email__contains=query)
+
+                if not user.exists():
+                    res['error'] = _('No user email saved in database')
+                else:
+                    project.user_ids.add(user.get().id)
+                    res['user_name'] = user.get().first_name
+        else:
+            redirect('user:login')
+
+        return JsonResponse(res)
 
     @staticmethod
     def create_project(request):
@@ -62,19 +83,15 @@ class ProjectView(View):
     @staticmethod
     def delete_project(request):
         res = {}
-        if request.user.is_authenticated:
-            if request.method == 'POST':
-                project_id = request.POST.get('project_id')
-                print(project_id)
-                project_to_delete = Project.objects.get(id=project_id)
-                project_to_delete.delete()
+        if request.method == 'POST':
+            project_id = request.POST.get('project_id')
+            project_to_delete = Project.objects.get(id=project_id)
+            project_to_delete.delete()
 
-                res['project_id'] = project_id
-                res['success'] = _('The project has deleted')
-            else:
-                res['error'] = _('The project doesn\'t have deleted')
+            res['project_id'] = project_id
+            res['success'] = _('The project has deleted')
         else:
-            res['error'] = _('Please, connect you.')
+            res['error'] = _('The project doesn\'t have deleted')
 
         return JsonResponse(res)
 
@@ -171,6 +188,7 @@ class ListView(View):
                     assigned_to=user,
                     deadline=None,
                     index=index,
+                    planned_hours=0.0,
                 )
                 project.save()
 
@@ -206,9 +224,7 @@ class TaskView(View):
     def get(self, request, project_id, task_id):
         project = get_object_or_404(Project, pk=project_id)
         task = get_object_or_404(Task, pk=task_id)
-        timesheets = task.timesheet_set.all()
-
-        context = {'project': project, 'task': task, 'timesheet': timesheets}
+        context = {'project': project, 'task': task}
 
         return render(request, self.template_name, context)
 
@@ -219,16 +235,19 @@ class TaskView(View):
                 task_id = request.POST.get('task_id')
                 current_task = Task.objects.get(id=int(task_id))
                 datas = {}
+                datas['name'] = current_task.name
                 datas['assigned_to'] = current_task.assigned_to
+                datas['deadline'] = current_task.deadline
                 datas['description'] = current_task.description
+                datas['planned_hours'] = current_task.planned_hours
 
                 form_update = UpdateTaskForm(instance=current_task, initial=datas)
                 TimeFormSet = inlineformset_factory(
                     parent_model=Task,
                     model=Timesheet,
                     form=UpdateTimesheetForm,
+                    can_delete=True,
                     extra=1,
-                    can_delete=None,
                     fields=('created_at', 'user', 'description', 'unit_hour')
                 )
                 formset = TimeFormSet(instance=current_task)
@@ -246,29 +265,31 @@ class TaskView(View):
             parent_model=Task,
             model=Timesheet,
             form=UpdateTimesheetForm,
-            can_delete=None,
+            can_delete=True,
         )
         if request.user.is_authenticated:
             if request.method == 'POST':
                 user = User.objects.get(id=request.POST.get('assigned_to'))
-                date_object = datetime.strptime(request.POST.get('deadline'), "%d/%m/%Y")
+                date_object = datetime.strptime(request.POST.get('deadline'), '%d/%m/%Y')
                 current_task = Task.objects.get(id=request.POST.get('task_id'))
 
-                print(request.POST)
                 formset = TimeFormSet(request.POST, instance=current_task)
 
-                print('Formset :', formset)
-                print('Formset is valid :', formset.is_valid())
                 if formset.is_valid():
                     formset.save()
+
+                # Convert time to float
+                convert_in_time = datetime.strptime(request.POST.get('planned_hours'), '%H:%M').time()
+                planned_hours_float = convert_in_time.hour + convert_in_time.minute / 60.0
 
                 current_task.name = request.POST.get('name')
                 current_task.assigned_to = user
                 current_task.deadline = date_object
                 current_task.description = request.POST.get('description')
-                current_task.planned_hours = request.POST.get('planned_hours')
+                current_task.planned_hours = planned_hours_float
                 current_task.save()
 
+                
                 context = {'task': current_task}
 
                 res['task_id'] = current_task.id

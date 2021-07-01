@@ -23,27 +23,22 @@
                 <label class="" for="id_description">
                     {% translate 'Description ' %}
                 </label>
-                <span>{{task.description}}</span>
+                <span class="task_description">{{task.description}}</span>
             </div>
             <div class="form-group">
                 <label class="" for="id_planned_hours">
                     {% translate 'Planned hours ' %}
                 </label>
-                <span>{{task.planned_hours}}</span>
+                <span>{{task.planned_hours_time}}</span>
             </div>
             <div class="form-group">
-                <label class="" for="id_timesheet">
-                    {% translate 'Timesheet ' %}
-                </label>
                 <table>
                     <thead>
                         <tr>
-                            {% for timesheet_line in task.timesheet_set.all %}
-                                <th>{{timesheet_line.created_at.verbose_name}}</th>
-                                <th>{{timesheet_line.user.verbose_name}}</th>
-                                <th>{{timesheet_line.description.verbose_name}}</th>
-                                <th>{{timesheet_line.unit_hour.verbose_name}}</th>
-                            {% endfor %}
+                            <th>Created at</th>
+                            <th>User</th>
+                            <th>Description</th>
+                            <th>Unit hour</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -53,7 +48,7 @@
                                     <td>{{timesheet_line.created_at}}</td>
                                     <td>{{timesheet_line.user}}</td>
                                     <td>{{timesheet_line.description}}</td>
-                                    <td>{{timesheet_line.unit_hour}}</td>
+                                    <td>{{timesheet_line.unit_hour_time}}</td>
                                 </tr>
                             {% else %}
                                 <tr>
@@ -64,14 +59,20 @@
                                 </tr>
                             {% endif %}
                         {% endfor %}
-                        <tr>
-                            <td>--</td>
-                            <td>--</td>
-                            <td>--</td>
-                            <td>--</td>
-                        </tr>
                     </tbody>
                 </table>
+            </div>
+            <div class="form-group">
+                <label class="" for="id_deadline">
+                    {% translate 'Effective hours ' %} 
+                </label>
+                <span>{{task.effective_hours_time}}</span>
+            </div>
+            <div class="form-group">
+                <label class="" for="id_deadline">
+                    {% translate 'Remaining hours ' %} 
+                </label>
+                <span>{{task.remaining_hours_time}}</span>
             </div>
         </div>
     </div>
