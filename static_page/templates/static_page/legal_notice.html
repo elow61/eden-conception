@@ -1,0 +1,29 @@
+{% extends 'static_page/base.html' %}
+{% load i18n %}
+{% load sass_tags %}
+{% block scss %}<link href="{% sass_src 'scss/legal_notice.scss' %}" rel="stylesheet" type="text/css" />{% endblock %}
+{% block content %}
+<a href="/" class="return-home"><i class="fas fa-arrow-left"></i></a>
+<section class="main-legal-notice">
+    <div class="container-legal-notice">
+        <h1>{% translate 'Legal notices' %}</h1>
+        <article>
+            <h2>Legal informations</h2>
+            <p>Under Article 6 of Law No. 2004-575 of June 21, 2004 on confidence in the digital economy, users of the eden-conception.fr site are informed of the identity of the various shareholders within the framework of its realization and its follow-up:</p>
+            <p>In accordance with the "Informatique et Libertés" law of January 6, 1978, this site is the subject of a declaration to the CNIL - dated November 19, 2015 - receipt of declaration n ° 190 6255</p>
+        </article>
+        <article>
+            <h2>{% translate 'Owner' %}</h2>
+            <p>Elodie Meunier</p>
+        </article>
+        <article>
+            <h2>{% translate 'Brand' %}</h2>
+            <p>"Eden Conception"</p>
+        </article>
+        <article>
+            <h2>Designer / Webhost</h2>
+            <p>Eden conception</p>
+        </article>
+    </div>
+</section>
+{% endblock %}

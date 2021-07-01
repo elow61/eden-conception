@@ -1,0 +1,54 @@
+* {
+  box-sizing: border-box;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-kerning: auto; }
+
+html {
+  font-family: sans-serif;
+  -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  color: #dbdada; }
+
+a {
+  text-decoration: none;
+  color: inherit; }
+
+ul {
+  list-style: none; }
+
+.m-auto {
+  margin: auto; }
+
+.col-6 {
+  -ms-flex: 0 0 50%;
+  flex: 0 0 50%;
+  max-width: 50%; }
+
+.d-none {
+  display: none; }
+
+.return-home {
+  position: absolute;
+  padding: 10px;
+  text-decoration: none;
+  color: inherit; }
+
+.main-legal-notice {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: inherit; }
+  .main-legal-notice .container-legal-notice {
+    border: 1px solid #dbdada;
+    padding: 40px 40px 0 40px;
+    margin: 30px; }
+    .main-legal-notice .container-legal-notice h1 {
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 1rem; }
+
+/*# sourceMappingURL=legal_notice.css.map */

@@ -12,10 +12,10 @@ class IndexView(View):
         return render(request, self.template_name)
 
 
-# class LegalNoticeView(View):
-#     """ Legal Notice view """
+class LegalNoticeView(View):
+    """ Legal Notice view """
 
-#     template_name = 'static_page/legal_notice.html'
+    template_name = 'static_page/legal_notice.html'
 
-#     def get(self, request):
-#         return render(request, self.template_name)
+    def get(self, request):
+        return render(request, self.template_name)

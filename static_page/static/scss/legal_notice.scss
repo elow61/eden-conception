@@ -1,0 +1,26 @@
+@import '_variables.scss';
+
+.return-home {
+    position: absolute;
+    padding: 10px;
+    text-decoration: none;
+    color: inherit;
+}
+.main-legal-notice {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: inherit;
+
+    .container-legal-notice {
+        border: 1px solid $white;
+        padding: 40px 40px 0 40px;
+        margin: 30px;
+    
+        h1 {
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1rem;
+        }
+    }
+}

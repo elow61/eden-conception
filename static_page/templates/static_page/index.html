@@ -13,10 +13,10 @@
     <nav>
         <ul>
             <li>
-                <a href="/login">{% translate 'Connection' %}</a>
+                <a href="{% url 'user:login' %}">{% translate 'Connection' %}</a>
             </li>
             <li>
-                <a href="/legal-mentions">{% translate 'Legals mentions' %}</a>
+                <a href="{% url 'static_page:legal_notices' %}">{% translate 'Legals mentions' %}</a>
             </li>
         </ul>
     </nav>
