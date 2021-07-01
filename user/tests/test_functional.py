@@ -47,7 +47,7 @@ class RegisterTests(StaticLiveServerTestCase):
 
     def test_register_click(self):
         self.selenium.get('%s%s' % (self.live_server_url, '/register/'))
-        submission_button = self.selenium.find_element_by_id("id_signup")
+        submission_button = self.selenium.find_element_by_id("id_register")
         self.define_elements()
 
         # Wait until the response is received
@@ -63,6 +63,59 @@ class RegisterTests(StaticLiveServerTestCase):
         self.define_elements()
 
         password2_input.send_keys(Keys.ENTER)
+        time.sleep(2)
+        redirection_url = self.selenium.current_url
+        self.assertEqual(self.live_server_url + '/dashboard/', redirection_url)
+
+
+class LoginTests(StaticLiveServerTestCase):
+    """ Class to test the form login account in the web """
+
+    def setUp(self):
+        self.selenium = webdriver.Chrome(
+            ChromeDriverManager().install(),
+            chrome_options=chrome_options
+        )
+        self.wait = WebDriverWait(self.selenium, 1000)
+        User.objects.create_user(
+            username='test_username',
+            first_name='test_first_name',
+            last_name='test_last_name',
+            email='email@test.com',
+            password='test_password_61',
+        )
+        super(LoginTests, self).setUp()
+
+    def tearDown(self):
+        self.selenium.quit()
+        super(LoginTests, self).tearDown()
+        return
+
+    def define_elements(self):
+        username_input = self.selenium.find_element_by_id("id_username")
+        password_input = self.selenium.find_element_by_id("id_password")
+        username_input.send_keys('email@test.com')
+        password_input.send_keys('test_password_61')
+
+    def test_login_click(self):
+        self.selenium.get('%s%s' % (self.live_server_url, '/login/'))
+        submission_button = self.selenium.find_element_by_id("id_login")
+        self.define_elements()
+
+        # Wait until the response is received
+        self.wait.until(lambda driver: self.selenium.find_element_by_tag_name('body'))
+        ActionChains(self.selenium).click(submission_button).perform()
+
+        time.sleep(2)
+        redirection_url = self.selenium.current_url
+        self.assertEqual(self.live_server_url + '/dashboard/', redirection_url)
+
+    def test_login_keyboard(self):
+        self.selenium.get('%s%s' % (self.live_server_url, '/login/'))
+        self.define_elements()
+        password_input = self.selenium.find_element_by_id("id_password")
+
+        password_input.send_keys(Keys.ENTER)
         time.sleep(2)
         redirection_url = self.selenium.current_url
         self.assertEqual(self.live_server_url + '/dashboard/', redirection_url)
