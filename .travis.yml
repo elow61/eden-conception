@@ -1,0 +1,19 @@
+language: python
+python:
+  - '3.7.9'
+
+before_script:
+  - pip3 install -r requirements.txt
+
+env: DJANGO_SETTINGS_MODULE="project.settings.travis"
+
+# safelist
+branches:
+  only:
+    - staging
+
+services:
+  - postgresql
+
+script:
+  - ./manage.py test eden_conception
