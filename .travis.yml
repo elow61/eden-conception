@@ -16,4 +16,4 @@ services:
   - postgresql
 
 script:
-  - ./manage.py test eden_conception
+  - ./manage.py test
