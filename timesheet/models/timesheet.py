@@ -3,13 +3,7 @@ from project.models.task import Task
 from user.models import User
 
 
-class Timesheet(models.Model):
-
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now=False, auto_now_add=False, blank=True, null=True)
-    description = models.CharField(max_length=200)
-    unit_hour = models.FloatField(default=0)
-    task = models.ForeignKey(Task, on_delete=models.CASCADE)
+class TimesheetManager(models.Manager):
 
     def _format_value(self, value):
         if isinstance(value, float) or isinstance(value, int):
@@ -24,6 +18,18 @@ class Timesheet(models.Model):
 
             return '%02d:%02d' % (hours, minutes)
 
+
+class Timesheet(models.Model):
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now=False, auto_now_add=False, blank=True, null=True)
+    description = models.CharField(max_length=200)
+    unit_hour = models.FloatField(default=0)
+    task = models.ForeignKey(Task, on_delete=models.CASCADE)
+
+    objects = models.Manager()
+    objects_timesheet = TimesheetManager()
+
     @property
     def unit_hour_time(self):
-        return self._format_value(self.unit_hour)
+        return Timesheet.objects_timesheet._format_value(self.unit_hour)

@@ -14,6 +14,7 @@ from project.models.task import Task
 from user.models import User
 from timesheet.models.timesheet import Timesheet
 from timesheet.forms.timesheet_forms import UpdateTimesheetForm
+from timesheet.views.timesheet_views import TimesheetView
 
 
 class TaskView(View):
@@ -60,21 +61,12 @@ class TaskView(View):
     @staticmethod
     def update_task(request):
         res = {}
-        TimeFormSet = inlineformset_factory(
-            parent_model=Task,
-            model=Timesheet,
-            form=UpdateTimesheetForm,
-            can_delete=True,
-        )
         if request.method == 'POST':
             user = User.objects.get(id=request.POST.get('assigned_to'))
             date_object = datetime.strptime(request.POST.get('deadline'), '%d/%m/%Y')
             current_task = Task.objects.get(id=request.POST.get('task_id'))
 
-            formset = TimeFormSet(request.POST, instance=current_task)
-
-            if formset.is_valid():
-                formset.save()
+            TimesheetView.update_timesheet(request)
 
             # Convert time to float
             convert_in_time = datetime.strptime(request.POST.get('planned_hours'), '%H:%M').time()

@@ -1,0 +1,60 @@
+[
+    {
+        "model": "user.user",
+        "pk": 1,
+        "fields": {
+            "username": "test_username",
+            "first_name": "Eden",
+            "last_name": "Test",
+            "email": "email@test.com",
+            "password": "test_password_61"
+        }
+    },
+    {
+        "model": "project.project",
+        "pk": 1,
+        "fields": {
+            "name": "Projet 13",
+            "user": 1,
+            "user_ids": [1],
+            "created_at": "2021-06-29 00:00:00+02",
+            "last_modified": "2021-06-30 00:00:00+02",
+            "number_task": 0
+        }
+    },
+    {
+        "model": "project.list",
+        "pk": 1,
+        "fields": {
+            "name": "Backlog",
+            "project": 1
+        }
+    },
+    {
+        "model": "project.task",
+        "pk": 1,
+        "fields": {
+            "name": "Supprimer des tâches",
+            "description": "Ajouter la suppression de tâches",
+            "project_list": 1,
+            "created_at": "2021-06-29 00:00:00+02",
+            "assigned_to": 1,
+            "deadline": "2021-06-12",
+            "index": 0,
+            "planned_hours": 3.5,
+            "effective_hours": 2,
+            "remaining_hours": 1.5
+        }
+    },
+    {
+        "model": "timesheet.timesheet",
+        "pk": 1,
+        "fields": {
+            "user": 1,
+            "created_at": "2021-06-29 00:00:00+02",
+            "description": "model test",
+            "unit_hour": 2,
+            "task": 1
+        }
+    }
+]
