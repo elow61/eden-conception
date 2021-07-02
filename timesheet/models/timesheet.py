@@ -1,7 +1,6 @@
 from django.db import models
-from project.models import Task
+from project.models.task import Task
 from user.models import User
-import datetime
 
 
 class Timesheet(models.Model):

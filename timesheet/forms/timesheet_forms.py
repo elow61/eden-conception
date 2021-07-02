@@ -1,9 +1,7 @@
-from django import forms
-from django.forms import ModelForm, DateField, TimeInput, ModelChoiceField
+from django.forms import ModelForm, DateField
 from django.utils.translation import gettext_lazy as _
-from .models import Timesheet
-from project.models import List
-from project.widget import HourField
+from timesheet.models.timesheet import Timesheet
+from project.forms.widgets import HourField
 
 
 class UpdateTimesheetForm(ModelForm):
