@@ -21,3 +21,15 @@ class TimesheetView(View):
         formset = TimeFormSet(request.POST, instance=current_task)
         if formset.is_valid():
             formset.save()
+
+    @classmethod
+    def create_formset(cls, current_task):
+        TimeFormSet = inlineformset_factory(
+            parent_model=Task,
+            model=Timesheet,
+            form=UpdateTimesheetForm,
+            can_delete=True,
+            extra=1,
+            fields=('created_at', 'user', 'description', 'unit_hour')
+        )
+        return TimeFormSet(instance=current_task)
