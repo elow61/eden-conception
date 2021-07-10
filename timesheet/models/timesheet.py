@@ -14,9 +14,9 @@ class TimesheetManager(models.Manager):
                 hours += 1
 
             if value < 0:
-                return '-%02d:%02d' % (hours, minutes)
+                return f'-{int(hours):02d}:{int(minutes):02d}'
 
-            return '%02d:%02d' % (hours, minutes)
+            return f'{int(hours):02d}:{int(minutes):02d}'
 
 
 class Timesheet(models.Model):

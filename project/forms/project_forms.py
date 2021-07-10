@@ -1,6 +1,8 @@
 from django import forms
+from django.forms import ModelForm
 from django.utils.translation import gettext_lazy as _
 from user.models import User
+from project.models.project import Project
 
 
 class CreateProjectForm(forms.Form):
@@ -16,3 +18,10 @@ class AddMember(forms.Form):
         self.fields['project_name'] = forms.ModelChoiceField(queryset=projects, empty_label=None)
 
     member_email = forms.CharField(label=_('Member Email'), max_length=100)
+
+
+class UpdateProjectForm(ModelForm):
+
+    class Meta:
+        model = Project
+        fields = ['name']

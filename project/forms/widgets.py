@@ -11,7 +11,7 @@ class HourWidget(widgets.TextInput):
 
             hours = math.floor(value)
             minutes = (value - hours) * 60
-            value = "%d:%02d" % (hours, minutes)
+            value = f'{int(hours):02d}:{int(minutes):02d}'
 
         return value
 

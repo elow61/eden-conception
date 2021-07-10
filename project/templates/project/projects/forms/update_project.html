@@ -1,0 +1,10 @@
+{% load i18n %}
+<form method="post" class="form-update-project" id="form-update-project">
+    <div>{{form_update.name}}</div>
+    <input type="hidden" name="project_id" value="{{project.id}}">
+    <div class="icons-p">
+        <div class="edit-project">
+            <button type="submit" id="save-project" form="form-update-project" project-id="{{project.id}}"><i class="fas fa-check"></i></button>
+        </div>
+    </div>
+</form>

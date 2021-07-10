@@ -57,6 +57,8 @@ header {
     header nav ul li h4 {
       cursor: pointer;
       letter-spacing: .2em; }
+    header nav ul li h4.selected {
+      color: #70e5cd; }
 
 main {
   height: 100vh;

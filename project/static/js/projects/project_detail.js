@@ -1,6 +1,6 @@
 (function($) {
     'use strict';
-    
+
     let projectName = $('.project-list').find('h4');
 
     /**
@@ -9,6 +9,13 @@
      */
     projectName.on('click', function () {
         const projectId = parseInt($(this).attr('project-id'));
+
+        $.each(projectName, (i) => {
+            if ($(projectName[i]).hasClass('selected')) {
+                $(projectName[i]).removeClass('selected');
+            }
+        })
+        $(this).addClass('selected');
         displayProjectDetails(projectId);
     })
 
@@ -19,10 +26,15 @@
     window.displayProjectDetails = function(projectId) {
         const projectDetail = $('.project-detail');
         const formCreateProject = $('.container-create-project');
+        const formAddMember = $('.container-add-member');
         const containerProjectDetail = $('.container-projects-details');
 
         if (!formCreateProject.hasClass('closed')) {
             formCreateProject.addClass('closed');
+        }
+
+        if (!formAddMember.hasClass('closed')) {
+            formAddMember.addClass('closed');
         }
 
         $.each(projectDetail, (i) => {
@@ -41,5 +53,19 @@
             deleteProject(url, $(this));
         })
     }
+
+    window.viewDashboard = function() {
+        let containerProjects = $('.container-projects-details');
+        const containerCreateProject = $('#container-create-project');
+        const projectNameList = $('.project-list');
+
+        if (containerProjects.children().length > 0) {
+            containerCreateProject.addClass('closed');
+            containerProjects.removeClass('d-none');
+            containerProjects.children(':first').removeClass('d-none');
+            projectNameList.find('h4:first').addClass('selected');
+        }
+    }
+    viewDashboard();
     
 })(jQuery);

@@ -25,8 +25,8 @@ class TaskManager(models.Manager):
                 hours += 1
 
             if value < 0:
-                return '-%02d:%02d' % (hours, minutes)
-        return '%02d:%02d' % (hours, minutes)
+                return f'-{int(hours):02d}:{int(minutes):02d}'
+        return f'{int(hours):02d}:{int(minutes):02d}'
 
     def update_order_task(self, datas):
         for data in datas:

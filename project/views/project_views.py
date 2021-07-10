@@ -6,7 +6,7 @@ from django.http import JsonResponse
 from django.template.loader import render_to_string
 from django.utils.translation import gettext_lazy as _
 
-from project.forms.project_forms import CreateProjectForm, AddMember
+from project.forms.project_forms import CreateProjectForm, AddMember, UpdateProjectForm
 from project.models.project import Project
 from user.models import User
 
@@ -30,6 +30,20 @@ class ProjectView(View):
 
         return render(request, self.template_name, context)
 
+    def post(self, request, project_id):
+        ''' Method to display the form to update a project '''
+        res = {}
+        if request.method == 'POST':
+            current_project = Project.objects.get(id=project_id)
+            datas = {'name': current_project.name}
+
+            form_update = UpdateProjectForm(instance=current_project, initial=datas)
+            context = {'form_update': form_update, 'project': current_project}
+            res['project_id'] = project_id
+            res['template'] = render_to_string('project/projects/forms/update_project.html', context, request=request)
+
+        return JsonResponse(res)
+
     @staticmethod
     def add_member(request):
         res = {}
@@ -39,7 +53,7 @@ class ProjectView(View):
             new_user = Project.objects_project.add_member(query, project)
 
             if new_user:
-                res['user_name'] = user.get().first_name
+                res['user_name'] = new_user.get().first_name
             else:
                 res['error'] = _('No user email saved in database')
 
@@ -83,6 +97,21 @@ class ProjectView(View):
             res['success'] = _('The project has deleted')
         else:
             res['error'] = _('The project doesn\'t have deleted')
+
+        return JsonResponse(res)
+
+    @staticmethod
+    def update_project(request):
+        res = {}
+        if request.method == 'POST':
+            current_project = Project.objects.get(id=request.POST.get('project_id'))
+
+            # Update project
+            current_project.name = request.POST.get('name')
+            current_project.save()
+
+            res['project_id'] = current_project.id
+            res['project_name'] = current_project.name
 
         return JsonResponse(res)
 

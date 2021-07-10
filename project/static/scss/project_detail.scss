@@ -34,8 +34,8 @@ main .container-projects-details {
                     cursor: pointer;
                     font-size: 1.6em;
                 }
-    
-                .view-project{color: $cyan_green;}
+                .edit-project {color: $cyan_green;}
+                .view-project{color: $cyan_green; margin-left: 20px;}
                 .delete-project {
                     margin-left: 20px;
 
@@ -45,6 +45,31 @@ main .container-projects-details {
                         color: $orange;
                     }
                 }
+            }
+        }
+        .form-update-project {
+            display: flex;
+            justify-content: space-between;
+
+            div {
+                margin: 0 !important;
+
+                input {
+                    background: transparent;
+                    border: none;
+                    color: $orange;
+                    outline: none;
+                    width: 100%;
+                    font-weight: bold;
+                    font-size: 1.6em !important;
+                    margin: 0 !important;
+                }
+            }
+
+            button {
+                background: transparent;
+                border: none;
+                color: $cyan_green;
             }
         }
         .main-project-detail {

@@ -57,14 +57,35 @@ main .container-projects-details {
         main .container-projects-details .project-detail .header-project-detail .icons-p i {
           cursor: pointer;
           font-size: 1.6em; }
-        main .container-projects-details .project-detail .header-project-detail .icons-p .view-project {
+        main .container-projects-details .project-detail .header-project-detail .icons-p .edit-project {
           color: #70e5cd; }
+        main .container-projects-details .project-detail .header-project-detail .icons-p .view-project {
+          color: #70e5cd;
+          margin-left: 20px; }
         main .container-projects-details .project-detail .header-project-detail .icons-p .delete-project {
           margin-left: 20px; }
           main .container-projects-details .project-detail .header-project-detail .icons-p .delete-project button {
             border: none;
             background: transparent !important;
             color: #ee6f4f; }
+    main .container-projects-details .project-detail .form-update-project {
+      display: flex;
+      justify-content: space-between; }
+      main .container-projects-details .project-detail .form-update-project div {
+        margin: 0 !important; }
+        main .container-projects-details .project-detail .form-update-project div input {
+          background: transparent;
+          border: none;
+          color: #ee6f4f;
+          outline: none;
+          width: 100%;
+          font-weight: bold;
+          font-size: 1.6em !important;
+          margin: 0 !important; }
+      main .container-projects-details .project-detail .form-update-project button {
+        background: transparent;
+        border: none;
+        color: #70e5cd; }
     main .container-projects-details .project-detail .main-project-detail {
       display: flex;
       justify-content: space-between;
@@ -88,5 +109,8 @@ main .container-projects-details {
         background-color: #dbdada;
         border: none;
         height: 1px; }
+    main .container-projects-details .project-detail .statistics-project #chartdiv {
+      width: 50%;
+      height: 400px; }
 
 /*# sourceMappingURL=project_detail.css.map */

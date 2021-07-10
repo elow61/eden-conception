@@ -5,6 +5,9 @@
         <div class="header-project-detail">
             <h2>{{project.name}}</h2>
             <div class="icons-p">
+                <div class="edit-project">
+                    <i id="edit-project" project-id="{{project.id}}" class="fas fa-pencil-alt"></i>
+                </div>
                 <div class="view-project">
                     <a href="/project-{{project.id}}">
                         <i class="far fa-eye"></i>
