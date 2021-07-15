@@ -32,10 +32,8 @@ ul {
   display: none; }
 
 main .container-projects-details {
-  background-color: #1F2136;
   width: 100%;
-  margin: 30px;
-  border-radius: 10px; }
+  margin: 30px; }
   main .container-projects-details .project-detail {
     padding: 10px; }
     main .container-projects-details .project-detail hr {
@@ -47,7 +45,10 @@ main .container-projects-details {
     main .container-projects-details .project-detail .header-project-detail {
       display: flex;
       justify-content: space-between;
-      margin-bottom: 15px; }
+      margin-bottom: 15px;
+      background-color: #1F2136;
+      padding: 20px;
+      border-radius: 10px; }
       main .container-projects-details .project-detail .header-project-detail h2 {
         margin: 0 !important;
         color: #ee6f4f;
@@ -89,7 +90,10 @@ main .container-projects-details {
     main .container-projects-details .project-detail .main-project-detail {
       display: flex;
       justify-content: space-between;
-      margin-top: 15px; }
+      margin-top: 15px;
+      background-color: #1F2136;
+      padding: 20px;
+      border-radius: 10px; }
       main .container-projects-details .project-detail .main-project-detail .info {
         display: flex;
         flex-direction: column;
@@ -109,8 +113,17 @@ main .container-projects-details {
         background-color: #dbdada;
         border: none;
         height: 1px; }
-    main .container-projects-details .project-detail .statistics-project #chartdiv {
-      width: 50%;
-      height: 400px; }
+    main .container-projects-details .project-detail .statistics-project {
+      margin-top: 25px; }
+      main .container-projects-details .project-detail .statistics-project .statistics-project-nb-task-by-list {
+        width: 50%;
+        height: 400px;
+        background-color: #1F2136;
+        padding: 20px;
+        border-radius: 10px; }
+      main .container-projects-details .project-detail .statistics-project .contain-stats {
+        background-color: #1F2136;
+        padding: 20px;
+        border-radius: 10px; }
 
 /*# sourceMappingURL=project_detail.css.map */

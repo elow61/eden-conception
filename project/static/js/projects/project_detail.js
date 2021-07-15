@@ -52,6 +52,15 @@
             e.preventDefault();
             deleteProject(url, $(this));
         })
+
+        // Get the datas and Generate statistics for projects
+        let csrfToken = getCookie('csrftoken');
+        let datas = {'project_id': projectId};
+
+        return ajaxMethod(csrfToken, 'post', '/get_statistics/', datas).then((response) => {
+            get_stats(response.nb_task, datas['project_id']);
+            get_time(response.time, datas['project_id']);
+        })
     }
 
     window.viewDashboard = function() {

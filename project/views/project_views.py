@@ -112,3 +112,13 @@ class ProjectView(View):
 
         return JsonResponse(res)
 
+    @staticmethod
+    def get_statistics(request):
+        res = {}
+        if request.method == 'POST':
+            project = Project.objects.get(id=request.POST.get('project_id'))
+            datas = Project.objects_project.get_number_task_by_list(project)
+            time = Project.objects_project.get_total_planned_hours(project)
+            res['nb_task'] = datas
+            res['time'] = time
+        return JsonResponse(res)

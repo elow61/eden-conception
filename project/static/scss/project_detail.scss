@@ -1,10 +1,8 @@
 @import '_variables.scss';
 
 main .container-projects-details {
-    background-color: $dark_blue;
     width: 100%;
     margin: 30px;
-    border-radius: 10px;
 
     .project-detail {
         padding: 10px;
@@ -21,6 +19,9 @@ main .container-projects-details {
             display: flex;
             justify-content: space-between;
             margin-bottom: 15px;
+            background-color: $dark_blue;
+            padding: 20px;
+            border-radius: 10px;
     
             h2 {
                 margin: 0 !important;
@@ -76,6 +77,9 @@ main .container-projects-details {
             display: flex;
             justify-content: space-between;
             margin-top: 15px;
+            background-color: $dark_blue;
+            padding: 20px;
+            border-radius: 10px;
 
             .info {
                 display: flex;
@@ -104,6 +108,23 @@ main .container-projects-details {
                 background-color: $white;
                 border:none;
                 height: 1px;
+            }
+        }
+        .statistics-project {
+            margin-top: 25px;
+            
+            .statistics-project-nb-task-by-list {
+                width: 50%;
+                height: 400px;
+                background-color: $dark_blue;
+                padding: 20px;
+                border-radius: 10px;
+            }
+
+            .contain-stats {
+                background-color: $dark_blue;
+                padding: 20px;
+                border-radius: 10px;
             }
         }
     }

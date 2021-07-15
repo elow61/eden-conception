@@ -1,18 +1,46 @@
 from django.db import models
 from user.models import User
+from datetime import datetime
 
 
 class ProjectManager(models.Manager):
 
     def add_member(self, email, project):
         user = User.objects.filter(email__contains=email)
-        import pdb; pdb.set_trace();
 
         if not user.exists():
             return
 
         project.user_ids.add(user.get().id)
         return True
+
+    def get_number_task_by_list(self, project):
+        datas = []
+        for li in project.list_set.all():
+            stats = {
+                'list': li.name,
+                'nb_task': li.task_set.all().count()
+            }
+            datas.append(stats)
+        return datas
+
+    def get_total_planned_hours(self, project):
+        datas = []
+        for li in project.list_set.all():
+            tasks = li.task_set.all()
+            total_planned_hours = sum(task.planned_hours for task in tasks)
+            total_effective_hours = 0
+            for task in tasks:
+                to_convert = datetime.strptime(task.effective_hours_time, '%H:%M').time()
+                total_effective_hours += to_convert.hour + to_convert.minute / 60.0
+
+            stats = {
+                'list': li.name,
+                'planned_hours': total_planned_hours,
+                'effective_hours': total_effective_hours
+            }
+            datas.append(stats)
+        return datas
 
 
 class Project(models.Model):
