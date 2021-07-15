@@ -11,7 +11,7 @@ html {
 
 body {
   margin: 0;
-  color: #dbdada; }
+  color: #c9cad7; }
 
 a {
   text-decoration: none;
@@ -63,7 +63,7 @@ header {
 main {
   height: 100vh;
   width: 100%;
-  background-color: #323b4f;
+  background-color: #25293d;
   overflow-y: scroll; }
   main section {
     display: flex;
@@ -76,7 +76,7 @@ main {
     main section .container-create-project, main section .container-add-member {
       display: block; }
     main section .create-project, main section .add-member {
-      border: 1px solid #dbdada;
+      border: 1px solid #c9cad7;
       padding: 40px; }
       main section .create-project form, main section .add-member form {
         display: flex;
@@ -91,11 +91,11 @@ main {
             float: right;
             background: transparent;
             border: none;
-            border-bottom: 1px solid #dbdada;
+            border-bottom: 1px solid #c9cad7;
             -ms-flex: 0 0 50%;
             flex: 0 0 50%;
             max-width: 50%;
-            color: #dbdada; }
+            color: #c9cad7; }
             main section .create-project form .form-group input:focus, main section .add-member form .form-group input:focus {
               outline: none; }
             main section .create-project form .form-group input:focus-visible, main section .add-member form .form-group input:focus-visible {
@@ -104,12 +104,12 @@ main {
             background: transparent;
             border: none;
             border-bottom: 1px solid white;
-            color: #dbdada; }
+            color: #c9cad7; }
         main section .create-project form button, main section .add-member form button {
           padding: 10px 40px;
           background: transparent;
-          color: #dbdada;
-          border: 1px solid #dbdada;
+          color: #c9cad7;
+          border: 1px solid #c9cad7;
           margin-top: 40px;
           margin-bottom: 10px;
           cursor: pointer;

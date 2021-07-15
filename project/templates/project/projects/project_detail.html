@@ -22,42 +22,21 @@
                 </div>
             </div>
         </div>
-        <hr/>
-        <div class="main-project-detail">
-            <div class="info">
-                <div class="last-modification">
-                    <span>{% translate 'Last modification:' %}</span>
-                    <span>{{project.last_modified}}</span>
-                </div>
-                <hr/>
-                <div class="task-count">
-                    <span>{% translate 'Task number:' %}</span>
-                    <span>{{project.get_number_task}}</span>
-                </div>
-                <hr/>
-                <div class="creator">
-                    <span>{% translate 'Creator:' %}</span>
-                    <span>{{project.user.first_name}}</span>
-                </div>
-                <hr/>
-                <div class="member">
-                    <span>{% translate 'Member:' %}</span>
-                    {% if project.user_ids.all %}
-                        <span>{{project.user_ids.first_name}}</span>
-                    {% else %}
-                        <span>{% translate 'Nobody except you :)' %}</span>
-                    {% endif %}
-                </div>
-                <hr/>
+        <div class="main-info">
+            <div class="last-modification">
+                <h2>{% translate 'Last modification:' %}</h2>
+                <span>{{project.last_modified}}</span>
             </div>
-            <div class="display">
-                <div class="contain-display">
-                    <img src="{% static '/img/_.jpeg' %}" alt="">
-                </div>
+            <div class="task-count">
+                <h2>{% translate 'Task number:' %}</h2>
+                <span class="nb_tasks">{{project.get_number_task}}</span>
             </div>
         </div>
         <div class="statistics-project">
-            <div id="project-nb-task-by-list-{{project.id}}" class="statistics-project-nb-task-by-list contain-stats"></div>
+            <div class="flex-stats">
+                <div id="project-nb-task-by-list-{{project.id}}" class="statistics-project-nb-task-by-list contain-stats"></div>
+                <div id="project-history-{{project.id}}" class="statistics-project-history contain-stats"></div>
+            </div>
             <div id="project-planned-hour-{{project.id}}" class="statistics-project-planned-hour contain-stats"></div>
         </div>
     </div>

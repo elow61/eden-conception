@@ -11,7 +11,7 @@ html {
 
 body {
   margin: 0;
-  color: #dbdada; }
+  color: #c9cad7; }
 
 a {
   text-decoration: none;
@@ -39,7 +39,7 @@ main .container-projects-details {
     main .container-projects-details .project-detail hr {
       width: 100%;
       margin: 0;
-      background-color: #dbdada;
+      background-color: #c9cad7;
       border: none;
       height: 1px; }
     main .container-projects-details .project-detail .header-project-detail {
@@ -103,24 +103,47 @@ main .container-projects-details {
       main .container-projects-details .project-detail .main-project-detail .display .contain-display {
         width: 500px;
         height: 250px;
-        border: 1px solid #dbdada; }
+        border: 1px solid #c9cad7; }
         main .container-projects-details .project-detail .main-project-detail .display .contain-display img {
           width: 500px;
           height: 250px; }
       main .container-projects-details .project-detail .main-project-detail hr {
         width: 400px;
         margin: 0;
-        background-color: #dbdada;
+        background-color: #c9cad7;
         border: none;
         height: 1px; }
-    main .container-projects-details .project-detail .statistics-project {
-      margin-top: 25px; }
-      main .container-projects-details .project-detail .statistics-project .statistics-project-nb-task-by-list {
-        width: 50%;
-        height: 400px;
-        background-color: #1F2136;
+    main .container-projects-details .project-detail .main-info {
+      display: flex;
+      justify-content: space-between; }
+      main .container-projects-details .project-detail .main-info .last-modification {
+        width: 53%;
+        height: 200px;
+        background: linear-gradient(160deg, #13295B, #70e5cd);
         padding: 20px;
         border-radius: 10px; }
+      main .container-projects-details .project-detail .main-info .task-count {
+        width: 45%;
+        height: 200px;
+        background: linear-gradient(123deg, #00B9E9, #ee6f4f);
+        padding: 20px;
+        border-radius: 10px; }
+        main .container-projects-details .project-detail .main-info .task-count .nb_tasks {
+          font-size: 5em; }
+    main .container-projects-details .project-detail .statistics-project {
+      margin-top: 15px; }
+      main .container-projects-details .project-detail .statistics-project .flex-stats {
+        display: flex;
+        justify-content: space-between; }
+      main .container-projects-details .project-detail .statistics-project .statistics-project-nb-task-by-list {
+        width: 45%;
+        height: 400px; }
+      main .container-projects-details .project-detail .statistics-project .statistics-project-history {
+        width: 53%;
+        height: 400px; }
+      main .container-projects-details .project-detail .statistics-project .statistics-project-planned-hour {
+        margin-top: 15px;
+        height: 400px; }
       main .container-projects-details .project-detail .statistics-project .contain-stats {
         background-color: #1F2136;
         padding: 20px;

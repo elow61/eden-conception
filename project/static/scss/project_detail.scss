@@ -110,16 +110,43 @@ main .container-projects-details {
                 height: 1px;
             }
         }
-        .statistics-project {
-            margin-top: 25px;
-            
-            .statistics-project-nb-task-by-list {
-                width: 50%;
-                height: 400px;
-                background-color: $dark_blue;
+
+        .main-info {
+            display: flex;
+            justify-content: space-between;
+
+            .last-modification {
+                width: 53%;
+                height: 200px;
+                background: linear-gradient(160deg, #13295B, $cyan_green);
                 padding: 20px;
                 border-radius: 10px;
             }
+            .task-count {
+                width: 45%;
+                height: 200px;
+                background: linear-gradient(123deg, #00B9E9, $orange);
+                padding: 20px;
+                border-radius: 10px;
+                .nb_tasks {font-size: 5em;}
+            }
+        }
+
+        .statistics-project {
+            margin-top: 15px;
+            .flex-stats {
+                display: flex;
+                justify-content: space-between;
+            }
+            .statistics-project-nb-task-by-list {
+                width: 45%;
+                height: 400px;
+            }
+            .statistics-project-history {
+                width: 53%;
+                height: 400px;
+            }
+            .statistics-project-planned-hour {margin-top: 15px; height: 400px;}
 
             .contain-stats {
                 background-color: $dark_blue;

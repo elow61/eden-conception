@@ -71,6 +71,7 @@
         }
 
         window.get_time = function (datas, projectId) {
+            console.log(datas);
             am4core.useTheme(am4themes_edenConception);
             am4core.useTheme(am4themes_animated);
         
@@ -152,6 +153,124 @@
                     }
                 }
             }
+        }
+
+        window.get_history = function (datas, projectId) {
+            am4core.useTheme(am4themes_edenConception);
+            am4core.useTheme(am4themes_animated);
+        
+            let htmlElement = 'project-history-' + projectId
+            var chart = am4core.create(htmlElement, am4charts.XYChart);
+            
+            // Add data
+            // chart.data = [{
+            //     "year": "2007",
+            //     "value1": 1691,
+            //     "value2": 737
+            //   }, {
+            //     "year": "2008",
+            //     "value1": 1098,
+            //     "value2": 680,
+            //     "value3": 910
+            //   }, {
+            //     "year": "2009",
+            //     "value1": 975,
+            //     "value2": 664,
+            //     "value3": 670
+            //   }, {
+            //     "year": "2010",
+            //     "value1": 1246,
+            //     "value2": 648,
+            //     "value3": 930
+            //   }, {
+            //     "year": "2011",
+            //     "value1": 1218,
+            //     "value2": 637,
+            //     "value3": 1010
+            //   }, {
+            //     "year": "2012",
+            //     "value1": 1913,
+            //     "value2": 133,
+            //     "value3": 1770
+            //   }];
+
+            // Create axes
+            var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+            categoryAxis.dataFields.category = "year";
+            categoryAxis.renderer.grid.template.disabled = true;
+            categoryAxis.renderer.minGridDistance = 30;
+            categoryAxis.startLocation = 0.5;
+            categoryAxis.endLocation = 0.5;
+            categoryAxis.renderer.minLabelPosition = 0.05;
+            categoryAxis.renderer.maxLabelPosition = 0.95;
+
+
+            var categoryAxisTooltip = categoryAxis.tooltip.background;
+            categoryAxisTooltip.pointerLength = 0;
+            categoryAxisTooltip.fillOpacity = 0.3;
+            categoryAxisTooltip.filters.push(new am4core.BlurFilter).blur = 5;
+            categoryAxis.tooltip.dy = 5;
+
+
+            var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+            valueAxis.renderer.inside = true;
+            valueAxis.renderer.grid.template.disabled = true;
+            valueAxis.renderer.minLabelPosition = 0.05;
+            valueAxis.renderer.maxLabelPosition = 0.95;
+            valueAxis.renderer.adjustLabelPrecision = true;
+
+            var valueAxisTooltip = valueAxis.tooltip.background;
+            valueAxisTooltip.pointerLength = 0;
+            valueAxisTooltip.fillOpacity = 0.3;
+            valueAxisTooltip.filters.push(new am4core.BlurFilter).blur = 5;
+
+
+            // Create series
+            var series1 = chart.series.push(new am4charts.LineSeries());
+            series1.dataFields.categoryX = "year";
+            series1.dataFields.valueY = "value1";
+            series1.fillOpacity = 1;
+            series1.stacked = true;
+
+            var blur1 = new am4core.BlurFilter();
+            blur1.blur = 20;
+            series1.filters.push(blur1);
+
+            var series2 = chart.series.push(new am4charts.LineSeries());
+            series2.dataFields.categoryX = "year";
+            series2.dataFields.valueY = "value2";
+            series2.fillOpacity = 1;
+            series2.stacked = true;
+
+            var blur2 = new am4core.BlurFilter();
+            blur2.blur = 20;
+            series2.filters.push(blur2);
+
+            var series3 = chart.series.push(new am4charts.LineSeries());
+            series3.dataFields.categoryX = "year";
+            series3.dataFields.valueY = "value3";
+            series3.stroke = am4core.color("#fff");
+            series3.strokeWidth = 2;
+            series3.strokeDasharray = "3,3";
+            series3.tooltipText = "{categoryX}\n---\n[bold font-size: 20]{valueY}[/]";
+            series3.tooltip.pointerOrientation = "vertical";
+            series3.tooltip.label.textAlign = "middle";
+
+            var bullet3 = series3.bullets.push(new am4charts.CircleBullet())
+            bullet3.circle.radius = 8;
+            bullet3.fill = chart.colors.getIndex(3);
+            bullet3.stroke = am4core.color("#fff");
+            bullet3.strokeWidth = 3;
+
+            var bullet3hover = bullet3.states.create("hover");
+            bullet3hover.properties.scale = 1.2;
+
+            var shadow3 = new am4core.DropShadowFilter();
+            series3.filters.push(shadow3);
+
+            chart.cursor = new am4charts.XYCursor();
+            chart.cursor.lineX.disabled = true;
+            chart.cursor.lineY.disabled = true;
         }
     });
 })(jQuery);
