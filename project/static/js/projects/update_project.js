@@ -5,7 +5,7 @@
     
     buttonUpdate.on('click', function () {
         const projectId = $(this).attr('project-id');
-        const url = '/' + projectId + '/update/'
+        const url = '/' + projectId + '/update_form/'
         displayFormUpdateProject(url, projectId);
     })
 

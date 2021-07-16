@@ -21,12 +21,9 @@ class ProjectView(View):
         context['form'] = self.form
         context['form_add_member'] = AddMember(request)
 
-        if request.user.is_authenticated:
-            user = User.objects.get(id=request.user.id)
-            projects = user.main_user.all()
-            context['projects'] = projects
-        else:
-            redirect('user:login')
+        user = User.objects.get(id=request.user.id)
+        projects = user.main_user.all()
+        context['projects'] = projects
 
         return render(request, self.template_name, context)
 
