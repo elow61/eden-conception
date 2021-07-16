@@ -7,6 +7,8 @@ from django.utils.translation import gettext_lazy as _
 
 from project.forms.project_forms import CreateProjectForm, AddMember, UpdateProjectForm
 from project.models.project import Project
+from project.models.list import List
+from project.models.task import Task
 from timesheet.models.timesheet import Timesheet
 from user.models import User
 
@@ -119,7 +121,7 @@ class ProjectView(View):
             project = Project.objects.get(id=request.POST.get('project_id'))
             datas = Project.objects_project.get_number_task_by_list(project)
             time = Project.objects_project.get_total_planned_hours(project)
-            history = Project.objects_project.get_history_time_work(project, Timesheet)
+            history = Project.objects_project.get_history_time_work(project, List, Task, Timesheet)
 
             res['nb_task'] = datas
             res['time'] = time

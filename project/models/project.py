@@ -45,10 +45,14 @@ class ProjectManager(models.Manager):
             datas.append(stats)
         return datas
 
-    def get_history_time_work(self, project, Timesheet):
-        datas = list(Timesheet.objects.order_by().annotate(month=ExtractMonth('created_at')).values('month').annotate(data_sum=Sum('unit_hour')))
+    def get_history_time_work(self, project, List, Task, Timesheet):
+        project_list = List.objects.filter(project=project)
+        project_task = Task.objects.filter(project_list__in=project_list)
+
+        datas = list(Timesheet.objects.filter(task__in=project_task).order_by().annotate(month=ExtractMonth('created_at')).values('month').annotate(data_sum=Sum('unit_hour')))
         for val in datas:
             val['month'] = calendar.month_name[val['month']]
+
         return datas
 
 
