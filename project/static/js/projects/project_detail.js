@@ -60,10 +60,14 @@
         return ajaxMethod(csrfToken, 'post', '/get_statistics/', datas).then((response) => {
             get_stats(response.nb_task, datas['project_id']);
             get_time(response.time, datas['project_id']);
-            get_history(response.time, datas['project_id']);
+            get_history(response.history, datas['project_id']);
         })
     }
 
+    /**
+     * Method to view automatically the first project info in the dashboard
+     * @returns a call AJAX to get and display the statistics of the current project
+     */
     window.viewDashboard = function() {
         let containerProjects = $('.container-projects-details');
         const containerCreateProject = $('#container-create-project');
@@ -74,6 +78,17 @@
             containerProjects.removeClass('d-none');
             containerProjects.children(':first').removeClass('d-none');
             projectNameList.find('h4:first').addClass('selected');
+            const projectId = projectNameList.find('h4:first').attr('project-id');
+
+            // Get the datas and Generate statistics for projects
+            let csrfToken = getCookie('csrftoken');
+            let datas = {'project_id': projectId};
+
+            return ajaxMethod(csrfToken, 'post', '/get_statistics/', datas).then((response) => {
+                get_stats(response.nb_task, datas['project_id']);
+                get_time(response.time, datas['project_id']);
+                get_history(response.history, datas['project_id']);
+            })
         }
     }
     viewDashboard();

@@ -1,6 +1,6 @@
 """ All views for the user application """
 import json
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, get_object_or_404
 from django.views import View
 from django.http import JsonResponse
 from django.template.loader import render_to_string
@@ -31,12 +31,15 @@ class ListView(View):
         }
         return render(request, self.template_name, context)
 
-    @staticmethod
-    def create_list(request):
+    @classmethod
+    def create_list(cls, request):
         res = {}
         context = {}
-        if request.method == 'POST':
-            name = request.POST.get('list_name')
+        form = cls.form(request.POST)
+        print(request)
+        if form.is_valid():
+            name = form.cleaned_data['list_name']
+
             project_id = request.POST.get('project_id')
             project = Project.objects.get(id=project_id)
 

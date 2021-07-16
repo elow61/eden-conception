@@ -1,6 +1,4 @@
 from django.db import models
-from django.db.models import F
-from django.utils.timezone import now
 from project.models.project import Project
 
 

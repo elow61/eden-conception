@@ -1,6 +1,9 @@
 from django.db import models
+from django.db.models import Sum
+from django.db.models.functions import ExtractMonth
 from user.models import User
 from datetime import datetime
+import calendar
 
 
 class ProjectManager(models.Manager):
@@ -40,6 +43,12 @@ class ProjectManager(models.Manager):
                 'effective_hours': total_effective_hours
             }
             datas.append(stats)
+        return datas
+
+    def get_history_time_work(self, project, Timesheet):
+        datas = list(Timesheet.objects.order_by().annotate(month=ExtractMonth('created_at')).values('month').annotate(data_sum=Sum('unit_hour')))
+        for val in datas:
+            val['month'] = calendar.month_name[val['month']]
         return datas
 
 

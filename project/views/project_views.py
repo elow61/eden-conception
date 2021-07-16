@@ -1,6 +1,5 @@
 """ All views for the user application """
 from django.shortcuts import render, redirect, get_object_or_404
-from django.db.models import F
 from django.views import View
 from django.http import JsonResponse
 from django.template.loader import render_to_string
@@ -8,6 +7,7 @@ from django.utils.translation import gettext_lazy as _
 
 from project.forms.project_forms import CreateProjectForm, AddMember, UpdateProjectForm
 from project.models.project import Project
+from timesheet.models.timesheet import Timesheet
 from user.models import User
 
 
@@ -119,6 +119,10 @@ class ProjectView(View):
             project = Project.objects.get(id=request.POST.get('project_id'))
             datas = Project.objects_project.get_number_task_by_list(project)
             time = Project.objects_project.get_total_planned_hours(project)
+            history = Project.objects_project.get_history_time_work(project, Timesheet)
+
             res['nb_task'] = datas
             res['time'] = time
+            res['history'] = history
+
         return JsonResponse(res)

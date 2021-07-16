@@ -158,49 +158,21 @@
         window.get_history = function (datas, projectId) {
             am4core.useTheme(am4themes_edenConception);
             am4core.useTheme(am4themes_animated);
-        
+            
+            console.log(datas)
             let htmlElement = 'project-history-' + projectId
             var chart = am4core.create(htmlElement, am4charts.XYChart);
             
             // Add data
-            // chart.data = [{
-            //     "year": "2007",
-            //     "value1": 1691,
-            //     "value2": 737
-            //   }, {
-            //     "year": "2008",
-            //     "value1": 1098,
-            //     "value2": 680,
-            //     "value3": 910
-            //   }, {
-            //     "year": "2009",
-            //     "value1": 975,
-            //     "value2": 664,
-            //     "value3": 670
-            //   }, {
-            //     "year": "2010",
-            //     "value1": 1246,
-            //     "value2": 648,
-            //     "value3": 930
-            //   }, {
-            //     "year": "2011",
-            //     "value1": 1218,
-            //     "value2": 637,
-            //     "value3": 1010
-            //   }, {
-            //     "year": "2012",
-            //     "value1": 1913,
-            //     "value2": 133,
-            //     "value3": 1770
-            //   }];
+            chart.data = datas;
 
             // Create axes
             var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
-            categoryAxis.dataFields.category = "year";
+            categoryAxis.dataFields.category = "month";
             categoryAxis.renderer.grid.template.disabled = true;
             categoryAxis.renderer.minGridDistance = 30;
-            categoryAxis.startLocation = 0.5;
-            categoryAxis.endLocation = 0.5;
+            categoryAxis.startLocation = 0.1;
+            categoryAxis.endLocation = 0.9;
             categoryAxis.renderer.minLabelPosition = 0.05;
             categoryAxis.renderer.maxLabelPosition = 0.95;
 
@@ -227,8 +199,8 @@
 
             // Create series
             var series1 = chart.series.push(new am4charts.LineSeries());
-            series1.dataFields.categoryX = "year";
-            series1.dataFields.valueY = "value1";
+            series1.dataFields.categoryX = "month";
+            series1.dataFields.valueY = "data_sum";
             series1.fillOpacity = 1;
             series1.stacked = true;
 
@@ -237,8 +209,8 @@
             series1.filters.push(blur1);
 
             var series2 = chart.series.push(new am4charts.LineSeries());
-            series2.dataFields.categoryX = "year";
-            series2.dataFields.valueY = "value2";
+            series2.dataFields.categoryX = "month";
+            series2.dataFields.valueY = "data_sum";
             series2.fillOpacity = 1;
             series2.stacked = true;
 
@@ -247,8 +219,8 @@
             series2.filters.push(blur2);
 
             var series3 = chart.series.push(new am4charts.LineSeries());
-            series3.dataFields.categoryX = "year";
-            series3.dataFields.valueY = "value3";
+            series3.dataFields.categoryX = "month";
+            series3.dataFields.valueY = "data_sum";
             series3.stroke = am4core.color("#fff");
             series3.strokeWidth = 2;
             series3.strokeDasharray = "3,3";

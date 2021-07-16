@@ -11,7 +11,7 @@ html {
 
 body {
   margin: 0;
-  color: #dbdada; }
+  color: #c9cad7; }
 
 a {
   text-decoration: none;
@@ -32,7 +32,7 @@ ul {
   display: none; }
 
 body {
-  background-color: #323b4f;
+  background-color: #25293d;
   height: 100vh;
   overflow: hidden;
   display: flex;
@@ -44,7 +44,7 @@ main {
     padding: 10px;
     height: 100vh;
     width: 100%;
-    background-color: #323b4f;
+    background-color: #25293d;
     overflow-y: scroll; }
     main #main-task .return-dashboard {
       display: flex;
@@ -60,8 +60,8 @@ main {
       main #main-task .header-task button {
         padding: 10px 40px;
         background: transparent;
-        color: #dbdada;
-        border: 1px solid #dbdada;
+        color: #c9cad7;
+        border: 1px solid #c9cad7;
         cursor: pointer;
         text-transform: uppercase; }
     main #main-task #form-update-task input[name="name"] {
@@ -84,14 +84,14 @@ main {
       background: transparent;
       border: none;
       border-bottom: 1px solid white;
-      color: #dbdada; }
+      color: #c9cad7; }
     main #main-task .container-task textarea {
       background-color: #1F2136;
       border: none;
       border-radius: 10px 10px;
       width: 543px;
       height: 274px;
-      color: #dbdada;
+      color: #c9cad7;
       outline: none;
       padding: 5px; }
     main #main-task .container-task .form-group {
@@ -124,10 +124,10 @@ main {
   border: none !important; }
 
 .ui-widget-content {
-  background: #323b4f !important; }
+  background: #25293d !important; }
 
 .ui-widget-content {
-  color: #dbdada !important; }
+  color: #c9cad7 !important; }
 
 .ui-state-active,
 .ui-widget-content .ui-state-active,
@@ -144,6 +144,6 @@ a.ui-button:active,
 .ui-widget-header .ui-state-highligh {
   border: 1px solid #1F2136 !important;
   background: #1F2136 !important;
-  color: #dbdada !important; }
+  color: #c9cad7 !important; }
 
 /*# sourceMappingURL=tasks.css.map */

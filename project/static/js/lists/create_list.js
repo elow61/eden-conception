@@ -56,6 +56,5 @@
             }
         })
     })
-    formCreate[0].reset();
 
 })(jQuery);
