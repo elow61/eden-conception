@@ -302,3 +302,76 @@ class TaskViewTest(TestCase):
         response = self.client.post(reverse('project:form_update_task', args=[task.id]), task_id=task.id)
         self.assertEqual(response.status_code, 302)
         self.assertEqual(response.url, f'/login/?next=/{task.id}/update/')
+
+    def test_update_task_user_auth(self):
+        task = Task.objects.get(pk=1)
+        user = User.objects.get(pk=2)
+        datas = {
+            'task_id': task.id,
+            'name': 'Test cancel',
+            'assigned_to': user.id,
+            'deadline': '10/07/2021',
+            'planned_hours': '02:00',
+            'created_at': '2021-06-29 00:00:00+02',
+            'user': user.id,
+            'description': 'a little description.',
+            'timesheet_set-0-created_at': "10/07/2021",
+            'timesheet_set-0-description': "ffff",
+            'timesheet_set-0-id': "",
+            'timesheet_set-0-task': "32",
+            'timesheet_set-0-unit_hour': "02:00",
+            'timesheet_set-0-user': "2",
+            'timesheet_set-INITIAL_FORMS': "0",
+            'timesheet_set-MAX_NUM_FORMS': "1000",
+            'timesheet_set-MIN_NUM_FORMS': "0",
+            'timesheet_set-TOTAL_FORMS': "1",
+        }
+
+        self.client.login(username='email@test.com', password='test_password_61')
+        response = self.client.post(reverse('project:update_task'), datas)
+        self.assertEqual(response.context['task'], task)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()['task_id'], task.id)
+        self.client.logout()
+
+    def test_update_task(self):
+        task = Task.objects.get(pk=1)
+        user = User.objects.get(pk=2)
+        datas = {
+            'task_id': task.id,
+            'name': 'Test cancel',
+            'assigned_to': user.id,
+            'deadline': '10/07/2021',
+            'planned_hours': '02:00',
+            'created_at': '2021-06-29 00:00:00+02',
+            'user': user.id,
+            'description': 'a little description.',
+            'timesheet_set-0-created_at': "10/07/2021",
+            'timesheet_set-0-description': "ffff",
+            'timesheet_set-0-id': "",
+            'timesheet_set-0-task': "32",
+            'timesheet_set-0-unit_hour': "02:00",
+            'timesheet_set-0-user': "2",
+            'timesheet_set-INITIAL_FORMS': "0",
+            'timesheet_set-MAX_NUM_FORMS': "1000",
+            'timesheet_set-MIN_NUM_FORMS': "0",
+            'timesheet_set-TOTAL_FORMS': "1",
+        }
+        response = self.client.post(reverse('project:update_task'), datas)
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.url, f'/login/?next=/update_task/')
+
+    def test_delete_task_user_auth(self):
+        task = Task.objects.get(pk=1)
+        self.client.login(username='email@test.com', password='test_password_61')
+        response = self.client.post(reverse('project:delete_task'), {'task_id': task.id})
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()['task_id'], str(task.id))
+        self.assertEqual(response.json()['success'], 'The task has been deleted')
+        self.client.logout()
+
+    def test_delete_task(self):
+        task = Task.objects.get(pk=1)
+        response = self.client.post(reverse('project:delete_task'), {'task_id': task.id})
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.url, f'/login/?next=/delete_task/')
