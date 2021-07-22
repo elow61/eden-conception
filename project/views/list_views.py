@@ -137,6 +137,6 @@ class ListView(View):
             current_list.save()
 
             res['list_id'] = current_list.id
-            res['name'] = current_list.name
+            res['list_name'] = current_list.name
 
         return JsonResponse(res)

@@ -167,6 +167,23 @@ class ListViewTest(TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertEqual(response.url, f'/login/?next=/project-{project.id}/')
 
+    def test_post_request_user_auth(self):
+        p_list = List.objects.get(pk=1)
+        self.client.login(username='email@test.com', password='test_password_61')
+        response = self.client.post(reverse('project:form_update_list', args=[p_list.id]), list_id=p_list.id)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context['list'], p_list)
+        self.assertEqual(type(response.context['list']), List)
+        self.assertTemplateUsed(response, 'project/lists/forms/update_list.html')
+        self.client.logout()
+
+    def test_post_request(self):
+        p_list = List.objects.get(pk=1)
+        response = self.client.post(reverse('project:form_update_list', args=[p_list.id]), list_id=p_list.id)
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.url, f'/login/?next=/{p_list.id}/update_list_form/')
+
     def test_create_list_user_auth(self):
         project = Project.objects.get(pk=1)
         datas = {'list_name': 'Cancel', 'project_id': project.id}
@@ -222,6 +239,25 @@ class ListViewTest(TestCase):
         response = self.client.post(reverse('project:create_task'), datas)
         self.assertEqual(response.status_code, 302)
         self.assertEqual(response.url, f'/login/?next=/create_task/')
+
+    def test_update_list_user_auth(self):
+        p_list = List.objects.get(pk=1)
+        datas = {'list_id': p_list.id, 'name': 'Cancel'}
+        self.client.login(username='email@test.com', password='test_password_61')
+        response = self.client.post(reverse('project:update_list'), datas)
+        self.assertEqual(response.status_code, 200)
+        self.assertJSONEqual(
+            str(response.content, encoding='utf8'),
+            {'list_id': p_list.id, 'list_name': 'Cancel'}
+        )
+        self.client.logout()
+
+    def test_update_list(self):
+        p_list = List.objects.get(pk=1)
+        datas = {'list_id': p_list.id, 'name': 'Cancel'}
+        response = self.client.post(reverse('project:update_list'), datas)
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.url, f'/login/?next=/update_list/')
 
 
 class TaskViewTest(TestCase):

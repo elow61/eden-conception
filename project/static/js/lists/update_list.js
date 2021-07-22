@@ -50,7 +50,7 @@
            
             containerName.children().removeAttr('style');
             containerName.css('display', 'flex');
-            containerName.find('h4').html(response.name);
+            containerName.find('h4').html(response.list_name);
 
             // Reload events
             const buttonUpdate = $('#edit-list');
