@@ -6,7 +6,7 @@ from django.http import JsonResponse
 from django.template.loader import render_to_string
 from django.utils.translation import gettext_lazy as _
 
-from project.forms.list_forms import CreateListForm
+from project.forms.list_forms import CreateListForm, UpdateListForm
 from project.forms.task_forms import CreateTaskForm
 from project.models.project import Project
 from project.models.list import List
@@ -31,12 +31,24 @@ class ListView(View):
         }
         return render(request, self.template_name, context)
 
+    def post(self, request, list_id):
+        res = {}
+        if request.method == 'POST':
+            current_list = List.objects.get(id=list_id)
+            datas = {'name': current_list.name}
+
+            form_update = UpdateListForm(instance=current_list, initial=datas)
+            context = {'form_update': form_update, 'list': current_list}
+            res['list_id'] = list_id
+            res['template'] = render_to_string('project/lists/forms/update_list.html', context, request=request)
+
+        return JsonResponse(res)
+
     @classmethod
     def create_list(cls, request):
         res = {}
         context = {}
         form = cls.form(request.POST)
-        print(request)
         if form.is_valid():
             name = form.cleaned_data['list_name']
             project = Project.objects.get(id=request.POST.get('project_id'))
@@ -111,5 +123,20 @@ class ListView(View):
         if request.method == 'POST':
             datas = json.loads(request.POST.get('datas'))
             Task.objects_task.update_order_task(datas)
+
+        return JsonResponse(res)
+
+    @staticmethod
+    def update_list(request):
+        res = {}
+        if request.method == 'POST':
+            current_list = List.objects.get(id=request.POST.get('list_id'))
+
+            # Update list
+            current_list.name = request.POST.get('name')
+            current_list.save()
+
+            res['list_id'] = current_list.id
+            res['name'] = current_list.name
 
         return JsonResponse(res)

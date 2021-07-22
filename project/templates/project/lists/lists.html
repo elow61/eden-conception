@@ -40,7 +40,10 @@
                     <div id="project-list-{{list.id}}" class="project-list">
                         <div class="header-list">
                             <h4>{{list.name}}</h4>
-                            <div class="delete-list">
+                            <div class="delete-update-list">
+                                <div class="edit-list">
+                                    <i list-id="{{list.id}}" class="fas fa-pencil-alt"></i>
+                                </div>
                                 <form method="post" class="form-delete-list">
                                     {% csrf_token %}
                                     <input type="hidden" name="list_id" value="{{ list.id }}">
@@ -73,6 +76,7 @@
 {% block js %}
     <script src="{% static 'js/submit_form_ajax.js' %}"></script>
     <script src="{% static 'js/lists/create_list.js' %}"></script>
+    <script src="{% static 'js/lists/update_list.js' %}"></script>
     <script src="{% static 'js/lists/delete_list.js' %}"></script>
     <script src="{% static 'js/tasks/create_task.js' %}"></script>
     <script src="{% static 'js/tasks/update_task.js' %}"></script>

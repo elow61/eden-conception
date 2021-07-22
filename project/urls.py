@@ -20,6 +20,8 @@ urlpatterns = [
     path('project-<int:project_id>/', login_required(ListView.as_view(), login_url='user:login'), name='project'),
     path('create_list/', login_required(ListView.create_list, login_url='user:login'), name='create_list'),
     path('delete_list/', login_required(ListView.delete_list, login_url='user:login'), name='delete_list'),
+    path('update_list/', login_required(ListView.update_list, login_url='user:login'), name='update_list'),
+    path('<list_id>/update_list_form/', login_required(ListView.as_view(), login_url='user:login'), name='form_update_list'),
     path('create_task/', login_required(ListView.create_task, login_url='user:login'), name='create_task'),
     path('update_order_task/', login_required(ListView.update_order_task, login_url='user:login'), name='update_task'),
 

@@ -1,0 +1,10 @@
+{% load i18n %}
+<form method="post" class="form-update-list" id="form-update-list">
+    <h4>{{form_update.name}}</h4>
+    <input type="hidden" name="list_id" value="{{list.id}}">
+    <div class="update-list">
+        <div class="edit-list">
+            <button type="submit" id="save-list" form="form-update-list" list-id="{{list.id}}"><i class="fas fa-check"></i></button>
+        </div>
+    </div>
+</form>

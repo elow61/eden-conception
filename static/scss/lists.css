@@ -110,14 +110,39 @@ body {
         position: relative;
         border-bottom: 1px solid #25293d;
         border-radius: none; }
-        body main .container-project-list .project-list .header-list .delete-list {
+        body main .container-project-list .project-list .header-list .delete-update-list {
           position: absolute;
+          display: flex;
           right: 10px; }
-          body main .container-project-list .project-list .header-list .delete-list button {
+          body main .container-project-list .project-list .header-list .delete-update-list .fa-pencil-alt {
+            cursor: pointer;
+            color: #70e5cd; }
+          body main .container-project-list .project-list .header-list .delete-update-list button {
             border: none !important;
             background: transparent !important;
             color: #ee6f4f !important;
             cursor: pointer; }
+        body main .container-project-list .project-list .header-list .form-update-list {
+          display: flex;
+          align-items: center; }
+          body main .container-project-list .project-list .header-list .form-update-list h4 input {
+            background: transparent;
+            border: none;
+            outline: none;
+            color: #c9cad7;
+            width: 100%;
+            font-weight: bold;
+            font-size: 1em !important;
+            margin: 0 !important; }
+          body main .container-project-list .project-list .header-list .form-update-list .update-list {
+            position: absolute;
+            display: flex;
+            right: 10px; }
+            body main .container-project-list .project-list .header-list .form-update-list .update-list button {
+              border: none !important;
+              background: transparent !important;
+              color: #ee6f4f !important;
+              cursor: pointer; }
       body main .container-project-list .project-list .main-list {
         min-height: 10px;
         padding-top: 9px;

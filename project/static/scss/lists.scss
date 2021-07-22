@@ -101,17 +101,50 @@ body {
                 justify-content: center;
                 position: relative;
                 border-bottom: 1px solid $dark_blue_light;
-                border-radius: none;;
+                border-radius: none;
 
-                .delete-list {
+                .delete-update-list {
                     position: absolute;
+                    display: flex;
                     right: 10px;
-
+                    
+                    .fa-pencil-alt {cursor: pointer; color: $cyan_green;}
                     button {
                         border: none !important;
                         background: transparent !important;
                         color: $orange !important;
                         cursor: pointer;
+                    }
+                }
+                
+                .form-update-list {
+                    display: flex;
+                    align-items: center;
+                    h4 {
+
+                        input {
+                            background: transparent;
+                            border: none;
+                            outline: none;
+                            color: $white;
+                            width: 100%;
+                            font-weight: bold;
+                            font-size: 1em !important;
+                            margin: 0 !important;
+                            text-align: center;
+                        }
+                    }
+                    .update-list {
+                        position: absolute;
+                        display: flex;
+                        right: 10px;
+
+                        button {
+                            border: none !important;
+                            background: transparent !important;
+                            color: $orange !important;
+                            cursor: pointer;
+                        }
                     }
                 }
             }
