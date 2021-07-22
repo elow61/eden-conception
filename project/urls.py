@@ -28,4 +28,5 @@ urlpatterns = [
     path('project-<int:project_id>/task-<int:task_id>/', login_required(TaskView.as_view(), login_url='user:login'), name='task'),
     path('<task_id>/update/', login_required(TaskView.as_view(), login_url='user:login'), name='form_update_task'),
     path('update_task/', login_required(TaskView.update_task, login_url='user:login'), name='update_task'),
+    path('delete_task/', login_required(TaskView.delete_task, login_url='user:login'), name='delete_task'),
 ]

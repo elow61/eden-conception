@@ -1,8 +1,10 @@
 {% load i18n %}
 <div class="contain-header-info">
+    <div id="delete-task-modal" class="modal"></div>
     <h1>{{task.name}}</h1>
     <div class="header-task">
         <button id="update-task" task-id="{{task.id}}">{% translate 'Update' %}</button>
+        <button type="button" id="delete-task" task-id="{{task.id}}">{% translate 'Delete' %}</button>
     </div>
     <div class="container-task">
         <div class="container-info-task">

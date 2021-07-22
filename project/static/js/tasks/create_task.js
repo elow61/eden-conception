@@ -27,6 +27,8 @@
      * @param {*} form 
      */
     window.createTask = function (url, form) {
+        let datas = form.serializeArray()
+        $('#create-task-in-' + datas[2]['value']).modal('hide');
         submitForm(url, form).then(response => {
             if (response.task_id) {
                 let containerList = $('#project-list-' + response.list_id).find('.main-list');

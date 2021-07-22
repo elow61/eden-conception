@@ -129,4 +129,14 @@
         return ajaxMethod(csrfToken, 'post', '/update_order_task/', datas);
     }
 
+    if (urlParam('success')) {
+        getMessage('The task has been deleted');
+    }
+    window.getMessage = function (message) {
+        $('#delete-task-modal').append('<p>' + message + '</p>');
+        $('#delete-task-modal').modal('show');
+        setTimeout(function () {
+            $("#delete-task-modal").modal("hide");
+        }, 3000);
+    }
 })(jQuery);

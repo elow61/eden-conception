@@ -1,6 +1,6 @@
 """ All views for the user application """
 from datetime import datetime
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
 from django.http import JsonResponse
 from django.template.loader import render_to_string
@@ -8,6 +8,7 @@ from django.utils.translation import gettext_lazy as _
 
 from project.forms.task_forms import UpdateTaskForm
 from project.models.project import Project
+from project.models.list import List
 from project.models.task import Task
 from user.models import User
 from timesheet.views.timesheet_views import TimesheetView
@@ -68,5 +69,23 @@ class TaskView(View):
 
             res['task_id'] = current_task.id
             res['template'] = render_to_string('project/tasks/task_detail.html', context)
+
+        return JsonResponse(res)
+
+    @staticmethod
+    def delete_task(request):
+        res = {}
+        if request.method == 'POST':
+            task_to_delete = Task.objects.get(id=request.POST.get('task_id'))
+            project = Project.objects.get(id=task_to_delete.project_list.project_id)
+
+            task_to_delete.delete()
+            project.save()
+
+            res['task_id'] = request.POST.get('task_id')
+            res['project_id'] = project.id
+            res['success'] = _('The task has been deleted')
+        else:
+            res['error'] = _('The task doesn\'t have deleted')
 
         return JsonResponse(res)
