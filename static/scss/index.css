@@ -11,7 +11,7 @@ html {
 
 body {
   margin: 0;
-  color: #dbdada; }
+  color: #c9cad7; }
 
 a {
   text-decoration: none;
@@ -41,7 +41,7 @@ header .container {
     height: auto;
     vertical-align: middle;
     border-style: none;
-    border: 1px solid #dbdada;
+    border: 1px solid #c9cad7;
     padding: 40px; }
 
 header nav {
@@ -52,14 +52,14 @@ header nav {
     list-style: none; }
     header nav ul li {
       margin-right: 10px;
-      color: #dbdada; }
+      color: #c9cad7; }
       header nav ul li a {
         text-decoration: none;
         color: inherit;
         position: relative;
         display: inline-block; }
         header nav ul li a::after {
-          background: #dbdada;
+          background: #c9cad7;
           bottom: 0;
           content: "";
           height: 1px;

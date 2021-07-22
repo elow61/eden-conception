@@ -15,7 +15,7 @@ class ProjectManager(models.Manager):
             return
 
         project.user_ids.add(user.get().id)
-        return True
+        return user
 
     def get_number_task_by_list(self, project):
         datas = []
@@ -49,7 +49,9 @@ class ProjectManager(models.Manager):
         project_list = List.objects.filter(project=project)
         project_task = Task.objects.filter(project_list__in=project_list)
 
-        datas = list(Timesheet.objects.filter(task__in=project_task).order_by().annotate(month=ExtractMonth('created_at')).values('month').annotate(data_sum=Sum('unit_hour')))
+        datas = list(Timesheet.objects.filter(
+            task__in=project_task
+        ).order_by().annotate(month=ExtractMonth('created_at')).values('month').annotate(data_sum=Sum('unit_hour')))
         for val in datas:
             val['month'] = calendar.month_name[val['month']]
 

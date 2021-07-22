@@ -39,9 +39,7 @@ class ListView(View):
         print(request)
         if form.is_valid():
             name = form.cleaned_data['list_name']
-
-            project_id = request.POST.get('project_id')
-            project = Project.objects.get(id=project_id)
+            project = Project.objects.get(id=request.POST.get('project_id'))
 
             new_list = List.objects.create(
                 name=name,
@@ -64,15 +62,14 @@ class ListView(View):
     def delete_list(request):
         res = {}
         if request.method == 'POST':
-            list_id = request.POST.get('list_id')
-            list_to_delete = List.objects.get(id=list_id)
+            list_to_delete = List.objects.get(id=request.POST.get('list_id'))
             project = Project.objects.get(id=list_to_delete.project_id)
 
             list_to_delete.delete()
             project.save()
 
-            res['list_id'] = list_id
-            res['success'] = _('The list has deleted')
+            res['list_id'] = request.POST.get('list_id')
+            res['success'] = _('The list has been deleted')
         else:
             res['error'] = _('The list doesn\'t have deleted')
 

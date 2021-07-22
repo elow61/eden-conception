@@ -11,6 +11,17 @@
         }
     },
     {
+        "model": "user.user",
+        "pk": 2,
+        "fields": {
+            "username": "test_username_2",
+            "first_name": "Elodie",
+            "last_name": "Test",
+            "email": "email_elodie@test.com",
+            "password": "test_password_610000"
+        }
+    },
+    {
         "model": "project.project",
         "pk": 1,
         "fields": {

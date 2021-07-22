@@ -20,10 +20,29 @@ class ProjectModelTest(TestCase):
         max_length = project._meta.get_field('name').max_length
         self.assertEqual(max_length, 120)
 
+    def test_created_at_auto_now_add(self):
+        project = Project.objects.get(pk=1)
+        auto_now_add = project._meta.get_field('created_at').auto_now_add
+        self.assertEqual(auto_now_add, True)
+
+    def test_created_at_auto_now(self):
+        project = Project.objects.get(pk=1)
+        auto_now = project._meta.get_field('last_modified').auto_now
+        self.assertEqual(auto_now, True)
+
     def test_number_task_default(self):
         project = Project.objects.get(pk=1)
         default = project._meta.get_field('number_task').default
         self.assertEqual(default, 0)
+
+    def test_str_method(self):
+        project = Project.objects.get(pk=1)
+        self.assertEqual(str(project), project.name)
+
+    def test_project_ordering(self):
+        project = Project.objects.get(pk=1)
+        ordering = project._meta.ordering
+        self.assertEqual(ordering[0], 'created_at')
 
 
 class ListModelTest(TestCase):
@@ -40,6 +59,9 @@ class ListModelTest(TestCase):
         project = Project.objects.get(pk=1)
         self.assertEqual(project.name, p_list.project.name)
 
+    def test_str_method(self):
+        p_list = List.objects.get(pk=1)
+        self.assertEqual(str(p_list), p_list.name)
 
 class TaskModelTest(TestCase):
 

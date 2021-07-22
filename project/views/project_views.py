@@ -93,7 +93,7 @@ class ProjectView(View):
             project_to_delete.delete()
 
             res['project_id'] = project_id
-            res['success'] = _('The project has deleted')
+            res['success'] = _('The project has been deleted')
         else:
             res['error'] = _('The project doesn\'t have deleted')
 
