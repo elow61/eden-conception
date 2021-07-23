@@ -27,6 +27,11 @@
             // Create chart instance
             let htmlElement = 'project-nb-task-by-list-' + projectId
             var chart = am4core.create(htmlElement, am4charts.PieChart);
+            
+            let title = chart.titles.create();
+            title.text = "Progression";
+            title.fontSize = 25;
+            title.marginBottom = 30;
 
             // Add and configure Series
             var pieSeries = chart.series.push(new am4charts.PieSeries());
@@ -78,6 +83,15 @@
             let htmlElement = 'project-planned-hour-' + projectId
             var chart = am4core.create(htmlElement, am4charts.XYChart)
             chart.colors.step = 2;
+
+            let title = chart.titles.create();
+            title.text = "Effective hours";
+            title.fontSize = 25;
+            title.marginBottom = 30;
+
+            let label = chart.chartContainer.createChild(am4core.Label);
+            label.text = "List / Number hours";
+            label.align = "center";
             
             chart.legend = new am4charts.Legend()
             chart.legend.position = 'top'
@@ -163,6 +177,15 @@
             let htmlElement = 'project-history-' + projectId
             var chart = am4core.create(htmlElement, am4charts.XYChart);
             
+            let title = chart.titles.create();
+            title.text = "Time";
+            title.fontSize = 25;
+            title.marginBottom = 30;
+
+            let label = chart.chartContainer.createChild(am4core.Label);
+            label.text = "Hour / Month";
+            label.align = "center";
+
             // Add data
             chart.data = datas;
 
