@@ -44,6 +44,7 @@
         })
 
         containerProjectDetail.removeClass('d-none');
+        $('.element-dashboard').removeClass('is-height');
         $('#project-detail-' + projectId).toggleClass('d-none');
 
         const formDelete = containerProjectDetail.find('#project-detail-' + projectId).find('.form-delete-project');
@@ -77,6 +78,7 @@
             containerCreateProject.addClass('closed');
             containerProjects.removeClass('d-none');
             containerProjects.children(':first').removeClass('d-none');
+            $('.element-dashboard').removeClass('is-height');
             projectNameList.find('h4:first').addClass('selected');
             const projectId = projectNameList.find('h4:first').attr('project-id');
 

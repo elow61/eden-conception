@@ -65,6 +65,8 @@ main {
   width: 100%;
   background-color: #25293d;
   overflow-y: scroll; }
+  main .element-dashboard.is-height {
+    height: 100%; }
   main section {
     display: flex;
     justify-content: center;

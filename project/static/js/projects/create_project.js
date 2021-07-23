@@ -48,6 +48,7 @@
         $.each(projectDetail, (i) => {
             if (!$(projectDetail[i]).hasClass('d-none')) {
                 $(projectDetail[i]).addClass('d-none');
+                $('.element-dashboard').addClass('is-height');
             }
         })
         if (!$('.container-projects-details').hasClass('d-none')) {

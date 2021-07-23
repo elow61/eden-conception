@@ -49,6 +49,8 @@ main {
     background-color: $dark_blue_light;
     overflow-y: scroll;
 
+
+    .element-dashboard.is-height {height: 100%;}
     section {
         display: flex;
         justify-content: center;
