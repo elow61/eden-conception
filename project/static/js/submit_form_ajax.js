@@ -74,4 +74,10 @@
         }
         return decodeURI(results[1]) || 0;
     }
+
+    window.hideElement = function (element, className)  {
+        if (!element.hasClass(className)) {
+            element.addClass(className);
+        }
+    }
 })(jQuery);

@@ -9,10 +9,16 @@
      */
     projectName.on('click', function () {
         const projectId = parseInt($(this).attr('project-id'));
+        let collaboratorName = $('.member-list').find('h4');
 
         $.each(projectName, (i) => {
             if ($(projectName[i]).hasClass('selected')) {
                 $(projectName[i]).removeClass('selected');
+            }
+        })
+        $.each(collaboratorName, (i) => {
+            if ($(collaboratorName[i]).hasClass('selected')) {
+                $(collaboratorName[i]).removeClass('selected');
             }
         })
         $(this).addClass('selected');
@@ -25,17 +31,12 @@
      */
     window.displayProjectDetails = function(projectId) {
         const projectDetail = $('.project-detail');
-        const formCreateProject = $('.container-create-project');
-        const formAddMember = $('.container-add-member');
         const containerProjectDetail = $('.container-projects-details');
-
-        if (!formCreateProject.hasClass('closed')) {
-            formCreateProject.addClass('closed');
-        }
-
-        if (!formAddMember.hasClass('closed')) {
-            formAddMember.addClass('closed');
-        }
+        
+        hideElement($('#container-info-member'), 'closed');
+        hideElement($('#container-create-project'), 'closed');
+        hideElement($('#container-add-member'), 'closed');
+        hideElement($('#container-info-user'), 'closed');
 
         $.each(projectDetail, (i) => {
             if (!$(projectDetail[i]).hasClass('d-none')) {

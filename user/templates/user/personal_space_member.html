@@ -1,0 +1,17 @@
+{% load static %}
+{% load i18n %}
+{% for project in projects %}
+    {% for member in project.user_ids.all %}
+        {% if member.id is not user.id %}
+            <div id="member-detail-{{member.id}}" class="d-none member-detail">
+                <div class="header-member-detail">
+                    <h2>{{member.first_name}}</h2>
+                    <img class="user_image" src="{{ member.image.url }}" alt="profil image">
+                </div>
+                <div class="main-info">
+            
+                </div>
+            </div>
+            {% endif %}
+        {% endfor %}
+    {% endfor %}

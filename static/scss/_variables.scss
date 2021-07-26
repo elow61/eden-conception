@@ -1,0 +1,93 @@
+// ---------------- Variables ----------------
+// Colors
+$light_blue: #8ec5fc;
+$light_pink: #e0c3fc;
+
+// $dark_blue: #2f2f3c;
+// $dark_blue_light: #dbdada;
+$dark_blue_light_light: #3c3d54;
+
+
+$dark_blue: #1F2136;
+$dark_blue_light: #25293d;
+
+$white: #c9cad7;
+
+$cyan_green: #70e5cd;
+// $orange: #912a2e;
+$orange: #ee6f4f;
+// Device size
+$mobile_size: 480px;
+$tablet_size: 1023px;
+$desktop_sier: 1024px;
+
+// ---------------- Functions ----------------
+@mixin media-to-from($one, $two) {
+    @media only screen and (min-width: $one) and (max-width: $two) {
+        @content;
+    }
+}
+
+@mixin media-to($media) {
+    @if $media == mobile {
+        @media only screen and (max-width: $mobile_size) {
+            @content;
+        }
+    } @else if $media == tablet {
+        @media only screen and (max-width: $tablet_size) {
+            @content;
+        }
+    } @else if $media == desktop {
+        @media only screen and (min-width: $desktop_size) {
+            @content;
+        }
+    } @else {
+        @media only screen and (max-width: $media) {
+            @content;
+        }
+    }
+}
+
+// ---------------- Preset CSS ----------------
+* {
+    box-sizing: border-box;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-kerning: auto;
+}
+
+html {
+    font-family: sans-serif;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    margin: 0;
+    color: $white;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+}
+// End preset css ----------------------
+
+// Generics classes
+.m-auto {
+    margin: auto;
+}
+
+.col-6 {
+    -ms-flex: 0 0 50%;
+    flex: 0 0 50%;
+    max-width: 50%;
+}
+
+.d-none {
+    display: none;
+}

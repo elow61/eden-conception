@@ -45,6 +45,9 @@ header {
     right: 0;
     padding: 10px;
     color: #70e5cd; }
+    header .logout .personal_space {
+      color: #ee6f4f;
+      cursor: pointer; }
   header nav {
     margin-top: 120px;
     margin-left: 20px; }
@@ -71,11 +74,15 @@ main {
     display: flex;
     justify-content: center;
     align-items: center; }
+    main section .container-info-user.closed {
+      display: none; }
     main section .container-add-member.closed {
       display: none; }
     main section .container-create-project.closed {
       display: none; }
-    main section .container-create-project, main section .container-add-member {
+    main section .container-info-member.closed {
+      display: none; }
+    main section .container-create-project, main section .container-add-member, main section .container-info-user, main section .container-info-member {
       display: block; }
     main section .create-project, main section .add-member {
       border: 1px solid #c9cad7;

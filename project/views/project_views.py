@@ -24,8 +24,13 @@ class ProjectView(View):
         context['form_add_member'] = AddMember(request)
 
         user = User.objects.get(id=request.user.id)
-        projects = user.main_user.all()
-        context['projects'] = projects
+
+        queryset = Project.objects.none()
+        queryset |= user.main_user.all()
+        queryset |= user.member.all()
+
+        context['projects'] = queryset.distinct()
+        context['user'] = user
 
         return render(request, self.template_name, context)
 

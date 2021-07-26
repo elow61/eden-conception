@@ -46,19 +46,15 @@
         const projectDetail = $('.project-detail');
 
         $.each(projectDetail, (i) => {
-            if (!$(projectDetail[i]).hasClass('d-none')) {
-                $(projectDetail[i]).addClass('d-none');
-                $('.element-dashboard').addClass('is-height');
-            }
+            hideElement($(projectDetail[i]), 'd-none');
         })
-        if (!$('.container-projects-details').hasClass('d-none')) {
-            $('.container-projects-details').addClass('d-none');
-        }
 
-        if (!$('#container-add-member').hasClass('closed')) {
-            $('#container-add-member').addClass('closed');
-        }
+        hideElement($('.container-projects-details'), 'd-none')
+        hideElement($('#container-add-member'), 'closed');
+        hideElement($('#container-info-user'), 'closed');
+        hideElement($('#container-info-member'), 'closed');
 
+        $('.element-dashboard').addClass('is-height');
         $('.container-create-project').toggleClass('closed');
     });
 })(jQuery);

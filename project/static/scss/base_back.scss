@@ -16,6 +16,11 @@ header {
         right: 0;
         padding: 10px;
         color: $cyan_green;
+
+        .personal_space {
+            color: $orange;
+            cursor: pointer;
+        }
     }
 
     nav {
@@ -57,9 +62,11 @@ main {
         align-items: center;
 
         // Create project add member
-        .container-add-member.closed { display: none}
-        .container-create-project.closed { display: none}
-        .container-create-project, .container-add-member { display: block};
+        .container-info-user.closed { display: none;}
+        .container-add-member.closed { display: none;}
+        .container-create-project.closed { display: none;}
+        .container-info-member.closed {display: none;}
+        .container-create-project, .container-add-member, .container-info-user, .container-info-member { display: block;}
 
         .create-project, .add-member {
             border: 1px solid $white;

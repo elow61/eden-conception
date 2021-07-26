@@ -12,6 +12,7 @@ class User(AbstractUser):
         unique=True,
         max_length=100
     )
+    image = models.ImageField(default='default.png')
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []

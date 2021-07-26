@@ -1,0 +1,158 @@
+@import '_variables.scss';
+
+body {
+    height: 100vh;
+    display: flex;
+}
+
+header {
+    background-color: $dark_blue;
+    height: 100vh;
+    width: 400px;
+    overflow-y: scroll;
+
+    .logout {
+        position: absolute;
+        right: 0;
+        padding: 10px;
+        color: $cyan_green;
+
+        .personal_space {
+            color: $orange;
+            cursor: pointer;
+        }
+    }
+
+    nav {
+        margin-top: 120px;
+        margin-left: 20px;
+
+        h2 {
+            color: $orange;
+            text-transform: uppercase;
+
+            #btn-create-project, #btn-add-member {
+                color: $cyan_green;
+                cursor: pointer;
+            }
+        }
+
+        ul li {
+            h4 {
+                cursor: pointer;
+                letter-spacing: .2em;
+            }
+            h4.selected {color: $cyan_green;}
+        }
+    }
+    
+}
+
+main {
+    height: 100vh;
+    width: 100%;
+    background-color: $dark_blue_light;
+    overflow-y: scroll;
+
+
+    .element-dashboard.is-height {height: 100%;}
+    section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        // Create project add member
+        .container-info-user.closed { display: none}
+        .container-add-member.closed { display: none}
+        .container-create-project.closed { display: none}
+        .container-create-project, .container-add-member, .container-info-user { display: block};
+
+        .create-project, .add-member {
+            border: 1px solid $white;
+            padding: 40px;
+
+            form {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+    
+                .form-group {
+                    display: flex;
+                    align-items: center;
+    
+                    input {
+                        width: 300px;
+                        margin-bottom: 10px;
+                        float: right;
+                        background: transparent;
+                        border: none;
+                        border-bottom: 1px solid $white;
+    
+                        -ms-flex: 0 0 50%;
+                        flex: 0 0 50%;
+                        max-width: 50%;
+                        color: $white;
+    
+                        &:focus {
+                            outline: none;
+                        }
+    
+                        &:focus-visible {
+                            outline: none;
+                        }
+                    }
+                    select {
+                        background: transparent;
+                        border: none;
+                        border-bottom: 1px solid white;
+                        color: $white;
+                    }
+                }
+    
+                button {
+                    padding: 10px 40px;
+                    background: transparent;
+                    color: $white;
+                    border: 1px solid $white;
+                    margin-top: 40px;
+                    margin-bottom: 10px;
+                    cursor: pointer;
+                    text-transform: uppercase;
+                }
+            }
+        }
+    }
+}
+
+// Responsive
+body {
+    @include media-to(768px) {
+        flex-direction: column;
+
+        header {
+            overflow-y: inherit;
+            width: 100%;
+            height: auto;
+        }
+
+        header nav {margin-top: 0}
+
+        main {
+            height: 100%;
+        }
+
+        main section .create-project {
+            margin: 20px
+        }
+
+        main section .create-project form .form-group input {
+            width: auto;
+        }
+
+        main .container-projects-details .project-detail .main-project-detail .display {display: none;}
+    }
+
+    @include media-to(1300px) {
+        main .container-projects-details .project-detail .main-project-detail hr {width: auto;}
+    }
+}

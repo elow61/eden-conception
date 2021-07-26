@@ -36,12 +36,6 @@ main .container-projects-details {
   margin: 30px; }
   main .container-projects-details .project-detail {
     padding: 10px; }
-    main .container-projects-details .project-detail hr {
-      width: 100%;
-      margin: 0;
-      background-color: #c9cad7;
-      border: none;
-      height: 1px; }
     main .container-projects-details .project-detail .header-project-detail {
       display: flex;
       justify-content: space-between;
@@ -87,37 +81,17 @@ main .container-projects-details {
         background: transparent;
         border: none;
         color: #70e5cd; }
-    main .container-projects-details .project-detail .main-project-detail {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 15px;
-      background-color: #1F2136;
-      padding: 20px;
-      border-radius: 10px; }
-      main .container-projects-details .project-detail .main-project-detail .info {
-        display: flex;
-        flex-direction: column;
-        margin-right: 10px; }
-        main .container-projects-details .project-detail .main-project-detail .info div {
-          padding: 22px 0; }
-      main .container-projects-details .project-detail .main-project-detail .display .contain-display {
-        width: 500px;
-        height: 250px;
-        border: 1px solid #c9cad7; }
-        main .container-projects-details .project-detail .main-project-detail .display .contain-display img {
-          width: 500px;
-          height: 250px; }
-      main .container-projects-details .project-detail .main-project-detail hr {
-        width: 400px;
-        margin: 0;
-        background-color: #c9cad7;
-        border: none;
-        height: 1px; }
     main .container-projects-details .project-detail .main-info {
       display: flex;
       justify-content: space-between; }
+      main .container-projects-details .project-detail .main-info .main-user {
+        width: 18%;
+        height: 200px;
+        background: linear-gradient(160deg, #ee6f4f, #13295B);
+        padding: 20px;
+        border-radius: 10px; }
       main .container-projects-details .project-detail .main-info .last-modification {
-        width: 53%;
+        width: 35%;
         height: 200px;
         background: linear-gradient(160deg, #13295B, #70e5cd);
         padding: 20px;

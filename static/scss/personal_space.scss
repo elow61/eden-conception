@@ -1,0 +1,30 @@
+@import '_variables.scss';
+
+main .container-info-user {
+    width: 100%;
+    margin: 30px;
+
+    .user-detail {
+        padding: 10px;
+
+        .header-user-detail { 
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            background-color: $dark_blue;
+            padding: 20px;
+            border-radius: 10px;
+    
+            h2 {
+                margin: 0 !important;
+                color: $orange;
+                font-size: 1.6em !important;
+            }
+        }
+
+        .main-info {
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+}

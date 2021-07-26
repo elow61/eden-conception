@@ -11,7 +11,7 @@ html {
 
 body {
   margin: 0;
-  color: #dbdada; }
+  color: #c9cad7; }
 
 a {
   text-decoration: none;
@@ -43,9 +43,8 @@ section.main-form {
   align-items: center;
   height: inherit; }
   section.main-form .container-form {
-    border: 1px solid #dbdada;
-    padding: 40px 40px 0 40px;
-    margin: 30px; }
+    border: 1px solid #c9cad7;
+    padding: 40px 40px 0 40px; }
     section.main-form .container-form h1 {
       text-align: center;
       text-transform: uppercase;
@@ -63,11 +62,11 @@ section.main-form {
           float: right;
           background: transparent;
           border: none;
-          border-bottom: 1px solid #dbdada;
+          border-bottom: 1px solid #c9cad7;
           -ms-flex: 0 0 50%;
           flex: 0 0 50%;
           max-width: 50%;
-          color: #dbdada; }
+          color: #c9cad7; }
           section.main-form .container-form form .form-group input:focus {
             outline: none; }
           section.main-form .container-form form .form-group input:focus-visible {
@@ -75,8 +74,8 @@ section.main-form {
       section.main-form .container-form form button {
         padding: 10px 40px;
         background: transparent;
-        color: #dbdada;
-        border: 1px solid #dbdada;
+        color: #c9cad7;
+        border: 1px solid #c9cad7;
         margin-top: 40px;
         margin-bottom: 10px;
         cursor: pointer;

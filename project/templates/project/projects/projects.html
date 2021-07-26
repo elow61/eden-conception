@@ -6,6 +6,7 @@
 {% block scss %}
     <link href="{% sass_src 'scss/base_back.scss' %}" rel="stylesheet" type="text/css" />
     <link href="{% sass_src 'scss/project_detail.scss' %}" rel="stylesheet" type="text/css" />
+    <link href="{% sass_src 'scss/personal_space.scss' %}" rel="stylesheet" type="text/css" />
 
     <!-- AmCharts Library -->
     <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
@@ -16,6 +17,7 @@
 {% block content %}
     <header>
         <div class="logout">
+            <a class="personal_space"><i class="fas fa-user"></i></a>
             <a href="{% url 'user:logout' %}"><i class="fas fa-sign-out-alt"></i></a>
         </div>
         <nav>
@@ -60,12 +62,19 @@
             <div class="container-add-member closed" id="container-add-member">
                 {% include 'project/projects/forms/add_member.html' %}
             </div>
+            <div class="container-info-user closed" id="container-info-user">
+                {% include 'user/personal_space.html' %}
+            </div>
+            <div class="container-info-member" id="container-info-member">
+                {% include 'user/personal_space_member.html' %}
+            </div>
         </section>
     </main>
 
 {% endblock %}
 {% block js %}
     <script src="{% static 'js/submit_form_ajax.js' %}"></script>
+    <script src="{% static 'js/personal_space.js' %}"></script>
     <script src="{% static 'js/projects/statistics.js' %}"></script>
     <script src="{% static 'js/projects/project_detail.js' %}"></script>
     <script src="{% static 'js/projects/create_project.js' %}"></script>

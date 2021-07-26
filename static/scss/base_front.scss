@@ -1,0 +1,18 @@
+@import '_variables.scss';
+
+// Base
+header {
+    height: 100vh;
+    background: linear-gradient(217deg, $dark_blue, $dark_blue_light_light);
+
+    canvas {
+        position: absolute;
+    }
+
+    .door {
+        position: absolute;
+        right: 0;
+        padding: 10px;
+        color: $cyan_green;
+    }
+}

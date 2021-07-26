@@ -31,6 +31,10 @@
                 <h2>{% translate 'Task number:' %}</h2>
                 <span class="nb_tasks">{{project.get_number_task}}</span>
             </div>
+            <div class="main-user">
+                <h2>{% translate 'Created by:' %}</h2>
+                <span>{{project.user.first_name}}</span>
+            </div>
         </div>
         <div class="statistics-project">
             <div class="flex-stats">
