@@ -9,7 +9,10 @@
                     <img class="user_image" src="{{ member.image.url }}" alt="profil image">
                 </div>
                 <div class="main-info">
-            
+                    <div class="projects-member">
+                        <h2>{% translate 'Guest on:' %}</h2>
+                        <span> - {{project}}</span>
+                    </div>
                 </div>
             </div>
             {% endif %}

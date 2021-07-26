@@ -1,13 +1,13 @@
 @import '_variables.scss';
 
-main .container-info-user {
+main .container-info-user, .container-info-member {
     width: 100%;
     margin: 30px;
 
-    .user-detail {
+    .user-detail, .member-detail {
         padding: 10px;
 
-        .header-user-detail { 
+        .header-user-detail, .header-member-detail { 
             display: flex;
             justify-content: space-between;
             margin-bottom: 15px;
@@ -33,6 +33,14 @@ main .container-info-user {
         .main-info {
             display: flex;
             justify-content: space-between;
+
+            .projects-member {
+                width: 18%;
+                height: 200px;
+                background: linear-gradient(160deg, $orange, #13295B);
+                padding: 20px;
+                border-radius: 10px;
+            }
         }
     }
 }

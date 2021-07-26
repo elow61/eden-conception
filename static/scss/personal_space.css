@@ -31,30 +31,36 @@ ul {
 .d-none {
   display: none; }
 
-main .container-info-user {
+main .container-info-user, .container-info-member {
   width: 100%;
   margin: 30px; }
-  main .container-info-user .user-detail {
+  main .container-info-user .user-detail, main .container-info-user .member-detail, .container-info-member .user-detail, .container-info-member .member-detail {
     padding: 10px; }
-    main .container-info-user .user-detail .header-user-detail {
+    main .container-info-user .user-detail .header-user-detail, main .container-info-user .user-detail .header-member-detail, main .container-info-user .member-detail .header-user-detail, main .container-info-user .member-detail .header-member-detail, .container-info-member .user-detail .header-user-detail, .container-info-member .user-detail .header-member-detail, .container-info-member .member-detail .header-user-detail, .container-info-member .member-detail .header-member-detail {
       display: flex;
       justify-content: space-between;
       margin-bottom: 15px;
       background-color: #1F2136;
       padding: 20px;
       border-radius: 10px; }
-      main .container-info-user .user-detail .header-user-detail h2 {
+      main .container-info-user .user-detail .header-user-detail h2, main .container-info-user .user-detail .header-member-detail h2, main .container-info-user .member-detail .header-user-detail h2, main .container-info-user .member-detail .header-member-detail h2, .container-info-member .user-detail .header-user-detail h2, .container-info-member .user-detail .header-member-detail h2, .container-info-member .member-detail .header-user-detail h2, .container-info-member .member-detail .header-member-detail h2 {
         margin: 0 !important;
         color: #ee6f4f;
         font-size: 1.6em !important; }
-      main .container-info-user .user-detail .header-user-detail .user_image {
+      main .container-info-user .user-detail .header-user-detail .user_image, main .container-info-user .user-detail .header-member-detail .user_image, main .container-info-user .member-detail .header-user-detail .user_image, main .container-info-user .member-detail .header-member-detail .user_image, .container-info-member .user-detail .header-user-detail .user_image, .container-info-member .user-detail .header-member-detail .user_image, .container-info-member .member-detail .header-user-detail .user_image, .container-info-member .member-detail .header-member-detail .user_image {
         width: 50px;
         height: 50px;
         border-radius: 50%;
         position: relative;
         top: -40px; }
-    main .container-info-user .user-detail .main-info {
+    main .container-info-user .user-detail .main-info, main .container-info-user .member-detail .main-info, .container-info-member .user-detail .main-info, .container-info-member .member-detail .main-info {
       display: flex;
       justify-content: space-between; }
+      main .container-info-user .user-detail .main-info .projects-member, main .container-info-user .member-detail .main-info .projects-member, .container-info-member .user-detail .main-info .projects-member, .container-info-member .member-detail .main-info .projects-member {
+        width: 18%;
+        height: 200px;
+        background: linear-gradient(160deg, #ee6f4f, #13295B);
+        padding: 20px;
+        border-radius: 10px; }
 
 /*# sourceMappingURL=personal_space.css.map */
