@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth import login, logout
 from django.contrib.auth.views import LogoutView
+from django.core.files.storage import default_storage
 from .forms import UserCreationFormInherit
 from .models import User
 
@@ -17,32 +18,35 @@ class RegisterView(View):
         return render(request, self.template_name, context)
 
     def post(self, request):
-        form = self.form_class(request.POST)
+        if request.method == 'POST' and 'image' in request.FILES:
+            form = self.form_class(request.POST, request.FILES)
 
-        if form.is_valid():
-            username = form.cleaned_data['username']
-            first_name = form.cleaned_data['first_name']
-            last_name = form.cleaned_data['last_name']
-            email = form.cleaned_data['email']
-            password1 = form.cleaned_data['password1']
+            if form.is_valid():
+                username = form.cleaned_data['username']
+                first_name = form.cleaned_data['first_name']
+                last_name = form.cleaned_data['last_name']
+                file = request.FILES['image']
+                image = default_storage.save(file.name, file)
+                email = form.cleaned_data['email']
+                password1 = form.cleaned_data['password1']
 
-            user = User.objects.filter(email=email)
-            if not user.exists():
-                user = User.objects.create_user(
-                    username=username,
-                    first_name=first_name,
-                    last_name=last_name,
-                    email=email,
-                    password=password1,
-                )
-            else:
-                user = user.first()
+                user = User.objects.filter(email=email)
+                if not user.exists():
+                    user = User.objects.create_user(
+                        username=username,
+                        first_name=first_name,
+                        last_name=last_name,
+                        image=image,
+                        email=email,
+                        password=password1,
+                    )
+                else:
+                    user = user.first()
 
-            login(request, user)
+                login(request, user)
+                return redirect('project:dashboard')
 
-            return redirect('project:dashboard')
-
-        return render(request, self.template_name, {'form': form})
+        return render(request, self.template_name, {'form': self.form_class(request.POST, request.FILES)})
 
 
 class LogoutView(LogoutView):

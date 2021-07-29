@@ -18,7 +18,8 @@ a {
   color: inherit; }
 
 ul {
-  list-style: none; }
+  list-style: none;
+  padding-left: 0; }
 
 .modal {
   color: #1F2136; }
@@ -33,6 +34,9 @@ ul {
 
 .d-none {
   display: none; }
+
+.errorList {
+  color: #70e5cd; }
 
 .return-home {
   position: absolute;

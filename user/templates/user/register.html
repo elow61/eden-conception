@@ -7,7 +7,7 @@
 <section class="main-form">
     <div class="container-form">
         <h1>{% translate 'Register' %}</h1>
-        <form method="post" action="{% url 'user:register' %}">
+        <form method="post" action="{% url 'user:register' %}" enctype="multipart/form-data">
             {% csrf_token %}
             {% for field in form %}
                 <div class="form-group">

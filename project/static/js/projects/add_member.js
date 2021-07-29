@@ -10,6 +10,7 @@
     formAddMember.submit((e) =>  {
         e.preventDefault();
         submitForm(url, formAddMember).then(response => {
+            console.log(response)
             if(response.error){
                 viewModal('#dash-modal', response.error);
             } else if (response.user_name) {

@@ -23,14 +23,9 @@ class ProjectView(View):
         context['form'] = self.form
         context['form_add_member'] = AddMember(request)
 
-        user = User.objects.get(id=request.user.id)
-
-        queryset = Project.objects.none()
-        queryset |= user.main_user.all()
-        queryset |= user.member.all()
-
-        context['projects'] = queryset.distinct()
-        context['user'] = user
+        context['projects'] = Project.objects_project.get_projects(request.user)
+        context['user'] = request.user
+        context['members'] = Project.objects_project.get_members(request.user)
 
         return render(request, self.template_name, context)
 
@@ -62,7 +57,11 @@ class ProjectView(View):
             if new_user:
                 res['user_name'] = new_user.get().first_name
                 res['user_id'] = new_user.get().id
-                res['template'] = render_to_string('user/personal_space_member.html', request=request)
+                context = {
+                    'projects': Project.objects_project.get_projects(request.user),
+                    'members': Project.objects_project.get_members(request.user)
+                }
+                res['template'] = render_to_string('user/personal_space_member.html', context, request=request)
             else:
                 res['error'] = _('No user email saved in database or the user is already in the project.')
 

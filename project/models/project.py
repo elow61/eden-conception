@@ -57,6 +57,22 @@ class ProjectManager(models.Manager):
 
         return datas
 
+    def get_projects(self, user):
+        queryset = Project.objects.none()
+        queryset |= user.main_user.all()
+        queryset |= user.member.all()
+        return queryset.distinct()
+
+    def get_members(self, user):
+        projects = Project.objects.filter(user_id=user.id)
+        members = User.objects.none()
+
+        for project in projects:
+            if project.user_id == user.id:
+                members |= project.user_ids.all().exclude(id=user.id)
+
+        return members.distinct()
+
 
 class Project(models.Model):
 

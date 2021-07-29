@@ -1,20 +1,22 @@
 {% load static %}
 {% load i18n %}
-{% for project in projects %}
-    {% for member in project.user_ids.all %}
-        {% if member.id is not user.id %}
-            <div id="member-detail-{{member.id}}" class="d-none member-detail">
-                <div class="header-member-detail">
-                    <h2>{{member.first_name}}</h2>
-                    <img class="user_image" src="{{ member.image.url }}" alt="profil image">
-                </div>
-                <div class="main-info">
-                    <div class="projects-member">
-                        <h2>{% translate 'Guest on:' %}</h2>
-                        <span> - {{project}}</span>
-                    </div>
-                </div>
+{% for member in members %}
+    <div id="member-detail-{{member.id}}" class="d-none member-detail">
+        <div class="header-member-detail">
+            <h2>{{member.first_name}}</h2>
+            <img class="user_image" src="{{ member.image.url }}" alt="profil image">
+        </div>
+        <div class="main-info">
+            <div class="projects-member">
+                <h2>{% translate 'Guest on:' %}</h2>
+                <ul>
+                    {% for project in member.member.all %}
+                        {% if project.user_id == user.id %}
+                            <li> - {{project.name}}</li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
             </div>
-        {% endif %}
-    {% endfor %}
+        </div>
+    </div>
 {% endfor %}
