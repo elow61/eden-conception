@@ -160,7 +160,7 @@ LANGUAGES = (
     # ('ar', gettext_noop('Arab')),
 )
 
-DATE_INPUT_FORMATS = ['dd-mm-YYYY']
+DATE_INPUT_FORMATS = ['dd/mm/YYYY']
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/

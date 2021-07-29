@@ -37,6 +37,10 @@
         displayInfoCollaborator(userId);
     });
 
+    /**
+     * Function to display the collaborator infos
+     * @param {*} userId is the member id to view informations about him.
+     */
     window.displayInfoCollaborator = function (userId) {
         const projectDetail = $('.project-detail');
         const memberDetail = $('.member-detail');

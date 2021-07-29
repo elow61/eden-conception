@@ -20,6 +20,9 @@ a {
 ul {
   list-style: none; }
 
+.modal {
+  color: #1F2136; }
+
 .m-auto {
   margin: auto; }
 
@@ -122,5 +125,12 @@ main .container-projects-details {
         background-color: #1F2136;
         padding: 20px;
         border-radius: 10px; }
+
+@media only screen and (max-width: 768px) {
+  main section .container-projects-details .project-detail .main-info {
+    flex-wrap: wrap; }
+    main section .container-projects-details .project-detail .main-info .main-user, main section .container-projects-details .project-detail .main-info .last-modification, main section .container-projects-details .project-detail .main-info .task-count {
+      width: 100%;
+      margin-bottom: 10px; } }
 
 /*# sourceMappingURL=project_detail.css.map */

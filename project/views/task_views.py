@@ -51,7 +51,11 @@ class TaskView(View):
         res = {}
         if request.method == 'POST':
             current_task = Task.objects.get(id=request.POST.get('task_id'))
-            TimesheetView.update_timesheet(request)
+            formset = TimesheetView.update_timesheet(request)
+
+            print(formset)
+            if formset is not True:
+                res['error'] = formset[0]
 
             # Convert time to float
             convert_in_time = datetime.strptime(request.POST.get('planned_hours'), '%H:%M').time()

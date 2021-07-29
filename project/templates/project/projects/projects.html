@@ -16,6 +16,7 @@
 {% endblock %}
 {% block content %}
     <header>
+        <div id="dash-modal" class="modal"></div>
         <div class="logout">
             <a class="personal_space"><i class="fas fa-user"></i></a>
             <a href="{% url 'user:logout' %}"><i class="fas fa-sign-out-alt"></i></a>
@@ -41,11 +42,13 @@
             <ul class="member-list">
                 {% if projects %}
                     {% for project in projects %}
-                        {% for member in project.user_ids.all %}
-                            {% if member.id is not user.id %}
-                                <li><h4 member-id="{{member.id}}">{{ member.first_name }}</h4></li>
-                            {% endif %}
+                        {% if project.user_id == user.id %}
+                            {% for member in project.user_ids.all %}
+                                {% if member.id is not user.id %}
+                                    <li><h4 member-id="{{member.id}}">{{ member.first_name }}</h4></li>
+                                {% endif %}
                             {% endfor %}
+                        {% endif %}
                     {% endfor %}
                 {% endif %}
             </ul>
@@ -81,4 +84,7 @@
     <script src="{% static 'js/projects/update_project.js' %}"></script>
     <script src="{% static 'js/projects/delete_project.js' %}"></script>
     <script src="{% static 'js/projects/add_member.js' %}"></script>
+    <script>
+        viewDashboard();
+    </script>
 {% endblock %}

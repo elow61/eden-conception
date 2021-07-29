@@ -152,8 +152,4 @@ body {
 
         main .container-projects-details .project-detail .main-project-detail .display {display: none;}
     }
-
-    @include media-to(1300px) {
-        main .container-projects-details .project-detail .main-project-detail hr {width: auto;}
-    }
 }

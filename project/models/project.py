@@ -11,7 +11,7 @@ class ProjectManager(models.Manager):
     def add_member(self, email, project):
         user = User.objects.filter(email__contains=email)
 
-        if not user.exists():
+        if not user.exists() or user in project.user_ids.all():
             return
 
         project.user_ids.add(user.get().id)

@@ -20,6 +20,9 @@ a {
 ul {
   list-style: none; }
 
+.modal {
+  color: #1F2136; }
+
 .m-auto {
   margin: auto; }
 
@@ -141,9 +144,5 @@ main {
       width: auto; }
     body main .container-projects-details .project-detail .main-project-detail .display {
       display: none; } }
-
-@media only screen and (max-width: 1300px) {
-  body main .container-projects-details .project-detail .main-project-detail hr {
-    width: auto; } }
 
 /*# sourceMappingURL=base_back.css.map */

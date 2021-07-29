@@ -5,21 +5,25 @@
         <div class="header-project-detail">
             <h2>{{project.name}}</h2>
             <div class="icons-p">
-                <div class="edit-project">
-                    <i id="edit-project" project-id="{{project.id}}" class="fas fa-pencil-alt"></i>
-                </div>
+                {% if project.user_id == user.id %}
+                    <div class="edit-project">
+                        <i id="edit-project" project-id="{{project.id}}" class="fas fa-pencil-alt"></i>
+                    </div>
+                {% endif %}
                 <div class="view-project">
                     <a href="/project-{{project.id}}">
                         <i class="far fa-eye"></i>
                     </a>
                 </div>
-                <div class="delete-project">
-                    <form method="post" class="form-delete-project">
-                        {% csrf_token %}
-                        <input type="hidden" name="project_id" value="{{ project.id }}">
-                        <button type="submit"><i class="far fa-trash-alt"></i></button>
-                    </form>
-                </div>
+                {% if project.user_id == user.id %}
+                    <div class="delete-project">
+                        <form method="post" class="form-delete-project">
+                            {% csrf_token %}
+                            <input type="hidden" name="project_id" value="{{ project.id }}">
+                            <button type="submit"><i class="far fa-trash-alt"></i></button>
+                        </form>
+                    </div>
+                {% endif %}
             </div>
         </div>
         <div class="main-info">

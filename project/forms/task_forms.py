@@ -12,6 +12,8 @@ class CreateTaskForm(forms.Form):
 
 class UpdateTaskForm(ModelForm):
 
+    deadline = DateField(input_formats=['%d-%m-%Y'], required=True)
+
     def __init__(self, instance, *args, **kwargs):
         super(UpdateTaskForm, self).__init__(*args, **kwargs)
         project = List.objects.get(pk=instance.project_list.id).project
@@ -21,6 +23,3 @@ class UpdateTaskForm(ModelForm):
     class Meta:
         model = Task
         fields = ['name', 'assigned_to', 'deadline', 'description', 'planned_hours']
-        widget = {
-            'deadline': DateField(input_formats=['%d-%m-%Y']),
-        }

@@ -16,7 +16,6 @@
      */
     window.deleteProject = function (url, form) {
         submitForm(url, form).then(response => {
-            console.log(response)
             let projectList = $('.project-list').find('h4');
             if (response.project_id) {
                 $('#project-detail-' + response.project_id).remove();

@@ -53,13 +53,18 @@ class ProjectView(View):
         res = {}
         if request.method == 'POST':
             query = request.POST.get('member_email')
+            if not Project.objects.filter(pk=request.POST.get('project_name')).exists():
+                res['error'] = _('You must add a project before.')
+                return JsonResponse(res)
+
             project = Project.objects.get(pk=request.POST.get('project_name'))
             new_user = Project.objects_project.add_member(query, project)
-
             if new_user:
                 res['user_name'] = new_user.get().first_name
+                res['user_id'] = new_user.get().id
+                res['template'] = render_to_string('user/personal_space_member.html', request=request)
             else:
-                res['error'] = _('No user email saved in database')
+                res['error'] = _('No user email saved in database or the user is already in the project.')
 
         return JsonResponse(res)
 
@@ -71,19 +76,22 @@ class ProjectView(View):
             if request.method == 'POST':
                 query = request.POST.get('project_name')
                 user = User.objects.get(id=request.user.id)
-                Project.objects.create(
-                    name=query,
-                    user=user,
-                )
-                project = Project.objects.get(name=query)
-                project.user_ids.add(user.id)
-                projects = user.main_user.all()
+                project = Project.objects.filter(name=query)
 
-                context['projects'] = projects
+                if project.exists():
+                    res['error'] = _('This project already exists.')
+                else:
+                    project = Project.objects.create(name=query, user=user)
+                    project.user_ids.add(user.id)
+                    projects = user.main_user.all()
 
-                res['project_name'] = query
-                res['project_id'] = project.id
-                res['template'] = render_to_string('project/projects/project_detail.html', context, request=request)
+                    context['projects'] = projects
+                    context['form_add_member'] = AddMember(request)
+                    res['template_add_member'] = render_to_string('project/projects/forms/add_member.html', context, request=request)
+
+                    res['project_name'] = query
+                    res['project_id'] = project.id
+                    res['template'] = render_to_string('project/projects/project_detail.html', context, request=request)
             else:
                 res['error'] = _('No project name received.')
 

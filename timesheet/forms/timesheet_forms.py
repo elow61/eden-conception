@@ -6,6 +6,8 @@ from project.forms.widgets import HourField
 
 class UpdateTimesheetForm(ModelForm):
 
+    created_at = DateField(input_formats=['%d/%m/%Y'], required=True)
+
     def __init__(self, *args, **kwargs):
         super(UpdateTimesheetForm, self).__init__(*args, **kwargs)
         self.fields['unit_hour'] = HourField()
@@ -13,6 +15,3 @@ class UpdateTimesheetForm(ModelForm):
     class Meta:
         model = Timesheet
         fields = ['created_at', 'user', 'description', 'unit_hour']
-        widget = {
-            'created_at': DateField(input_formats=['%d-%m-%Y']),
-        }

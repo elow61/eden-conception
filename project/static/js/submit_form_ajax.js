@@ -24,8 +24,7 @@
         if (csrfToken === undefined) {
             csrfToken = getCookie('csrftoken');
         }
-        
-        console.log(data)
+
         return ajaxMethod(csrfToken, 'post', url, data)
     }
 
@@ -69,6 +68,7 @@
 
     window.urlParam = function (name) {
         var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+
         if (results==null) {
            return null;
         }
@@ -79,5 +79,20 @@
         if (!element.hasClass(className)) {
             element.addClass(className);
         }
+    }
+
+    /**
+     * method to open the modal
+     * @param {*} element The html element (modal)
+     * @param {*} message The message into the modal
+     */
+    window.viewModal = function (element, message) {
+        $(element).empty()
+        $(element).append('<p>' + message + '</p>');
+        $(element).modal('show');
+        setTimeout(function () {
+            $("#dash-modal").modal("hide");
+            $('.jquery-modal').hide();
+        }, 5000);
     }
 })(jQuery);

@@ -1,6 +1,6 @@
 {% load i18n %}
 <div class="contain-header-info">
-    <div id="delete-task-modal" class="modal"></div>
+    <div id="task-modal" class="modal"></div>
     <h1>{{task.name}}</h1>
     <div class="header-task">
         <button id="update-task" task-id="{{task.id}}">{% translate 'Update' %}</button>
@@ -19,13 +19,13 @@
                 <label class="" for="id_deadline">
                     {% translate 'Deadline ' %} 
                 </label>
-                <span>{{task.deadline}}</span>
+                <span>{{task.deadline.day}}/{{task.deadline.month}}/{{task.deadline.year}}</span>
             </div>
             <div class="form-group">
                 <label class="" for="id_description">
                     {% translate 'Description ' %}
                 </label>
-                <span class="task_description">{{task.description}}</span>
+                <div class="task_description">{{task.description |linebreaks}}</div>
             </div>
             <div class="form-group">
                 <label class="" for="id_planned_hours">
@@ -47,17 +47,10 @@
                         {% for timesheet_line in task.timesheet_set.all %}
                             {% if timesheet_line %}
                                 <tr>
-                                    <td>{{timesheet_line.created_at}}</td>
+                                    <td>{{timesheet_line.created_at.day}}/{{timesheet_line.created_at.month}}/{{timesheet_line.created_at.year}}</td>
                                     <td>{{timesheet_line.user}}</td>
                                     <td>{{timesheet_line.description}}</td>
                                     <td>{{timesheet_line.unit_hour_time}}</td>
-                                </tr>
-                            {% else %}
-                                <tr>
-                                    <td>--</td>
-                                    <td>--</td>
-                                    <td>--</td>
-                                    <td>--</td>
                                 </tr>
                             {% endif %}
                         {% endfor %}

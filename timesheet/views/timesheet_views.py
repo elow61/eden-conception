@@ -21,6 +21,11 @@ class TimesheetView(View):
         formset = TimeFormSet(request.POST, instance=current_task)
         if formset.is_valid():
             formset.save()
+        else:
+            errors = formset.errors
+            return errors
+
+        return True
 
     @classmethod
     def create_formset(cls, current_task):

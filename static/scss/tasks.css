@@ -108,7 +108,11 @@ main {
     main #main-task .container-task table td input[id*="description"] {
       width: 500px; }
     main #main-task .container-task table td input[id*="unit_hour"] {
-      width: 65px; }
+      width: 70px; }
+    main #main-task .container-task table td:nth-child(3) {
+      width: 500px; }
+    main #main-task .container-task table td:nth-child(4) {
+      width: 70px; }
   main #main-messages {
     position: absolute;
     top: 0;
@@ -145,5 +149,15 @@ a.ui-button:active,
   border: 1px solid #1F2136 !important;
   background: #1F2136 !important;
   color: #c9cad7 !important; }
+
+@media only screen and (max-width: 1130px) {
+  body {
+    overflow: auto; }
+    body main {
+      height: auto;
+      flex-direction: column; }
+      body main #main-messages {
+        position: inherit;
+        width: auto; } }
 
 /*# sourceMappingURL=tasks.css.map */

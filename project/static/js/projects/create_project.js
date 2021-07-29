@@ -13,7 +13,6 @@
     form.submit((e) =>  {
         e.preventDefault();
         submitForm(url, form).then(response => {
-
             if (response.project_name) {
                 // Management project name in list
                 let projectName = $('<li><h4 project-id=' + response.project_id + '>' + response.project_name + '</h4></li>').hide();
@@ -26,13 +25,18 @@
                 containerProjectDetail.empty();
                 containerProjectDetail.append(response.template);
                 
-                // Reload event in the new elements
-                projectName.on('click', function () {
-                    displayProjectDetails(response.project_id);
-                })
+                // Reload events
+                $.getScript("/static/js/projects/project_detail.js");
+                displayProjectDetails(response.project_id);
+
+                // Reload the add member form
+                $('#container-add-member').empty();
+                $('#container-add-member').append(response.template_add_member);
+                $('#btn-add-member').off();
+                $.getScript("/static/js/projects/add_member.js");
 
             } else {
-                console.log(response.error);
+                viewModal('#dash-modal', response.error);
             }
         });
         form[0].reset();
