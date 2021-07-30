@@ -62,6 +62,7 @@ class ProjectView(View):
                     'members': Project.objects_project.get_members(request.user)
                 }
                 res['template'] = render_to_string('user/personal_space_member.html', context, request=request)
+                res['success'] = _(f'The member {new_user.get().first_name} has been add into the project : {project}.')
             else:
                 res['error'] = _('No user email saved in database or the user is already in the project.')
 
@@ -102,12 +103,29 @@ class ProjectView(View):
         if request.method == 'POST':
             project_id = request.POST.get('project_id')
             project_to_delete = Project.objects.get(id=project_id)
-            project_to_delete.delete()
 
+            members = project_to_delete.user_ids.all().exclude(id=request.user.id)
+            res['member_to_remove'] = []
+            for member in members:
+                projects_member = member.member.all().filter(user_id=request.user.id)
+                if len(projects_member) == 1:
+                    if projects_member[0] == project_to_delete:
+                        res['member_to_remove'].append(member.id)
+
+            project_to_delete.delete()
+            context = {}
+            context['projects'] = Project.objects_project.get_projects(request.user)
+            context['form_add_member'] = AddMember(request)
+            context['members'] = Project.objects_project.get_members(request.user)
+            if not context['members']:
+                res['remove_all_members'] = True
+
+            res['template'] = render_to_string('user/personal_space_member.html', context, request=request)
+            res['template_add_member'] = render_to_string('project/projects/forms/add_member.html', context, request=request)
             res['project_id'] = project_id
-            res['success'] = _('The project has been deleted')
+            res['success'] = _('The project has been deleted.')
         else:
-            res['error'] = _('The project doesn\'t have deleted')
+            res['error'] = _('The project doesn\'t have deleted.')
 
         return JsonResponse(res)
 
@@ -116,11 +134,16 @@ class ProjectView(View):
         res = {}
         if request.method == 'POST':
             current_project = Project.objects.get(id=request.POST.get('project_id'))
-
-            # Update project
             current_project.name = request.POST.get('name')
             current_project.save()
 
+            context = {}
+            context['projects'] = Project.objects_project.get_projects(request.user)
+            context['form_add_member'] = AddMember(request)
+            context['members'] = Project.objects_project.get_members(request.user)
+
+            res['template'] = render_to_string('user/personal_space_member.html', context, request=request)
+            res['template_add_member'] = render_to_string('project/projects/forms/add_member.html', context, request=request)
             res['project_id'] = current_project.id
             res['project_name'] = current_project.name
 

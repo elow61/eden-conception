@@ -13,15 +13,24 @@
             console.log(response)
             if(response.error){
                 viewModal('#dash-modal', response.error);
-            } else if (response.user_name) {
-                let memberName = $('<li><h4 member-id=' + response.user_id + '>' + response.user_name + '</h4></li>').hide();
-                $('.member-list').append(memberName);
-                memberName.show('normal');
-
+            } else {
+                let memberNameList = $('.member-list').find('h4');
+                let alreadyExists = false;
+                for (let i = 0; i < memberNameList.length; i++) {
+                    if (memberNameList[i].getAttribute('member-id') == response.user_id) {
+                        alreadyExists = true;
+                    }
+                }
+                
+                if (!alreadyExists) {
+                    let memberName = $('<li><h4 member-id=' + response.user_id + '>' + response.user_name + '</h4></li>').hide();
+                    $('.member-list').append(memberName);
+                    memberName.show('normal');
+                }
                 $('#container-info-member').empty();
                 $('#container-info-member').append(response.template);
-
                 $.getScript("/static/js/personal_space.js");
+                viewModal('#dash-modal', response.success);
             }
         });
     });

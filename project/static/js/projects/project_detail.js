@@ -60,6 +60,7 @@
         let datas = {'project_id': projectId};
 
         return ajaxMethod(csrfToken, 'post', '/get_statistics/', datas).then((response) => {
+            console.log(' - I Get the stats - in project_detail.js ')
             get_stats(response.nb_task, datas['project_id']);
             get_time(response.time, datas['project_id']);
             get_history(response.history, datas['project_id']);
@@ -88,6 +89,7 @@
             let datas = {'project_id': projectId};
 
             return ajaxMethod(csrfToken, 'post', '/get_statistics/', datas).then((response) => {
+                console.log(' - I Get the stats - in viewDashboard ')
                 get_stats(response.nb_task, datas['project_id']);
                 get_time(response.time, datas['project_id']);
                 get_history(response.history, datas['project_id']);

@@ -9,7 +9,7 @@
         <div class="main-info">
             <div class="projects-member">
                 <h2>{% translate 'Guest on:' %}</h2>
-                <ul>
+                <ul class="list-project-member">
                     {% for project in member.member.all %}
                         {% if project.user_id == user.id %}
                             <li> - {{project.name}}</li>

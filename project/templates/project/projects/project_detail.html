@@ -7,7 +7,7 @@
             <div class="icons-p">
                 {% if project.user_id == user.id %}
                     <div class="edit-project">
-                        <i id="edit-project" project-id="{{project.id}}" class="fas fa-pencil-alt"></i>
+                        <i id="edit-project-{{project.id}}" project-id="{{project.id}}" class="fas fa-pencil-alt"></i>
                     </div>
                 {% endif %}
                 <div class="view-project">

@@ -76,6 +76,25 @@ class ProjectViewTest(TestCase):
         self.assertEqual(response.json()['project_id'], project.id)
         self.client.logout()
 
+    def create_project_and_add_member(self):
+        self.client.login(username='email@test.com', password='test_password_61')
+        datas = {'project_name': 'Test'}
+        response = self.client.post(reverse('project:create_project'), datas)
+        project = Project.objects.get(name='Test')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()['project_name'], project.name)
+        self.assertEqual(response.json()['project_id'], project.id)
+
+        user = User.objects.get(pk=2)
+        datas = {'member_email': user.email, 'project_name': project.id}
+        new_response = self.client.post(reverse('project:add_member'), datas)
+        self.assertEqual(new_response.status_code, 200)
+        self.assertJSONEqual(
+            str(new_response.content, encoding='utf8'),
+            {'user_name': user.first_name}
+        )
+        self.client.logout()
+
     def test_create_project(self):
         datas = {'project_name': 'Test'}
         response = self.client.post(reverse('project:create_project'), datas)

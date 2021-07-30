@@ -18,8 +18,7 @@ a {
   color: inherit; }
 
 ul {
-  list-style: none;
-  padding-left: 0; }
+  list-style: none; }
 
 .modal {
   color: #1F2136; }
@@ -66,5 +65,7 @@ main .container-info-user, .container-info-member {
         background: linear-gradient(160deg, #ee6f4f, #13295B);
         padding: 20px;
         border-radius: 10px; }
+      main .container-info-user .user-detail .main-info .list-project-member, main .container-info-user .member-detail .main-info .list-project-member, .container-info-member .user-detail .main-info .list-project-member, .container-info-member .member-detail .main-info .list-project-member {
+        padding-left: 0; }
 
 /*# sourceMappingURL=personal_space.css.map */

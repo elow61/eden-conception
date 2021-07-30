@@ -24,10 +24,35 @@
                 const containerProjectDetail = $('.container-projects-details');
                 containerProjectDetail.empty();
                 containerProjectDetail.append(response.template);
+
+                displayProjectDetails(response.project_id);
                 
                 // Reload events
-                $.getScript("/static/js/projects/project_detail.js");
-                displayProjectDetails(response.project_id);
+                // $.getScript("/static/js/projects/project_detail.js");
+                let projectNames = $('.project-list').find('h4');
+                projectName.on('click', function () {
+                    let collaboratorName = $('.member-list').find('h4');
+            
+                    $.each(projectNames, (i) => {
+                        if ($(projectNames[i]).hasClass('selected')) {
+                            $(projectNames[i]).removeClass('selected');
+                        }
+                    })
+                    $.each(collaboratorName, (i) => {
+                        if ($(collaboratorName[i]).hasClass('selected')) {
+                            $(collaboratorName[i]).removeClass('selected');
+                        }
+                    })
+                    $(this).find('h4').addClass('selected');
+                    displayProjectDetails(response.project_id);
+                })
+
+                const buttonUpdate = containerProjectDetail.find('.edit-project > i');
+                buttonUpdate.on('click', function () {
+                    const projectId = $(this).attr('project-id');
+                    const url = '/' + projectId + '/update_form/'
+                    displayFormUpdateProject(url, projectId);
+                })
 
                 // Reload the add member form
                 $('#container-add-member').empty();
@@ -38,8 +63,7 @@
             } else {
                 viewModal('#dash-modal', response.error);
             }
-        });
-        form[0].reset();
+        }); 
     });
 
     /**
