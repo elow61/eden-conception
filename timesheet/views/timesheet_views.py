@@ -1,4 +1,4 @@
-""" All views for the user application """
+""" All views for the timesheet application """
 from django.forms import inlineformset_factory
 from django.views import View
 
@@ -11,6 +11,10 @@ class TimesheetView(View):
 
     @classmethod
     def update_timesheet(cls, request):
+        ''' When we update a task, this method is called
+            to update too the timesheets associed at her
+            and saved the changes.
+        '''
         TimeFormSet = inlineformset_factory(
             parent_model=Task,
             model=Timesheet,
@@ -29,6 +33,10 @@ class TimesheetView(View):
 
     @classmethod
     def create_formset(cls, current_task):
+        ''' To display the form to update the task,
+            this method is called for can update too
+            the timesheet.
+        '''
         TimeFormSet = inlineformset_factory(
             parent_model=Task,
             model=Timesheet,
