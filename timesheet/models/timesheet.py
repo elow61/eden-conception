@@ -1,3 +1,4 @@
+''' The timesheet model and his manager. '''
 from django.db import models
 from project.models.task import Task
 from user.models import User
@@ -6,7 +7,10 @@ from user.models import User
 class TimesheetManager(models.Manager):
 
     def _format_value(self, value):
-        if isinstance(value, float) or isinstance(value, int):
+        ''' Method to convert a float field in a time.
+            Return a sring with an hour format.
+        '''
+        if isinstance(value, (float,  int)):
             hours, minutes = divmod(abs(value) * 60, 60)
             minutes = round(minutes)
             if minutes == 60:
@@ -17,6 +21,8 @@ class TimesheetManager(models.Manager):
                 return f'-{int(hours):02d}:{int(minutes):02d}'
 
             return f'{int(hours):02d}:{int(minutes):02d}'
+
+        return None
 
 
 class Timesheet(models.Model):
