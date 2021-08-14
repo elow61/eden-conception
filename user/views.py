@@ -14,10 +14,12 @@ class RegisterView(View):
     form_class = UserCreationFormInherit
 
     def get(self, request):
+        ''' Method to display the page contains the register form '''
         context = {'form': self.form_class}
         return render(request, self.template_name, context)
 
     def post(self, request):
+        ''' Method to manage the submit register form '''
         if request.method == 'POST' and 'image' in request.FILES:
             form = self.form_class(request.POST, request.FILES)
 
@@ -46,7 +48,11 @@ class RegisterView(View):
                 login(request, user)
                 return redirect('project:dashboard')
 
-        return render(request, self.template_name, {'form': self.form_class(request.POST, request.FILES)})
+        return render(
+            request,
+            self.template_name,
+            {'form': self.form_class(request.POST, request.FILES)}
+        )
 
 
 class LogoutView(LogoutView):

@@ -5,7 +5,7 @@ from django.utils.translation import gettext_lazy as _
 
 
 class User(AbstractUser):
-
+    ''' Inherit AbstractUser and add new fields '''
     email = models.EmailField(
         _('email address'),
         blank=True,
