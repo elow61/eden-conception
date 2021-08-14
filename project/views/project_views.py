@@ -1,5 +1,5 @@
-""" All views for the user application """
-from django.shortcuts import render, redirect, get_object_or_404
+""" All views for the model project """
+from django.shortcuts import render
 from django.views import View
 from django.http import JsonResponse
 from django.template.loader import render_to_string
@@ -14,11 +14,15 @@ from user.models import User
 
 
 class ProjectView(View):
+    ''' Class to manage all interactions and views with the projects
+        and the dashboard.
+    '''
 
     template_name = 'project/projects/projects.html'
     form = CreateProjectForm
 
     def get(self, request):
+        ''' Method to view the dashboard. '''
         context = {}
         context['form'] = self.form
         context['form_add_member'] = AddMember(request)
@@ -39,12 +43,17 @@ class ProjectView(View):
             form_update = UpdateProjectForm(instance=current_project, initial=datas)
             context = {'form_update': form_update, 'project': current_project}
             res['project_id'] = project_id
-            res['template'] = render_to_string('project/projects/forms/update_project.html', context, request=request)
+            res['template'] = render_to_string(
+                template_name='project/projects/forms/update_project.html',
+                context=context,
+                request=request
+            )
 
         return JsonResponse(res)
 
     @staticmethod
     def add_member(request):
+        ''' Method called when the user add a member into a project. '''
         res = {}
         if request.method == 'POST':
             query = request.POST.get('member_email')
@@ -61,15 +70,22 @@ class ProjectView(View):
                     'projects': Project.objects_project.get_projects(request.user),
                     'members': Project.objects_project.get_members(request.user)
                 }
-                res['template'] = render_to_string('user/personal_space_member.html', context, request=request)
-                res['success'] = _(f'The member {new_user.get().first_name} has been add into the project : {project}.')
+                res['template'] = render_to_string(
+                    template_name='user/personal_space_member.html',
+                    context=context,
+                    request=request
+                )
+                res['success'] = _(
+                    f'The member {new_user.get().first_name} has been add into the project : {project}.')
             else:
-                res['error'] = _('No user email saved in database or the user is already in the project.')
+                res['error'] = _(
+                    'No user email saved in database or the user is already in the project.')
 
         return JsonResponse(res)
 
     @staticmethod
     def create_project(request):
+        ''' Method called when the user create a project. '''
         res = {}
         context = {}
         if request.user.is_authenticated:
@@ -87,11 +103,19 @@ class ProjectView(View):
 
                     context['projects'] = projects
                     context['form_add_member'] = AddMember(request)
-                    res['template_add_member'] = render_to_string('project/projects/forms/add_member.html', context, request=request)
+                    res['template_add_member'] = render_to_string(
+                        template_name='project/projects/forms/add_member.html',
+                        context=context,
+                        request=request
+                    )
 
                     res['project_name'] = query
                     res['project_id'] = project.id
-                    res['template'] = render_to_string('project/projects/project_detail.html', context, request=request)
+                    res['template'] = render_to_string(
+                        template_name='project/projects/project_detail.html',
+                        context=context,
+                        request=request
+                    )
             else:
                 res['error'] = _('No project name received.')
 
@@ -99,6 +123,7 @@ class ProjectView(View):
 
     @staticmethod
     def delete_project(request):
+        ''' Method called when the user delete a project. '''
         res = {}
         if request.method == 'POST':
             project_id = request.POST.get('project_id')
@@ -120,8 +145,16 @@ class ProjectView(View):
             if not context['members']:
                 res['remove_all_members'] = True
 
-            res['template'] = render_to_string('user/personal_space_member.html', context, request=request)
-            res['template_add_member'] = render_to_string('project/projects/forms/add_member.html', context, request=request)
+            res['template'] = render_to_string(
+                template_name='user/personal_space_member.html',
+                context=context,
+                request=request
+            )
+            res['template_add_member'] = render_to_string(
+                template_name='project/projects/forms/add_member.html',
+                context=context,
+                request=request
+            )
             res['project_id'] = project_id
             res['success'] = _('The project has been deleted.')
         else:
@@ -131,6 +164,7 @@ class ProjectView(View):
 
     @staticmethod
     def update_project(request):
+        ''' Method called when the user delete a project. '''
         res = {}
         if request.method == 'POST':
             current_project = Project.objects.get(id=request.POST.get('project_id'))
@@ -142,8 +176,16 @@ class ProjectView(View):
             context['form_add_member'] = AddMember(request)
             context['members'] = Project.objects_project.get_members(request.user)
 
-            res['template'] = render_to_string('user/personal_space_member.html', context, request=request)
-            res['template_add_member'] = render_to_string('project/projects/forms/add_member.html', context, request=request)
+            res['template'] = render_to_string(
+                template_name='user/personal_space_member.html',
+                context=context,
+                request=request
+            )
+            res['template_add_member'] = render_to_string(
+                template_name='project/projects/forms/add_member.html',
+                context=context,
+                request=request
+            )
             res['project_id'] = current_project.id
             res['project_name'] = current_project.name
 
@@ -151,6 +193,9 @@ class ProjectView(View):
 
     @staticmethod
     def get_statistics(request):
+        ''' Method called into the dashboard when you select a project
+            to display the statistics of him.
+        '''
         res = {}
         if request.method == 'POST':
             project = Project.objects.get(id=request.POST.get('project_id'))

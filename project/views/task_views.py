@@ -1,6 +1,6 @@
-""" All views for the user application """
+""" All views for the model task """
 from datetime import datetime
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404
 from django.views import View
 from django.http import JsonResponse
 from django.template.loader import render_to_string
@@ -8,17 +8,17 @@ from django.utils.translation import gettext_lazy as _
 
 from project.forms.task_forms import UpdateTaskForm
 from project.models.project import Project
-from project.models.list import List
 from project.models.task import Task
 from user.models import User
 from timesheet.views.timesheet_views import TimesheetView
 
 
 class TaskView(View):
-
+    ''' Class to manage all interactions and views with the tasks. '''
     template_name = 'project/tasks/tasks.html'
 
     def get(self, request, project_id, task_id):
+        ''' Method to view the detail of a task. '''
         project = get_object_or_404(Project, pk=project_id)
         task = get_object_or_404(Task, pk=task_id)
         context = {'project': project, 'task': task}
@@ -39,15 +39,24 @@ class TaskView(View):
             }
 
             form_update = UpdateTaskForm(instance=current_task, initial=datas)
-            context = {'form_update': form_update, 'formset': TimesheetView.create_formset(current_task), 'task': current_task}
+            context = {
+                'form_update': form_update,
+                'formset': TimesheetView.create_formset(current_task),
+                'task': current_task
+            }
 
             res['task_id'] = task_id
-            res['template'] = render_to_string('project/tasks/forms/update_task.html', context, request=request)
+            res['template'] = render_to_string(
+                template_name='project/tasks/forms/update_task.html',
+                context=context,
+                request=request
+            )
 
         return JsonResponse(res)
 
     @staticmethod
     def update_task(request):
+        ''' Method to update a task. '''
         res = {}
         if request.method == 'POST':
             current_task = Task.objects.get(id=request.POST.get('task_id'))
@@ -78,6 +87,7 @@ class TaskView(View):
 
     @staticmethod
     def delete_task(request):
+        ''' Method to delete a task. '''
         res = {}
         if request.method == 'POST':
             task_to_delete = Task.objects.get(id=request.POST.get('task_id'))

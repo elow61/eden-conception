@@ -1,4 +1,4 @@
-""" All views for the user application """
+""" All views for the model list """
 import json
 from django.shortcuts import render, get_object_or_404
 from django.views import View
@@ -15,11 +15,14 @@ from user.models import User
 
 
 class ListView(View):
+    ''' Class to manage all interactions and views with the lists '''
 
     template_name = 'project/lists/lists.html'
     form = CreateListForm
 
     def get(self, request, project_id):
+        ''' Method to view all lists of project choosen. '''
+
         project = get_object_or_404(Project, pk=project_id)
         lists = project.list_set.all()
 
@@ -32,6 +35,9 @@ class ListView(View):
         return render(request, self.template_name, context)
 
     def post(self, request, list_id):
+        ''' Method post to display the form
+            to update a list.
+        '''
         res = {}
         if request.method == 'POST':
             current_list = List.objects.get(id=list_id)
@@ -40,12 +46,17 @@ class ListView(View):
             form_update = UpdateListForm(instance=current_list, initial=datas)
             context = {'form_update': form_update, 'list': current_list}
             res['list_id'] = list_id
-            res['template'] = render_to_string('project/lists/forms/update_list.html', context, request=request)
+            res['template'] = render_to_string(
+                template_name='project/lists/forms/update_list.html',
+                context=context,
+                request=request
+            )
 
         return JsonResponse(res)
 
     @classmethod
     def create_list(cls, request):
+        ''' method to create a list.'''
         res = {}
         context = {}
         form = cls.form(request.POST)
@@ -64,7 +75,11 @@ class ListView(View):
 
             res['list_name'] = name
             res['list_id'] = new_list.id
-            res['template'] = render_to_string('project/lists/new_list.html', context, request=request)
+            res['template'] = render_to_string(
+                template_name='project/lists/new_list.html',
+                context=context,
+                request=request
+            )
         else:
             res['error'] = _('Please, write a list name.')
 
@@ -72,6 +87,7 @@ class ListView(View):
 
     @staticmethod
     def delete_list(request):
+        ''' method to delete a list.'''
         res = {}
         if request.method == 'POST':
             list_to_delete = List.objects.get(id=request.POST.get('list_id'))
@@ -89,6 +105,7 @@ class ListView(View):
 
     @staticmethod
     def create_task(request):
+        ''' method to create a task.'''
         res = {}
         if request.method == 'POST':
             user = User.objects.get(id=request.user.id)
@@ -119,6 +136,10 @@ class ListView(View):
 
     @staticmethod
     def update_order_task(request):
+        ''' method to update the order of task.
+            Called when we drag and drop a task into
+            an another list.
+        '''
         res = {}
         if request.method == 'POST':
             datas = json.loads(request.POST.get('datas'))
@@ -128,6 +149,7 @@ class ListView(View):
 
     @staticmethod
     def update_list(request):
+        ''' Method to update the name of list. '''
         res = {}
         if request.method == 'POST':
             current_list = List.objects.get(id=request.POST.get('list_id'))
