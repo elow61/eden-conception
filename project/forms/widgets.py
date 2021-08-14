@@ -1,14 +1,17 @@
+''' Widget to manipulate float fields in hours '''
+import math
+import re
 from django import forms
 from django.forms import widgets
 from django.core.exceptions import ValidationError
 
 
+
 class HourWidget(widgets.TextInput):
+    ''' This widget manipulate a field float in hour '''
 
     def _format_value(self, value):
-        if isinstance(value, float) or isinstance(value, int):
-            import math
-
+        if isinstance(value, (float, int)):
             hours = math.floor(value)
             minutes = (value - hours) * 60
             value = f'{int(hours):02d}:{int(minutes):02d}'
@@ -24,12 +27,12 @@ class HourWidget(widgets.TextInput):
 
 
 class HourField(forms.Field):
+    ''' This class create a new field for a form '''
     widget = HourWidget
 
     def clean(self, value):
         super(HourField, self).clean(value)
 
-        import re
         match = re.match("^([0-9]{1,2}):([0-9]{2})$", value)
         if not match:
             raise ValidationError("Please enter a valid hour ( ex: 12:34 )")
