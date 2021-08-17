@@ -35,7 +35,7 @@ class RegisterView(View):
 
                 user = User.objects.filter(email=email)
                 if not user.exists():
-                    if request.FILES['image']:
+                    if request.FILES:
                         file = request.FILES['image']
                         image = default_storage.save(file.name, file)
                         user = User.objects.create_user(
