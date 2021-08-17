@@ -1,4 +1,5 @@
 ''' Forms to the user application '''
+from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from user.models import User
 

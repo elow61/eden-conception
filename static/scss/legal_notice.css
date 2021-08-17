@@ -11,7 +11,7 @@ html {
 
 body {
   margin: 0;
-  color: #dbdada; }
+  color: #c9cad7; }
 
 a {
   text-decoration: none;
@@ -19,6 +19,9 @@ a {
 
 ul {
   list-style: none; }
+
+.modal {
+  color: #1F2136; }
 
 .m-auto {
   margin: auto; }
@@ -43,7 +46,7 @@ ul {
   align-items: center;
   height: inherit; }
   .main-legal-notice .container-legal-notice {
-    border: 1px solid #dbdada;
+    border: 1px solid #c9cad7;
     padding: 40px 40px 0 40px;
     margin: 30px; }
     .main-legal-notice .container-legal-notice h1 {

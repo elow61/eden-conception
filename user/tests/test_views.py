@@ -1,7 +1,9 @@
 """ All tests for the user views application """
-from django.test import TestCase, override_settings
-from django.db.models.query import QuerySet
-from user.models import User
+from django.test import TestCase
+from django.core.files.uploadedfile import SimpleUploadedFile
+from io import BytesIO
+from PIL import Image
+from django.core.files.base import File
 
 
 class RegisterViewTest(TestCase):
@@ -13,9 +15,18 @@ class RegisterViewTest(TestCase):
             'first_name': 'test_first_name',
             'last_name': 'test_last_name',
             'email': 'email@test.com',
+            'image': self.get_image_file(),
             'password1': 'test_password_1',
             'password2': 'test_password_1',
         }
+
+    @staticmethod
+    def get_image_file(name='test.png', ext='png', size=(50, 50), color=(256, 0, 0)):
+        file_obj = BytesIO()
+        image = Image.new("RGB", size=size, color=color)
+        image.save(file_obj, ext)
+        file_obj.seek(0)
+        return File(file_obj, name=name)
 
     def test_get_request(self):
         response = self.client.get('/register/')

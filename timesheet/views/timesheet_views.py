@@ -26,8 +26,7 @@ class TimesheetView(View):
         if formset.is_valid():
             formset.save()
         else:
-            errors = formset.errors
-            return errors
+            return formset.errors
 
         return True
 

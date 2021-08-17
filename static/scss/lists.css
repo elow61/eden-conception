@@ -20,6 +20,9 @@ a {
 ul {
   list-style: none; }
 
+.modal {
+  color: #1F2136; }
+
 .m-auto {
   margin: auto; }
 
@@ -133,7 +136,8 @@ body {
             width: 100%;
             font-weight: bold;
             font-size: 1em !important;
-            margin: 0 !important; }
+            margin: 0 !important;
+            text-align: center; }
           body main .container-project-list .project-list .header-list .form-update-list .update-list {
             position: absolute;
             display: flex;

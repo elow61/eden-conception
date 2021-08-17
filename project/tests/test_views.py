@@ -52,10 +52,7 @@ class ProjectViewTest(TestCase):
         self.client.login(username='email@test.com', password='test_password_61')
         response = self.client.post(reverse('project:add_member'), datas)
         self.assertEqual(response.status_code, 200)
-        self.assertJSONEqual(
-            str(response.content, encoding='utf8'),
-            {'user_name': user.first_name}
-        )
+        self.assertEqual(response.json()['user_name'], user.first_name)
         self.client.logout()
 
     def test_add_member(self):
@@ -107,10 +104,7 @@ class ProjectViewTest(TestCase):
         self.client.login(username='email@test.com', password='test_password_61')
         response = self.client.post(reverse('project:delete_project'), datas)
         self.assertEqual(response.status_code, 200)
-        self.assertJSONEqual(
-            str(response.content, encoding='utf8'),
-            {'project_id': str(project.id), 'success': 'The project has been deleted'}
-        )
+        self.assertEqual(response.json()['project_id'], str(project.id))
         self.client.logout()
 
     def test_delete_project(self):
@@ -126,10 +120,7 @@ class ProjectViewTest(TestCase):
         self.client.login(username='email@test.com', password='test_password_61')
         response = self.client.post(reverse('project:update_project'), datas)
         self.assertEqual(response.status_code, 200)
-        self.assertJSONEqual(
-            str(response.content, encoding='utf8'),
-            {'project_id': project.id, 'project_name': 'New project'}
-        )
+        self.assertEqual(response.json()['project_id'], project.id)
         self.client.logout()
     
     def test_update_project(self):
