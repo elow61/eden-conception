@@ -20,28 +20,40 @@ class RegisterView(View):
 
     def post(self, request):
         ''' Method to manage the submit register form '''
-        if request.method == 'POST' and 'image' in request.FILES:
-            form = self.form_class(request.POST, request.FILES)
+        if request.method == 'POST':
+            if 'image' in request.FILES:
+                form = self.form_class(request.POST, request.FILES)
+            else:
+                form = self.form_class(request.POST)
 
             if form.is_valid():
                 username = form.cleaned_data['username']
                 first_name = form.cleaned_data['first_name']
                 last_name = form.cleaned_data['last_name']
-                file = request.FILES['image']
-                image = default_storage.save(file.name, file)
                 email = form.cleaned_data['email']
                 password1 = form.cleaned_data['password1']
 
                 user = User.objects.filter(email=email)
                 if not user.exists():
-                    user = User.objects.create_user(
-                        username=username,
-                        first_name=first_name,
-                        last_name=last_name,
-                        image=image,
-                        email=email,
-                        password=password1,
-                    )
+                    if request.FILES['image']:
+                        file = request.FILES['image']
+                        image = default_storage.save(file.name, file)
+                        user = User.objects.create_user(
+                            username=username,
+                            first_name=first_name,
+                            last_name=last_name,
+                            image=image,
+                            email=email,
+                            password=password1,
+                        )
+                    else:
+                        user = User.objects.create_user(
+                            username=username,
+                            first_name=first_name,
+                            last_name=last_name,
+                            email=email,
+                            password=password1,
+                        )
                 else:
                     user = user.first()
 
