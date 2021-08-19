@@ -18,6 +18,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.contrib.auth import views as v
 from django.conf.urls.static import static
+from django.views.i18n import JavaScriptCatalog
 
 
 urlpatterns = [
@@ -25,6 +26,7 @@ urlpatterns = [
     path('', include('static_page.urls', namespace='static_page')),
     path('', include('user.urls', namespace='user')),
     path('', include('project.urls', namespace='project')),
+    path('jsi18n/', JavaScriptCatalog.as_view(), name='javascript-catalog'),
     path(
         'reset_password/',
         v.PasswordResetView.as_view(template_name='user/password_reset.html'),

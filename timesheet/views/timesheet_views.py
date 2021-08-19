@@ -19,7 +19,7 @@ class TimesheetView(View):
             parent_model=Task,
             model=Timesheet,
             form=UpdateTimesheetForm,
-            can_delete=True,
+            can_delete=False,
         )
         current_task = Task.objects.get(id=request.POST.get('task_id'))
         formset = TimeFormSet(request.POST, instance=current_task)
@@ -40,7 +40,7 @@ class TimesheetView(View):
             parent_model=Task,
             model=Timesheet,
             form=UpdateTimesheetForm,
-            can_delete=True,
+            can_delete=False,
             extra=1,
             fields=('created_at', 'user', 'description', 'unit_hour')
         )

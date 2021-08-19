@@ -37,16 +37,16 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>Created at</th>
-                            <th>User</th>
-                            <th>Description</th>
-                            <th>Unit hour</th>
+                            <th>{% translate 'Created at' %}</th>
+                            <th>{% translate 'User' %}</th>
+                            <th>{% translate 'Description' %}</th>
+                            <th>{% translate 'Unit hour' %}</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for timesheet_line in task.timesheet_set.all %}
                             {% if timesheet_line %}
-                                <tr>
+                                <tr class="no-update">
                                     <td>{{timesheet_line.created_at.day}}/{{timesheet_line.created_at.month}}/{{timesheet_line.created_at.year}}</td>
                                     <td>{{timesheet_line.user}}</td>
                                     <td>{{timesheet_line.description}}</td>

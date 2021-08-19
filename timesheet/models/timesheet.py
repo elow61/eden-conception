@@ -1,5 +1,6 @@
 ''' The timesheet model and his manager. '''
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 from project.models.task import Task
 from user.models import User
 
@@ -27,10 +28,10 @@ class TimesheetManager(models.Manager):
 
 class Timesheet(models.Model):
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now=False, auto_now_add=False, blank=True, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name=_('User'))
+    created_at = models.DateTimeField(auto_now=False, auto_now_add=False, blank=True, null=True, verbose_name=_('Created at'))
     description = models.CharField(max_length=200)
-    unit_hour = models.FloatField(default=0)
+    unit_hour = models.FloatField(default=0, verbose_name=_('Unit hour'))
     task = models.ForeignKey(Task, on_delete=models.CASCADE)
 
     objects = models.Manager()

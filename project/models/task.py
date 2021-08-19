@@ -1,5 +1,6 @@
 ''' The model Task and his manager '''
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 from django.db.models import F
 from project.models.list import List
 from user.models import User
@@ -67,13 +68,13 @@ class Task(models.Model):
     name = models.CharField(max_length=120)
     description = models.TextField()
     project_list = models.ForeignKey(List, on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)
-    assigned_to = models.ForeignKey(User, on_delete=models.CASCADE)
-    deadline = models.DateField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name=_('Created at'))
+    assigned_to = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name=_('Assigned to '))
+    deadline = models.DateField(blank=True, null=True, verbose_name=_('Deadline '))
     index = models.IntegerField(db_index=True)
-    planned_hours = models.FloatField(default=0)
-    effective_hours = models.FloatField(default=0)
-    remaining_hours = models.FloatField(default=0)
+    planned_hours = models.FloatField(default=0, verbose_name=_('Planned hours '))
+    effective_hours = models.FloatField(default=0, verbose_name=_('Effective hours '))
+    remaining_hours = models.FloatField(default=0, verbose_name=_('Remaining hours '))
 
     objects = models.Manager()
     objects_task = TaskManager()

@@ -14,16 +14,17 @@ class CreateTaskForm(forms.Form):
 
 class UpdateTaskForm(ModelForm):
     ''' Form to update a task '''
-    deadline = DateField(input_formats=['%d-%m-%Y'], required=True)
+    deadline = DateField(input_formats=['%d/%m/%Y'], required=True, label=_('Deadline'))
 
     def __init__(self, instance, *args, **kwargs):
         super(UpdateTaskForm, self).__init__(*args, **kwargs)
         project = List.objects.get(pk=instance.project_list.id).project
         self.fields['assigned_to'] = forms.ModelChoiceField(
             queryset=project.user_ids.all(),
-            empty_label=None
+            empty_label=None,
+            label=_('Assigned to')
         )
-        self.fields['planned_hours'] = HourField()
+        self.fields['planned_hours'] = HourField(label=_('Planned hours'))
 
     class Meta:
         ''' Class Meta is used to target the model and her fields '''

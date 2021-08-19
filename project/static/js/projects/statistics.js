@@ -29,7 +29,7 @@
             var chart = am4core.create(htmlElement, am4charts.PieChart);
             
             let title = chart.titles.create();
-            title.text = "Progression";
+            title.text = gettext('Progress');
             title.fontSize = 25;
             title.marginBottom = 30;
 
@@ -84,12 +84,12 @@
             chart.colors.step = 2;
 
             let title = chart.titles.create();
-            title.text = "Effective hours";
+            title.text = gettext('Effective hours');
             title.fontSize = 25;
             title.marginBottom = 30;
 
             let label = chart.chartContainer.createChild(am4core.Label);
-            label.text = "List / Number hours";
+            label.text = gettext('List / Number hours');
             label.align = "center";
             
             chart.legend = new am4charts.Legend()
@@ -126,8 +126,8 @@
 
             chart.data = datas
 
-            createSeries('planned_hours', 'Planned hours');
-            createSeries('effective_hours', 'Effective hours');
+            createSeries('planned_hours', gettext('Planned hours'));
+            createSeries('effective_hours', gettext('Effective hours'));
             
             function arrangeColumns() {
             
@@ -176,12 +176,12 @@
             var chart = am4core.create(htmlElement, am4charts.XYChart);
             
             let title = chart.titles.create();
-            title.text = "Time";
+            title.text = gettext('Time');
             title.fontSize = 25;
             title.marginBottom = 30;
 
             let label = chart.chartContainer.createChild(am4core.Label);
-            label.text = "Hour / Month";
+            label.text = gettext('"Hour / Month"');
             label.align = "center";
 
             // Add data
