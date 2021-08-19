@@ -41,7 +41,7 @@ urlpatterns = [
         'reset_password_complete/',
         v.PasswordResetCompleteView.as_view(template_name='user/password_reset_complete.html'),
         name='password_reset_complete'),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
 
 if settings.DEBUG:
     import debug_toolbar

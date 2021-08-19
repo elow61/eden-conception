@@ -63,7 +63,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'debug_toolbar',
     'sass_processor',
-    # 'fontawesome_free',
+    'fontawesome_free',
 ]
 
 MIDDLEWARE = [
