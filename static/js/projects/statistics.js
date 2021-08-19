@@ -76,6 +76,7 @@
         }
 
         window.get_time = function (datas, projectId) {
+            console.log(datas);
             am4core.useTheme(am4themes_edenConception);
             am4core.useTheme(am4themes_animated);
         
@@ -172,6 +173,7 @@
             am4core.useTheme(am4themes_edenConception);
             am4core.useTheme(am4themes_animated);
             
+            console.log(datas)
             let htmlElement = 'project-history-' + projectId
             var chart = am4core.create(htmlElement, am4charts.XYChart);
             

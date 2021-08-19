@@ -118,18 +118,3 @@ main .container-projects-details {
         }
     }
 }
-
-// Responsive
-
-main section .container-projects-details .project-detail {
-    @include media-to(768px) {
-        .main-info {
-            flex-wrap:wrap;
-    
-            .main-user, .last-modification, .task-count {
-                width: 100%;
-                margin-bottom: 10px;
-            }
-        }
-    }
-}

@@ -4,6 +4,7 @@
     const buttonUpdate = $('.fa-pencil-alt');
 
     buttonUpdate.on('click', function () {
+        console.log('coucou')
         const listId = $(this).attr('list-id');
         const url = '/' + listId + '/update_list_form/'
         displayFormUpdateList(url, listId);
@@ -18,7 +19,7 @@
     window.displayFormUpdateList = function (url, listId) {
         let csrfToken = getCookie('csrftoken');
         let data = {'list_id': listId}
-
+        console.log(data)
         return ajaxMethod(csrfToken, 'post', url, data).then(response => {
             const containerMain = $("#project-list-" + response.list_id);
             const containerName = containerMain.find('.header-list');

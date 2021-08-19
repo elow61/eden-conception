@@ -1,7 +1,7 @@
 (function($) {
     'use strict';
 
-    const buttonUpdate = $('.edit-project').find('i');
+    const buttonUpdate = $('#edit-project');
     
     buttonUpdate.on('click', function () {
         const projectId = $(this).attr('project-id');
@@ -21,8 +21,6 @@
     window.displayFormUpdateProject = function (url, projectId) {
         let csrfToken = getCookie('csrftoken');
         let data = {'project_id': projectId}
-
-        console.log('Yo !')
         
         return ajaxMethod(csrfToken, 'post', url, data).then(response => {
             const containerMain = $("#project-detail-" + response.project_id);
@@ -65,17 +63,13 @@
             projectName.on('click', function () {
                 displayProjectDetails(response.project_id);
             })
-
-            // Reload the add member form
-            $('#container-add-member').empty();
-            $('#container-add-member').append(response.template_add_member);
-            $('#btn-add-member').off();
-            $.getScript("/static/js/projects/add_member.js");
-
-            // Reload the view info member
-            $('#container-info-member').empty();
-            $('#container-info-member').append(response.template);
-            $.getScript("/static/js/personal_space.js");
+            
+            // Reload events
+            const buttonUpdate = $('#edit-project');
+            buttonUpdate.on('click', function () {
+                const url = '/' + response.project_id + '/update/'
+                displayFormUpdateProject(url, response.project_id);
+            })
         })
     }
 

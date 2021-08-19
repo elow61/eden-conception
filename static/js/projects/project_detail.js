@@ -9,16 +9,10 @@
      */
     projectName.on('click', function () {
         const projectId = parseInt($(this).attr('project-id'));
-        let collaboratorName = $('.member-list').find('h4');
 
         $.each(projectName, (i) => {
             if ($(projectName[i]).hasClass('selected')) {
                 $(projectName[i]).removeClass('selected');
-            }
-        })
-        $.each(collaboratorName, (i) => {
-            if ($(collaboratorName[i]).hasClass('selected')) {
-                $(collaboratorName[i]).removeClass('selected');
             }
         })
         $(this).addClass('selected');
@@ -31,12 +25,22 @@
      */
     window.displayProjectDetails = function(projectId) {
         const projectDetail = $('.project-detail');
+        const formCreateProject = $('.container-create-project');
+        const formAddMember = $('.container-add-member');
         const containerProjectDetail = $('.container-projects-details');
-        
-        hideElement($('#container-info-member'), 'closed');
-        hideElement($('#container-create-project'), 'closed');
-        hideElement($('#container-add-member'), 'closed');
-        hideElement($('#container-info-user'), 'closed');
+        const containerInfoUser = $('#container-info-user');
+
+        if (!formCreateProject.hasClass('closed')) {
+            formCreateProject.addClass('closed');
+        }
+
+        if (!formAddMember.hasClass('closed')) {
+            formAddMember.addClass('closed');
+        }
+
+        if (!containerInfoUser.hasClass('closed')) {
+            containerInfoUser.addClass('closed');
+        }
 
         $.each(projectDetail, (i) => {
             if (!$(projectDetail[i]).hasClass('d-none')) {
@@ -60,7 +64,6 @@
         let datas = {'project_id': projectId};
 
         return ajaxMethod(csrfToken, 'post', '/get_statistics/', datas).then((response) => {
-            console.log(' - I Get the stats - in project_detail.js ')
             get_stats(response.nb_task, datas['project_id']);
             get_time(response.time, datas['project_id']);
             get_history(response.history, datas['project_id']);
@@ -89,12 +92,12 @@
             let datas = {'project_id': projectId};
 
             return ajaxMethod(csrfToken, 'post', '/get_statistics/', datas).then((response) => {
-                console.log(' - I Get the stats - in viewDashboard ')
                 get_stats(response.nb_task, datas['project_id']);
                 get_time(response.time, datas['project_id']);
                 get_history(response.history, datas['project_id']);
             })
         }
     }
+    viewDashboard();
     
 })(jQuery);

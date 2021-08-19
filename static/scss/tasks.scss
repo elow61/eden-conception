@@ -106,9 +106,7 @@ main {
 
             table {
                 td input[id*="description"] {width: 500px;}
-                td input[id*="unit_hour"] {width:70px;}
-                td:nth-child(3) {width: 500px;}
-                td:nth-child(4) {width:70px;}
+                td input[id*="unit_hour"] {width:65px;}
             }
         }
     }
@@ -153,21 +151,4 @@ a.ui-button:active,
     border: 1px solid $dark_blue !important;
     background: $dark_blue !important;
     color: $white !important;
-}
-
-// Responsive
-body {
-    @include media-to(1130px) {
-        overflow: auto;
-    
-        main {
-            height: auto;
-            flex-direction: column;
-
-            #main-messages {
-                position: inherit;
-                width: auto;
-            }
-        }
-    }
 }
