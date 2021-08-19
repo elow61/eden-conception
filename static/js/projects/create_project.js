@@ -13,7 +13,6 @@
     form.submit((e) =>  {
         e.preventDefault();
         submitForm(url, form).then(response => {
-
             if (response.project_name) {
                 // Management project name in list
                 let projectName = $('<li><h4 project-id=' + response.project_id + '>' + response.project_name + '</h4></li>').hide();
@@ -25,17 +24,46 @@
                 const containerProjectDetail = $('.container-projects-details');
                 containerProjectDetail.empty();
                 containerProjectDetail.append(response.template);
+
+                displayProjectDetails(response.project_id);
                 
-                // Reload event in the new elements
+                // Reload events
+                // $.getScript("/static/js/projects/project_detail.js");
+                let projectNames = $('.project-list').find('h4');
                 projectName.on('click', function () {
+                    let collaboratorName = $('.member-list').find('h4');
+            
+                    $.each(projectNames, (i) => {
+                        if ($(projectNames[i]).hasClass('selected')) {
+                            $(projectNames[i]).removeClass('selected');
+                        }
+                    })
+                    $.each(collaboratorName, (i) => {
+                        if ($(collaboratorName[i]).hasClass('selected')) {
+                            $(collaboratorName[i]).removeClass('selected');
+                        }
+                    })
+                    $(this).find('h4').addClass('selected');
                     displayProjectDetails(response.project_id);
                 })
 
+                const buttonUpdate = containerProjectDetail.find('.edit-project > i');
+                buttonUpdate.on('click', function () {
+                    const projectId = $(this).attr('project-id');
+                    const url = '/' + projectId + '/update_form/'
+                    displayFormUpdateProject(url, projectId);
+                })
+
+                // Reload the add member form
+                $('#container-add-member').empty();
+                $('#container-add-member').append(response.template_add_member);
+                $('#btn-add-member').off();
+                $.getScript("/static/js/projects/add_member.js");
+
             } else {
-                console.log(response.error);
+                viewModal('#dash-modal', response.error);
             }
-        });
-        form[0].reset();
+        }); 
     });
 
     /**
@@ -46,24 +74,15 @@
         const projectDetail = $('.project-detail');
 
         $.each(projectDetail, (i) => {
-            if (!$(projectDetail[i]).hasClass('d-none')) {
-                $(projectDetail[i]).addClass('d-none');
-                $('.element-dashboard').addClass('is-height');
-            }
+            hideElement($(projectDetail[i]), 'd-none');
         })
-        if (!$('.container-projects-details').hasClass('d-none')) {
-            $('.container-projects-details').addClass('d-none');
-        }
 
-        if (!$('#container-add-member').hasClass('closed')) {
-            $('#container-add-member').addClass('closed');
-        }
+        hideElement($('.container-projects-details'), 'd-none')
+        hideElement($('#container-add-member'), 'closed');
+        hideElement($('#container-info-user'), 'closed');
+        hideElement($('#container-info-member'), 'closed');
 
-        if (!$('#container-info-user').hasClass('closed')) {
-            $('#container-info-user').addClass('closed');
-            $('.element-dashboard').addClass('is-height');
-        }
-
+        $('.element-dashboard').addClass('is-height');
         $('.container-create-project').toggleClass('closed');
     });
 })(jQuery);

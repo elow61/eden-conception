@@ -32,10 +32,15 @@
             containerMain.append(response.template);
 
             // Events with new DOM Elements
-            const buttonCanceled = $('#cancel-task');
-            buttonCanceled.on('click', function (e) {
+            $('#cancel-task').on('click', function (e) {
                 e.preventDefault();
                 cancelUpdateTask(containerInfo);
+            })
+
+            $('#delete-task').on('click', function () {
+                const taskId = $(this).attr('task-id');
+                const url = '/delete_task/'
+                deleteTask(url, taskId);
             })
 
             $('#form-update-task').submit(function (e) {
@@ -53,6 +58,15 @@
                 dateFormat: "dd/mm/yy",
             })
         })
+    }
+
+
+    window.getMessage = function (message) {
+        $('#delete-task-modal').append('<p>' + message + '</p>');
+        $('#delete-task-modal').modal('show');
+        setTimeout(function () {
+            $("#delete-task-modal").modal("hide");
+        }, 3000);
     }
 
     /**
@@ -74,6 +88,21 @@
      */
     window.updateTask = function (url, form) {
         submitForm(url, form).then(response => {
+
+            if(response.error){
+                let  htmlList = document.createElement('ul');
+                $.each(response.error, (i, v) => {
+                    let htmlLi = document.createElement('li');
+                    htmlLi.append(i + ':' + v[0])
+                    htmlList.append(htmlLi);
+                })
+                $('#task-modal').append(htmlList);
+                $('#task-modal').modal('show');
+                setTimeout(function () {
+                    $("#task-modal").modal("hide");
+                    $('.jquery-modal').hide();
+                }, 5000);
+            }
 
             const containerMain = $('#main-task');
             containerMain.find('#form-update-task').remove();
@@ -131,12 +160,5 @@
 
     if (urlParam('success')) {
         getMessage('The task has been deleted');
-    }
-    window.getMessage = function (message) {
-        $('#delete-task-modal').append('<p>' + message + '</p>');
-        $('#delete-task-modal').modal('show');
-        setTimeout(function () {
-            $("#delete-task-modal").modal("hide");
-        }, 3000);
     }
 })(jQuery);

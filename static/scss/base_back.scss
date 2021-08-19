@@ -62,10 +62,11 @@ main {
         align-items: center;
 
         // Create project add member
-        .container-info-user.closed { display: none}
-        .container-add-member.closed { display: none}
-        .container-create-project.closed { display: none}
-        .container-create-project, .container-add-member, .container-info-user { display: block};
+        .container-info-user.closed { display: none;}
+        .container-add-member.closed { display: none;}
+        .container-create-project.closed { display: none;}
+        .container-info-member.closed {display: none;}
+        .container-create-project, .container-add-member, .container-info-user, .container-info-member { display: block;}
 
         .create-project, .add-member {
             border: 1px solid $white;
@@ -150,9 +151,5 @@ body {
         }
 
         main .container-projects-details .project-detail .main-project-detail .display {display: none;}
-    }
-
-    @include media-to(1300px) {
-        main .container-projects-details .project-detail .main-project-detail hr {width: auto;}
     }
 }
