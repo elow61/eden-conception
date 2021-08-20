@@ -2,6 +2,7 @@
 from django.forms import inlineformset_factory
 from django.views import View
 
+from project.models.list import List
 from project.models.task import Task
 from timesheet.models.timesheet import Timesheet
 from timesheet.forms.timesheet_forms import UpdateTimesheetForm
@@ -15,14 +16,14 @@ class TimesheetView(View):
             to update too the timesheets associed at her
             and saved the changes.
         '''
+        current_task = Task.objects.get(id=request.POST.get('task_id'))
         TimeFormSet = inlineformset_factory(
             parent_model=Task,
             model=Timesheet,
             form=UpdateTimesheetForm,
             can_delete=False,
         )
-        current_task = Task.objects.get(id=request.POST.get('task_id'))
-        formset = TimeFormSet(request.POST, instance=current_task)
+        formset = TimeFormSet(request.POST, instance=current_task, form_kwargs={'current_task': current_task})
         if formset.is_valid():
             formset.save()
         else:
@@ -44,4 +45,5 @@ class TimesheetView(View):
             extra=1,
             fields=('created_at', 'user', 'description', 'unit_hour')
         )
-        return TimeFormSet(instance=current_task)
+        formset = TimeFormSet(instance=current_task, form_kwargs={'current_task': current_task})
+        return formset
