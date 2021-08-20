@@ -20,7 +20,7 @@ Pour la base de données :
 - DB_PASS = 'Mot de passe de la base de données'
 - DB_HOST = 'localhost'
 
-Pour le serveur SMTP (Fonction de réinitialisation de mot de passe)
+Pour le serveur SMTP (Fonction de réinitialisation de mot de passe) :
 - EMAIL_HOST = 'L'hôte pour le serveur SMTP' ex : smtp.gmail.com
 - EMAIL_USER = 'L'email de l'utilisateur du serveur SMTP'
 - EMAIL_PASS = 'Le mot de passe'
@@ -55,4 +55,5 @@ Pour récupérer les fichiers statiques, 2 commandes doivent être lancées dans
     ./manage.py collectstatic
 
 ** Visiter l'application web
-Voici le lien du projet : 
+
+Voici le lien du projet : http://eden-conception.elodie-meunier.fr/
