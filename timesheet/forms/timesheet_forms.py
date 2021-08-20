@@ -12,6 +12,7 @@ class UpdateTimesheetForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super(UpdateTimesheetForm, self).__init__(*args, **kwargs)
         self.fields['unit_hour'] = HourField(label=_('Unit hour'))
+        self.fields['unit_hour'].widget.attrs['placeholder'] = '00:00'
 
     class Meta:
         ''' Is used to target the model and her field '''

@@ -2,7 +2,10 @@
 <div id="project-list-{{new_list.id}}" class="project-list">
     <div class="header-list">
         <h4>{{new_list.name}}</h4>
-        <div class="delete-list">
+        <div class="delete-update-list">
+            <div class="edit-list">
+                <i list-id="{{new_list.id}}" class="fas fa-pencil-alt"></i>
+            </div>
             <form method="post" class="form-delete-list">
                 {% csrf_token %}
                 <input type="hidden" name="list_id" value="{{ new_list.id }}">

@@ -172,11 +172,10 @@ msgid "You must add a project before."
 msgstr "Vous devez ajouter un projet avant."
 
 #: project/views/project_views.py:79
-msgid ""
-"The member {new_user.get().first_name} has been add into the project : "
+msgid "The member {new_user.get().first_name} has been add into the project : "
 "{project}."
-msgstr ""
-"Le membre {new_user.get().first_name} a été ajouté au projet : {project}."
+msgstr "Le membre {new_user.get().first_name} a été ajouté au projet : "
+"{project}."
 
 #: project/views/project_views.py:82
 msgid "No user email saved in database or the user is already in the project."

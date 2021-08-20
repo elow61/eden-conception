@@ -27,6 +27,7 @@
                 containerLists.append(response.template);
 
                 // Reload event with the new elements
+                // # Delete list
                 const formDelete = containerLists.find('#project-list-'+response.list_id).find('.form-delete-list');
                 formDelete.submit(function (e) {
                     let url = '/delete_list/'
@@ -34,6 +35,7 @@
                     deleteList(url, $(this));
                 })
 
+                // # Creation list
                 const createTasks = containerLists.find('.create-task');
                 const formCreate = containerLists.find('.form-create-task');
                 createTasks.on('click', function (e) {
@@ -45,6 +47,14 @@
                     e.preventDefault();
                     createTask(url, $(this));
                 });
+
+                // # Update list
+                const buttonUpdate = $('.fa-pencil-alt');
+                buttonUpdate.on('click', function () {
+                    const listId = $(this).attr('list-id');
+                    const url = '/' + listId + '/update_list_form/'
+                    displayFormUpdateList(url, listId);
+                })
 
                 // Management drag & drop with the new list
                 $('.js-sortable').sortable({
