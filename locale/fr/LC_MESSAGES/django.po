@@ -107,7 +107,7 @@ msgstr "Dernière modification : "
 
 #: project/templates/project/projects/project_detail.html:35
 msgid "Task number:"
-msgstr "Nombre de tâche(s)"
+msgstr "Nombre de tâche(s) : "
 
 #: project/templates/project/projects/project_detail.html:39
 msgid "Created by:"
