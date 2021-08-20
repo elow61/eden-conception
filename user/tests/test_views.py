@@ -1,9 +1,11 @@
 """ All tests for the user views application """
-from django.test import TestCase
-from django.core.files.uploadedfile import SimpleUploadedFile
+from django.test import TestCase, override_settings
+from django.urls import reverse
 from io import BytesIO
 from PIL import Image
 from django.core.files.base import File
+from django.core import mail
+from user.models import User
 
 
 class RegisterViewTest(TestCase):
@@ -29,17 +31,42 @@ class RegisterViewTest(TestCase):
         return File(file_obj, name=name)
 
     def test_get_request(self):
-        response = self.client.get('/register/')
+        response = self.client.get(reverse('user:register'))
         self.assertEqual(response.status_code, 200)
 
     def test_post_request(self):
-        response = self.client.post('/register/', self.form_class)
+        response = self.client.post(reverse('user:register'), self.form_class)
         self.assertEqual(response.status_code, 302)
-        self.assertEqual(response.url, '/dashboard/')
+        self.assertEqual(response.url, reverse('project:dashboard'))
 
     def test_post_request_if_wrong_form(self):
         form = self.form_class
         form['password2'] = 'wrong_password'
-        response = self.client.post('/register/', form)
+        response = self.client.post(reverse('user:register'), form)
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.wsgi_request.path, '/register/')
+        self.assertEqual(response.wsgi_request.path, reverse('user:register'))
+
+
+class PasswordResetView(TestCase):
+
+    def setUp(self):
+        User.objects.create_user(
+            username='test_username',
+            first_name='test_first_name',
+            last_name='test_last_name',
+            email='email@test.com',
+            password='test_password_61',
+        )
+        self.form = {'email': 'email@test.com'}
+
+    def test_reset_password(self):
+        response = self.client.get('/reset_password/')
+        self.assertEqual(response.status_code, 200)
+
+    @override_settings(LANGUAGE_CODE='en-US', LANGUAGES=(('en', 'English'),))
+    def test_send_email(self):
+        response = self.client.post('/reset_password/', self.form)
+        self.assertEqual(response.url, '/reset_password_sent/')
+
+        self.assertEqual(len(mail.outbox), 1)
+        self.assertEqual(mail.outbox[0].subject, 'Password reset on testserver')

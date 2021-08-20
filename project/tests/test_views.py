@@ -1,4 +1,4 @@
-from django.test import TestCase
+from django.test import TestCase, override_settings
 from django.urls import reverse
 from user.models import User
 from project.models.project import Project
@@ -90,6 +90,37 @@ class ProjectViewTest(TestCase):
             str(new_response.content, encoding='utf8'),
             {'user_name': user.first_name}
         )
+        self.client.logout()
+
+    def test_update_project_and_add_member(self):
+        self.client.login(username='email@test.com', password='test_password_61')
+        project = Project.objects.get(pk=1)
+        datas = {'project_id': project.id, 'name': 'New project'}
+        response = self.client.post(reverse('project:update_project'), datas)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()['project_id'], project.id)
+
+        user = User.objects.get(pk=2)
+        datas_to_add_member = {'member_email': user.email, 'project_name': project.id}
+        response = self.client.post(reverse('project:add_member'), datas_to_add_member)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()['user_name'], user.first_name)
+        self.client.logout()
+
+    def test_create_project_and_update(self):
+        self.client.login(username='email@test.com', password='test_password_61')
+        datas = {'project_name': 'Test'}
+        response = self.client.post(reverse('project:create_project'), datas)
+        project = Project.objects.get(name='Test')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()['project_name'], project.name)
+        self.assertEqual(response.json()['project_id'], project.id)
+
+        new_datas = {'project_id': project.id, 'name': 'New project'}
+        self.client.login(username='email@test.com', password='test_password_61')
+        response = self.client.post(reverse('project:update_project'), new_datas)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()['project_id'], project.id)
         self.client.logout()
 
     def test_create_project(self):
@@ -214,6 +245,7 @@ class ListViewTest(TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertEqual(response.url, f'/login/?next=/create_list/')
 
+    @override_settings(LANGUAGE_CODE='en-US', LANGUAGES=(('en', 'English'),))
     def test_delete_list_user_auth(self):
         p_list = List.objects.get(pk=1)
         self.client.login(username='email@test.com', password='test_password_61')
@@ -371,6 +403,7 @@ class TaskViewTest(TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertEqual(response.url, f'/login/?next=/update_task/')
 
+    @override_settings(LANGUAGE_CODE='en-US', LANGUAGES=(('en', 'English'),))
     def test_delete_task_user_auth(self):
         task = Task.objects.get(pk=1)
         self.client.login(username='email@test.com', password='test_password_61')

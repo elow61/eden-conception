@@ -1,5 +1,6 @@
 """ All tests with Selenium for the user views application """
 import time
+from django.urls import reverse
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
@@ -46,7 +47,7 @@ class RegisterTests(StaticLiveServerTestCase):
         password2_input.send_keys('test_password_61')
 
     def test_register_click(self):
-        self.selenium.get('%s%s' % (self.live_server_url, '/register/'))
+        self.selenium.get(self.live_server_url + reverse('user:register'))
         submission_button = self.selenium.find_element_by_id("id_register")
         self.define_elements()
 
@@ -55,17 +56,17 @@ class RegisterTests(StaticLiveServerTestCase):
 
         time.sleep(2)
         redirection_url = self.selenium.current_url
-        self.assertEqual(self.live_server_url + '/dashboard/', redirection_url)
+        self.assertEqual(self.live_server_url + reverse('project:dashboard'), redirection_url)
 
     def test_register_keyboard(self):
-        self.selenium.get('%s%s' % (self.live_server_url, '/register/'))
+        self.selenium.get('%s%s' % (self.live_server_url, reverse('user:register')))
         password2_input = self.selenium.find_element_by_id('id_password2')
         self.define_elements()
 
         password2_input.send_keys(Keys.ENTER)
         time.sleep(2)
         redirection_url = self.selenium.current_url
-        self.assertEqual(self.live_server_url + '/dashboard/', redirection_url)
+        self.assertEqual(self.live_server_url + reverse('project:dashboard'), redirection_url)
 
 
 class LoginTests(StaticLiveServerTestCase):
@@ -98,7 +99,7 @@ class LoginTests(StaticLiveServerTestCase):
         password_input.send_keys('test_password_61')
 
     def test_login_click(self):
-        self.selenium.get('%s%s' % (self.live_server_url, '/login/'))
+        self.selenium.get(self.live_server_url + reverse('user:login'))
         submission_button = self.selenium.find_element_by_id("id_login")
         self.define_elements()
 
@@ -108,14 +109,54 @@ class LoginTests(StaticLiveServerTestCase):
 
         time.sleep(2)
         redirection_url = self.selenium.current_url
-        self.assertEqual(self.live_server_url + '/dashboard/', redirection_url)
+        self.assertEqual(self.live_server_url + reverse('project:dashboard'), redirection_url)
 
     def test_login_keyboard(self):
-        self.selenium.get('%s%s' % (self.live_server_url, '/login/'))
+        self.selenium.get(self.live_server_url + reverse('user:login'))
         self.define_elements()
         password_input = self.selenium.find_element_by_id("id_password")
 
         password_input.send_keys(Keys.ENTER)
         time.sleep(2)
         redirection_url = self.selenium.current_url
-        self.assertEqual(self.live_server_url + '/dashboard/', redirection_url)
+        self.assertEqual(self.live_server_url + reverse('project:dashboard'), redirection_url)
+
+
+class PasswordResetTests(StaticLiveServerTestCase):
+    """ Class to test the form password reset """
+
+    def setUp(self):
+        self.selenium = webdriver.Chrome(
+            ChromeDriverManager().install(),
+            chrome_options=chrome_options
+        )
+        self.wait = WebDriverWait(self.selenium, 1000)
+        super(PasswordResetTests, self).setUp()
+
+    def tearDown(self):
+        self.selenium.quit()
+        super(PasswordResetTests, self).tearDown()
+
+    def test_password_reset_click(self):
+        self.selenium.get(self.live_server_url + '/reset_password/')
+        email_input = self.selenium.find_element_by_id("id_email")
+        email_input.send_keys('email@test.com')
+        submission_button = self.selenium.find_element_by_id("password_reset_btn")
+
+        # Wait until the response is received
+        self.wait.until(lambda driver: self.selenium.find_element_by_tag_name('body'))
+        ActionChains(self.selenium).click(submission_button).perform()
+
+        time.sleep(2)
+        redirection_url = self.selenium.current_url
+        self.assertEqual(self.live_server_url +  '/reset_password_sent/', redirection_url)
+
+    def test_password_reset_keyboard(self):
+        self.selenium.get(self.live_server_url + '/reset_password/')
+        email_input = self.selenium.find_element_by_id("id_email")
+        email_input.send_keys('email@test.com')
+
+        email_input.send_keys(Keys.ENTER)
+        time.sleep(2)
+        redirection_url = self.selenium.current_url
+        self.assertEqual(self.live_server_url + '/reset_password_sent/', redirection_url)
