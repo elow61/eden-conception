@@ -33,6 +33,7 @@
             if (response.task_id) {
                 let containerList = $('#project-list-' + response.list_id).find('.main-list');
                 containerList.append(response.template);
+                $('.container-project-task').updateOrderTask();
             }
         })
     }

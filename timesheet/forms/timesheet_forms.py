@@ -19,7 +19,6 @@ class UpdateTimesheetForm(ModelForm):
         self.fields['unit_hour'].widget.attrs['placeholder'] = '00:00'
         self.fields['user'] = forms.ModelChoiceField(
             queryset=List.objects.filter(id=self.task.project_list.id).first().project.user_ids.all(),
-            empty_label=None,
             label=_('User')
         )
 
